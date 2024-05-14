@@ -1,7 +1,7 @@
-from os import path
-from fastapi import APIRouter, HTTPException, Query, status
-from fastapi import FastAPI, File, UploadFile
-from src.converters.latex_to_react import convert_latex_to_react
+from fastapi import APIRouter, HTTPException, Query, status, File, UploadFile
+from fastapi.responses import FileResponse
+from src.converters.latex_to_react import convert_tex_to_react
+from src.persistence.persistence import persist_content
 
 
 router = APIRouter(
@@ -13,10 +13,13 @@ router = APIRouter(
 
 @router.post("/convert_to_react", status_code=status.HTTP_201_CREATED)
 async def convert_to_react(file: UploadFile = File(...)):
-    filename = file.filename
-    if file.filename.endswith(".tex"):
-        with open(file.filename, "wb") as f:
-            convert_latex_to_react(f)
-    else:
-        raise HTTPException(status_code=400, detail="File must be a .tex file")
-    return {"filename": file.filename}
+    _check_file_extension(file.filename, ".tex")
+    converted_content = await convert_tex_to_react(file)
+    path = persist_content(file.filename, converted_content)
+    return FileResponse(path=path, filename=file.filename.split(".")[0] + ".txt", media_type="text/plain")
+
+
+def _check_file_extension(filename: str, expected_extension: str):
+    if not filename.endswith(expected_extension):
+        raise HTTPException(status_code=400, detail=f"File must have a {expected_extension} extension")
+    return

@@ -1,0 +1,333 @@
+{/*  !TeX root = Mecánica newtoniana */}<h1>Cinemática</h1>
+
+La cinemática es la rama de la mecánica newtoniana que estudia el movimiento de los cuerpos sólidos, tratados como partículas, sin considerar su causa: las fuerzas. 
+{/* Si es posible, ahondar en la definición de cinemática. */}
+{/* Este documento estudia la cinemática en \textcolor{green}{tantas partes. Programa del documento}.  */}{/* %Completar programa del documento. */}
+{/*  Agradecimientos: */}{/*  Carlos Andrés Flórez Bustos, profesor de Física 1 en segundo semestre en la Universidad de los Andes. */}{/*  Ronald Jamith Avendaño Ramírez, profesor de Física en grado décimo en el Colegio San Carlos. */}
+<h2>Movimiento en una dimensión</h2>
+
+El movimiento unidimensional es el cambio de posición de una partícula en <LaTeX>{`\\R`}</LaTeX>, la recta real. Para describirlo se hace uso de relaciones entre magnitudes físicas.
+
+<h3>Intervalos de tiempo</h3>
+{/* {\small Unidad SI: segundos (s)} */}
+La cinemática trabaja con intervalos temporales. Se toman marcas temporales de forma <LaTeX>{`t_0, t_1, ... t_f`}</LaTeX> donde <LaTeX>{`t_0`}</LaTeX> es el tiempo inicial y <LaTeX>{`t_f`}</LaTeX> el tiempo final. Los tiempos inicial y final no tienen que corresponder al comienzo y fin del movimiento, sino simplemente al inicio y fin del intervalo de tiempo arbitrario que se está analizando.
+
+Un intervalo de tiempo se define como la diferencia entre un tiempo final y un tiempo inicial, se denota por <LaTeX>{`\\Delta t=t_f-t_0`}</LaTeX>. Generalmente, el tiempo inicial se toma como <LaTeX>{`t_0=0`}</LaTeX>, por lo que <LaTeX>{`\\Delta t=t_f-0=t_f=t`}</LaTeX>. Por eso, en la mayoría de definiciones <LaTeX>{`\\Delta t`}</LaTeX>, <LaTeX>{`t_f`}</LaTeX> y <LaTeX>{`t`}</LaTeX> son intercambiables. 
+
+<h3>Posición</h3>
+{/* {\small Unidad SI: metros (m)} */}
+La posición unidimensional de una partícula es su ubicación en la recta, <LaTeX>{`x`}</LaTeX> si se trabaja horizontalmente y <LaTeX>{`y`}</LaTeX> si se trabaja verticalmente. Al manejar múltiples posiciones en la resolución de problemas se utiliza la notación <LaTeX>{`x_0, x_1, ... x_f`}</LaTeX> donde <LaTeX>{`x_0`}</LaTeX> es la posición inicial y <LaTeX>{`x_f`}</LaTeX> la posición final.
+La posición se interpreta en función del tiempo, de forma  <LaTeX>{`t \\rightarrow x(t)`}</LaTeX>. 
+
+<h3>Distancia recorrida</h3>
+{/* {\small Unidad SI: metros (m)} */}
+La distancia recorrida por una partícula es la longitud total de su trayectoria en un periodo de tiempo arbitrario. En la gráfica de la velocidad en función del tiempo <LaTeX>{`\\boldsymbol{\\mathbf{v}}(t)`}</LaTeX>, la distancia recorrida en un intervalo de tiempo <LaTeX>{`\\Delta t=t_f-t_0`}</LaTeX> es el área bajo la curva en ese intervalo:
+<LaTeX block>{`\\text{Distancia recorrida}=\\int_{t_0}^{t_f} v(t) \\: \\mathrm{d}t`}</LaTeX> 
+
+<h3>Desplazamiento</h3> 
+{/* {\small Unidad SI: metros (m)} */}
+El desplazamiento <LaTeX>{`\\Delta x`}</LaTeX> es la diferencia entre la posición final <LaTeX>{`x_f`}</LaTeX> de una partícula y la inicial <LaTeX>{`x_0`}</LaTeX> : 
+<LaTeX>{`\\Delta x \\equiv x_f-x_0`}</LaTeX>. Se expresa como la variación de posición en función del tiempo: <LaTeX>{`\\Delta x=x(t_f)-x(t_0)`}</LaTeX>.
+
+<h3>Velocidad lineal</h3>
+{/* {\small Unidad SI: <LaTeX>{`\\si{m s^{-1}}`}</LaTeX>} */}
+La velocidad lineal mide el ritmo de un movimiento rectilíneo y su dirección.
+
+<h4>Rapidez</h4>
+La rapidez se define como la razón entre la distancia recorrida de una partícula y el intervalo de tiempo en el que se recorrió:
+<LaTeX block>{`\\text{Rapidez media} \\equiv \\frac{\\text{Distancia recorrida}}{t}`}</LaTeX>
+La rapidez generalmente es la magnitud de la velocidad, y se interpreta en función del tiempo <LaTeX>{`t \\rightarrow v(t)`}</LaTeX>. 
+
+<h4>Velocidad lineal media</h4> (Unidad SI: m/s)
+La velocidad lineal media <LaTeX>{`\\boldsymbol{\\mathbf{v}}_{\\text{med.}}`}</LaTeX> se define como la relación entre el desplazamiento y el intervalo de tiempo que demora:
+<LaTeX block>{`\\boldsymbol{\\mathbf{v}}_{\\text{med.}} \\equiv \\frac{\\Delta x}{ \\Delta t}=\\frac{x_f-x_0}{t_f-t_0}.`}</LaTeX> 
+Expresando el desplazamiento como variación de la posición en función del tiempo, la velocidad lineal media se expresa como cociente diferencia: <LaTeX block>{`\\boldsymbol{\\mathbf{v}}_{\\text{med.}}=\\frac{x(t_f)-x(t_0)}{t_f-t_0}=\\frac{x(t_0+\\Delta t)-x(t_0)}{\\Delta t}`}</LaTeX>
+En la gráfica de la función posición <LaTeX>{`x(t)`}</LaTeX>, la velocidad lineal media corresponde a la pendiente de la recta que pasa por los puntos <LaTeX>{`(t_0,x_0)`}</LaTeX> y <LaTeX>{`(t_f,x_f)`}</LaTeX>. 
+
+<h4>Velocidad lineal instantánea</h4> 
+La velocidad lineal instantánea <LaTeX>{`\\boldsymbol{\\mathbf{v}}`}</LaTeX> mide la velocidad lineal en un intervalo de tiempo infinitesimalmente pequeño. Se define como el límite cuando el intervalo de tiempo tiende a 0 de la velocidad lineal media:
+<LaTeX block>{`\\boldsymbol{\\mathbf{v}}=\\lim_{\\Delta t \\to 0}\\boldsymbol{\\mathbf{v}}_{\\text{med.}}=\\lim_{\\Delta t \\to 0}\\frac{\\Delta x}{\\Delta t}`}</LaTeX>
+Expresando el desplazamiento como variación de la posición en función del tiempo, la velocidad lineal instantánea se expresa como la derivada temporal de la función posición:
+<LaTeX block>{`\\boldsymbol{\\mathbf{v}}(t) = \\lim_{\\Delta t \\to 0}\\frac{x(t+\\Delta t)-x(t)}{\\Delta t}=\\frac{\\mathrm{d}x}{\\mathrm{d}t}=\\dot{x}`}</LaTeX>
+En la gráfica de la función posición <LaTeX>{`x(t)`}</LaTeX>, la velocidad instantánea corresponde a la pendiente de la recta tangente al punto <LaTeX>{`(t,x)`}</LaTeX>, es decir a la derivada en ese punto.  
+
+<h3>Aceleración lineal</h3>
+{/* {\small Unidad SI: <LaTeX>{`\\si{m s^{-2}}`}</LaTeX>} */}
+La aceleración lineal mide el cambio de la velocidad de una partícula en un intervalo de tiempo.
+
+<h4>Aceleración lineal media</h4>
+La aceleración lineal media <LaTeX>{`\\boldsymbol{\\mathbf{a}}_{\\text{med.}}`}</LaTeX> se define como el cambio de la velocidad lineal en un intervalo de tiempo: <LaTeX block>{`\\boldsymbol{\\mathbf{a}}_{\\text{med.}}\\equiv \\frac{\\Delta \\boldsymbol{\\mathbf{v}}}{\\Delta t}=\\frac{\\boldsymbol{\\mathbf{v}}_f-\\boldsymbol{\\mathbf{v}}_0}{t_f-t_0}=\\frac{\\boldsymbol{\\mathbf{v}}(t_0+\\Delta t)-\\boldsymbol{\\mathbf{v}}(t_0)}{\\Delta t}`}</LaTeX>
+
+En la gráfica de la función velocidad <LaTeX>{`\\boldsymbol{\\mathbf{v}}(t)`}</LaTeX>, la aceleración lineal media corresponde a la pendiente de la recta que pasa por los puntos <LaTeX>{`(t_0,v_0)`}</LaTeX> y <LaTeX>{`(t_f,v_f)`}</LaTeX>. 
+
+<h3>Aceleración lineal instantánea</h3> 
+La aceleración lineal instantánea <LaTeX>{`\\boldsymbol{\\mathbf{a}}`}</LaTeX> es el cambio de la velocidad lineal en un intervalo de tiempo infinitesimalmente pequeño, es decir, el límite cuando el intervalo de tiempo tiende a 0 de la aceleración lineal media. 
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}=\\lim_{\\Delta t \\to 0}\\boldsymbol{\\mathbf{a}}_{\\text{med.}}=\\lim_{\\Delta t \\to 0}\\frac{\\boldsymbol{\\mathbf{v}}(t_0+\\Delta t)-\\boldsymbol{\\mathbf{v}}(t_0)}{\\Delta t}`}</LaTeX>
+Ergo, la aceleración lineal instantánea como función del tiempo es la derivada de la velocidad lineal con respecto al tiempo, que viene siendo la segunda derivada del desplazamiento con respecto al tiempo: 
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}(t)=\\dot{\\boldsymbol{\\mathbf{v}}}=\\ddot{x}`}</LaTeX>
+
+En la gráfica de la función velocidad <LaTeX>{`\\boldsymbol{\\mathbf{v}}(t)`}</LaTeX>, la aceleración lineal instantánea corresponde a la pendiente de la recta tangente al punto <LaTeX>{`(t,v)`}</LaTeX>, es decir a la derivada en ese punto.  
+
+<h3>Movimiento rectilíneo uniforme</h3>
+El Movimiento rectilíneo uniforme (MRU) es un movimiento que tiene como trayectoria una recta en el cual la velocidad de la partícula es constante, por lo que la aceleración es nula. La velocidad final es entonces igual a la velocidad inicial y el desplazamiento está dado por el producto entre la velocidad media y el tiempo. 
+<h4>Ecuaciones del movimiento rectilíneo uniforme</h4>
+<ul>
+	<li> <LaTeX>{`a=a_{\\text{med.}}=0`}</LaTeX> </li>
+	<li> <LaTeX>{`v=v_f=v_0=v_{\\text{med.}}`}</LaTeX> </li>
+	<li> <LaTeX>{`\\Delta x = v_{\\text{med.}}t`}</LaTeX> </li>
+</ul>
+
+<h3>Movimiento rectilíneo uniformemente acelerado</h3>
+El Movimiento rectilíneo uniformemente acelerado (MRUA) es un movimiento que tiene como trayectoria una recta en el cual la velocidad cambia en un ritmo determinado, por lo que la aceleración es constante.
+<h4>Ecuaciones del movimiento rectilíneo uniformemente acelerado</h4>
+<ul>
+	<li> <LaTeX>{`a=a_{\\text{med.}} \\neq 0`}</LaTeX> </li>
+	<li> <LaTeX>{`v_{\\text{med.}}=\\dfrac{v_f+v_0}{t}`}</LaTeX></li>
+	<li> <LaTeX>{`v_f=v_0+at`}</LaTeX> </li>
+	<li> <LaTeX>{`\\Delta x=v_0t+\\frac{1}{2}at^2`}</LaTeX> </li>
+	<li> <LaTeX>{`v_f^2=v_0^2+2a\\Delta x`}</LaTeX> </li>
+</ul>
+
+<h3>Movimiento de caída libre</h3>
+Ignorando la resistencia del aire y tomando la aceleración por la gravedad <LaTeX>{`\\boldsymbol{\\mathbf{g}}`}</LaTeX> como uniforme (usualmente se toma <LaTeX>{`\\boldsymbol{\\mathbf{g}} = -9.81 \\, \\bm{\\hat{\\mathbf{j}}}\\,\\mathrm{m}\\,\\mathrm{s}^{-2}\\approx -10 \\, \\bm{\\hat{\\mathbf{j}}}\\,\\mathrm{m}\\,\\mathrm{s}^{-2}`}</LaTeX>), el movimiento de una partícula en caída libre es un movimiento rectilíneo uniformemente acelerado. Como el movimiento es en el eje vertical, se usa <LaTeX>{`y`}</LaTeX> como la variable posición en lugar de <LaTeX>{`x`}</LaTeX>. 
+<h4>Ecuaciones para objetos en caída libre</h4>
+Como el movimiento de caída libre es un movimiento rectilíneo uniformemente acelerado, sus ecuaciones son variaciones de las del MRUA.
+<ul>
+	<li> <LaTeX>{`a=a_{\\text{med.}}=-g`}</LaTeX> </li>
+	<li> <LaTeX>{`v_f=v_0-gt`}</LaTeX> </li>
+	<li> <LaTeX>{`\\Delta y=v_0t-\\frac{1}{2}gt^2`}</LaTeX> </li>
+	<li> <LaTeX>{`v_f^2=v_0^2-2g\\Delta y`}</LaTeX> </li>
+</ul> 
+
+
+<h2>Movimiento lineal en dos y tres dimensiones</h2>
+
+Los movimientos bidimensionales y tridimensionales son el cambio de posición de una partícula en <LaTeX>{`\\R^2 `}</LaTeX> y <LaTeX>{`\\R^3 `}</LaTeX> respectivamente. Se forman por combinaciones de movimientos unidimensionales y para describirlos se utilizan relaciones entre magnitudes físicas que son análogas a las magnitudes físicas definidas para el movimiento unidimensional. Las cantidades escalares, como el tiempo, no cambian en absoluto, y las cantidades vectoriales cuentan ahora con componentes en dirección <LaTeX>{`\\bm{\\hat{\\mathbf{i}}}`}</LaTeX>, <LaTeX>{`\\bm{\\hat{\\mathbf{j}}}`}</LaTeX> y <LaTeX>{`\\bm{\\hat{\\mathbf{k}}}`}</LaTeX>.\\
+
+<h3>Vector posición</h3>
+{/* {\small Unidad SI: metros (m)} */}
+El vector posición <LaTeX>{`\\boldsymbol{\\mathbf{r}}`}</LaTeX> de una partícula ubicado en un punto <LaTeX>{`P=(x,y,z)`}</LaTeX> es <LaTeX>{`\\boldsymbol{\\mathbf{r}}=\\overrightarrow{0P}`}</LaTeX> y está dado por <LaTeX>{`\\boldsymbol{\\mathbf{r}}=x\\bm{\\hat{\\mathbf{i}}}+y\\bm{\\hat{\\mathbf{j}}}+z\\bm{\\hat{\\mathbf{k}}}`}</LaTeX>. Análogamente a la posición en una recta, se interpreta como la función <LaTeX>{`t \\rightarrow \\boldsymbol{\\mathbf{r}}(t)`}</LaTeX>. 
+
+<h3>Vector desplazamiento</h3> 
+{/* {\small Unidad SI: metros (m)} */}
+El vector desplazamiento <LaTeX>{`\\Delta \\boldsymbol{\\mathbf{r}}`}</LaTeX> es la variación del vector posición: <LaTeX>{`\\Delta\\boldsymbol{\\mathbf{r}} \\equiv \\boldsymbol{\\mathbf{r}}_f-\\boldsymbol{\\mathbf{r}}_0`}</LaTeX>. La Figura  muestra cómo se obtiene el vector desplazamiento para dos posiciones <LaTeX>{`\\boldsymbol{\\mathbf{r}}_0=(x_0,y_0)`}</LaTeX> y <LaTeX>{`\\boldsymbol{\\mathbf{r}}_f=(x_f,y_f)`}</LaTeX>.
+
+<h3>Velocidad lineal</h3>
+{/* {\small Unidad SI: <LaTeX>{`\\si{m s^{-1}}`}</LaTeX>} */}
+<h4>Rapidez</h4> 
+La rapidez es el módulo del vector velocidad:
+<LaTeX block>{`v=\\abs{\\boldsymbol{\\mathbf{v}}}=\\sqrt{v_x^2+v_y^2+v_z^2}.`}</LaTeX>
+
+<h4>Velocidad lineal media</h4> 
+El vector velocidad lineal media <LaTeX>{`\\boldsymbol{\\mathbf{v}}_{\\text{med.}}`}</LaTeX> se define como el cociente entre el desplazamiento y el intervalo de tiempo que demora:
+<LaTeX block>{`\\boldsymbol{\\mathbf{v}}_{\\text{med.}} \\equiv \\frac{\\Delta \\boldsymbol{\\mathbf{r}}}{\\Delta t}=\\frac{\\boldsymbol{\\mathbf{r}}_f-\\boldsymbol{\\mathbf{r}}_0}{t_f-t_0}=\\frac{ \\boldsymbol{\\mathbf{r}}(t_0+\\Delta t)-\\boldsymbol{\\mathbf{r}}(t_0)}{\\Delta t}`}</LaTeX> 
+
+La velocidad media tiene la misma dirección que el vector desplazamiento y si <LaTeX>{`t>1`}</LaTeX> tiene menor magnitud, como se muestra en la Figura .
+
+{/* Idea principal la figura tomada de: Young, H. D. y Freedman, R. A. (2013). Física universitaria (13ra ed., Vol. 1). Pearson Educación de México. */}
+<h4>Velocidad lineal instantánea</h4>
+El vector velocidad lineal instantánea <LaTeX>{` \\boldsymbol{\\mathbf{v}} = v_x\\bm{\\hat{\\mathbf{i}}}+v_y\\bm{\\hat{\\mathbf{j}}}+v_z\\bm{\\hat{\\mathbf{k}}} `}</LaTeX> se define como el límite de la velocidad lineal media cuando <LaTeX>{`\\Delta t`}</LaTeX> tiende a cero, es decir la derivada de <LaTeX>{`\\boldsymbol{\\mathbf{r}}`}</LaTeX> con respecto al tiempo:
+<LaTeX block>{`\\boldsymbol{\\mathbf{v}}(t)=\\lim_{\\Delta t \\to 0}\\boldsymbol{\\mathbf{v}}_{\\text{med.}}=\\lim_{\\Delta t \\to 0}\\frac{ \\boldsymbol{\\mathbf{r}}(t_0+\\Delta t)-\\boldsymbol{\\mathbf{r}}(t_0)}{\\Delta t}=\\dot{\\boldsymbol{\\mathbf{r}}}.`}</LaTeX>
+
+En la gráfica de la posición, la velocidad lineal instantánea corresponde al vector tangente a la curva en el punto <LaTeX>{`(x(t),y(t))`}</LaTeX> tomando <LaTeX>{`\\boldsymbol{\\mathbf{r}}(t)=(x(t),y(t))`}</LaTeX>. En la figura  se muestra la velocidad instantánea de una partícula en las dos posiciones de la Figura .
+
+Las componentes del vector velocidad lineal instantánea se pueden expresar en <LaTeX>{`\\R^2`}</LaTeX> con coordenadas polares como
+<ul>
+<li> <LaTeX>{`v_x=\\abs{\\boldsymbol{\\mathbf{v}}} \\cos \\theta`}</LaTeX></li>
+<li> <LaTeX>{`v_y=\\abs{\\boldsymbol{\\mathbf{v}}} \\sin \\theta`}</LaTeX></li>
+</ul>
+Donde el valor del ángulo <LaTeX>{`\\theta`}</LaTeX> está dado por <LaTeX block>{`\\theta=\\arctan\\left(\\frac{v_y}{v_x}\\right).`}</LaTeX>
+
+Pueden ser expresados en <LaTeX>{`\\R^3`}</LaTeX> con relación a la posición <LaTeX>{`\\boldsymbol{\\mathbf{r}}=x\\bm{\\hat{\\mathbf{i}}}+y\\bm{\\hat{\\mathbf{j}}}+z\\bm{\\hat{\\mathbf{k}}}`}</LaTeX> como
+<ul>
+<li> <LaTeX>{`v_x=\\dder[x][t]`}</LaTeX>.</li>
+<li> <LaTeX>{`v_y=\\dder[y][t]`}</LaTeX>.</li>
+<li> <LaTeX>{`v_z=\\dder[z][t]`}</LaTeX>.</li>
+</ul>
+
+<h3>Aceleración lineal</h3>
+{/* {\small Unidad SI: <LaTeX>{`\\si{m s^{-2}}`}</LaTeX>} */}
+<h4>Aceleración lineal media</h4> 
+La aceleración lineal media <LaTeX>{`\\boldsymbol{\\mathbf{a}}_{\\text{med.}}`}</LaTeX> se define como la diferencia de la velocidad lineal instantánea dividida entre el intervalo de tiempo: <LaTeX block>{`\\boldsymbol{\\mathbf{a}}_{\\text{med.}} \\equiv \\frac{\\Delta \\boldsymbol{\\mathbf{v}}}{\\Delta t}=\\frac{\\boldsymbol{\\mathbf{v}}_f-\\boldsymbol{\\mathbf{v}}_0}{t_f-t_0}=\\frac{\\boldsymbol{\\mathbf{v}}(t_0+\\Delta t)-\\boldsymbol{\\mathbf{v}}(t_0)}{\\Delta t}`}</LaTeX>
+
+La Figura  muestra la relación entre una velocidad instantánea inicial y final arbitrarias en la trayectoria de un objeto y su aceleración media. 
+
+
+{/* Idea principal la figura tomada de: Young, H. D. y Freedman, R. A. (2013). Física universitaria (13ra ed., Vol. 1). Pearson Educación de México. */}
+<h4>Aceleración lineal instantánea</h4> 
+El vector aceleración lineal instantánea <LaTeX>{`\\boldsymbol{\\mathbf{a}}=a_x\\bm{\\hat{\\mathbf{i}}}+a_y\\bm{\\hat{\\mathbf{j}}}+a_z\\bm{\\hat{\\mathbf{k}}}`}</LaTeX> es el cambio de la velocidad lineal en un intervalo de tiempo infinitesimalmente pequeño, es decir, el límite cuando el tiempo tiende a 0 de la aceleración lineal media, que a su vez es la derivada temporal de la velocidad y la segunda derivada con respecto al tiempo del desplazamiento. 
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}=\\lim_{\\Delta t \\to 0}\\boldsymbol{\\mathbf{a}}_{\\text{med.}}=\\lim_{\\Delta t \\to 0}\\frac{ \\boldsymbol{\\mathbf{v}}(t_0+\\Delta t)-\\boldsymbol{\\mathbf{v}}(t_0)}{\\Delta t}=\\dot{\\boldsymbol{\\mathbf{v}}}=\\ddot{\\boldsymbol{\\mathbf{r}}}.`}</LaTeX>
+
+Las componentes del vector aceleración lineal instantánea  ser expresados en <LaTeX>{`\\R^3`}</LaTeX> con relación a la velocidad <LaTeX>{`\\boldsymbol{\\mathbf{r}}=x\\bm{\\hat{\\mathbf{i}}}+y\\bm{\\hat{\\mathbf{j}}}+z\\bm{\\hat{\\mathbf{k}}}`}</LaTeX> como
+<ul>
+<li> <LaTeX>{`a_x=\\dder[v_x][t]`}</LaTeX></li>
+<li> <LaTeX>{`a_y=\\dder[v_y][t]`}</LaTeX></li>
+<li> <LaTeX>{`a_z=\\dder[v_z][t]`}</LaTeX></li>
+</ul>
+
+La componente de aceleración que es paralela al vector velocidad instantánea afecta la rapidez, mientras que la componente de <LaTeX>{`\\boldsymbol{\\mathbf{a}}`}</LaTeX> ortogonal a <LaTeX>{`\\boldsymbol{\\mathbf{v}}`}</LaTeX> afecta únicamente la dirección del movimiento. 
+
+<h3>Movimiento parabólico o de proyectil</h3>
+
+El movimiento parabólico o movimiento de proyectil es un movimiento bidimensional que describe el lanzamiento de un proyectil (omitiendo la resistencia del aire). Está constituido por dos movimientos unidimensionales independientes que son perpendiculares entre sí, en las direcciones <LaTeX>{`x`}</LaTeX> y <LaTeX>{`y`}</LaTeX>, por lo que se debe dividir el vector velocidad en componentes con coordenadas polares, donde el ángulo es el ángulo de proyección. 
+
+Para el movimiento en el eje <LaTeX>{`x`}</LaTeX> se omite la resistencia del aire, por lo que el componente cartesiano de la aceleración en ese eje es nulo. Así pues, el movimiento en <LaTeX>{`x`}</LaTeX> se trabaja como un movimiento rectilíneo uniforme. En el caso del movimiento en el eje <LaTeX>{`y`}</LaTeX>, la aceleración es la gravedad (que al ir en contra del movimiento se denota con signo negativo). Por ello, el movimiento en <LaTeX>{`y`}</LaTeX> se trabaja como un movimiento rectilíneo uniformemente acelerado, concretamente un movimiento de caída libre.
+
+En un movimiento de proyectil completo, con punto de inicio <LaTeX>{`(x_0,y_0)`}</LaTeX> y punto final <LaTeX>{`(x_f,y_0)`}</LaTeX>, las componentes en <LaTeX>{`x`}</LaTeX> y <LaTeX>{`y`}</LaTeX> de la velocidad inicial del proyectil son iguales a las componentes en <LaTeX>{`x`}</LaTeX> y <LaTeX>{`y`}</LaTeX> de la velocidad final. En ese tipo de movimiento, sea <LaTeX>{`\\theta`}</LaTeX> la dirección de la velocidad inicial, la dirección <LaTeX>{`\\theta_f`}</LaTeX> de la velocidad final está dada por <LaTeX>{`\\theta_f=2\\uppi-\\theta`}</LaTeX>. Un movimiento de proyectil completo tiene como forma una parábola negativa con vértice en la altura máxima del proyectil, siendo simétrico. Nótese, no obstante, que el proyectil no demora el mismo tiempo en subir a su altura máxima <LaTeX>{`y_{\\text{máx}}`}</LaTeX> que en caer de la altura máxima al suelo, por lo que <LaTeX>{`t_{y_{\\text{máx}}} \\neq t_{\\text{Total}} - t_{y_{\\text{máx}}}`}</LaTeX>.
+
+
+{/* Idea original de la figura tomada de: Serway, R. A. y Vuille, C. (2012). Fundamentos de física (9na ed., Vol. 1). Cengage Learning Editores. */}
+<h4>Ecuaciones del movimiento parabólico</h4> 
+Sea <LaTeX>{`\\theta`}</LaTeX> el ángulo de proyección:
+<ul>
+	<li> <LaTeX>{`a_x=0 \\implies v_x=v_{f_x}=v_{0_x}=v_0 \\cos \\theta`}</LaTeX> </li>
+	<li> <LaTeX>{`a_y=-g=-9.8 \\text{ms}^{-2} \\approx -10 \\text{ms}^{-2}`}</LaTeX> </li>
+	<li> <LaTeX>{`\\Delta x = v_xt = (v_0 \\cos \\theta) t`}</LaTeX> </li>
+	<li> <LaTeX>{`v_{f_y}=v_{0_y}-gt=v_0 \\sin \\theta-gt`}</LaTeX> </li>
+	<li> <LaTeX>{`\\Delta y = v_{0_y}t- \\frac{1}{2}gt^2= (v_0 \\sin \\theta) t - \\frac{1}{2}gt^2`}</LaTeX> </li>
+	<li> <LaTeX>{`v_{f_y}^2=v_{0_y}^2-2g\\Delta y= (v_0 \\sin \\theta)^2-2g\\Delta y`}</LaTeX> </li>
+</ul>
+En el pico de la trayectoria, a la altura máxima <LaTeX>{`y_{\\text{máx.}} `}</LaTeX>, el componente en <LaTeX>{`y`}</LaTeX> de la velocidad es cero: <LaTeX>{`v_{y_{\\text{máx.}}}=0`}</LaTeX>. A partir de las ecuaciones anteriores se puede llegar a que la trayectoria es descrita por una expresión cuadrática de forma <LaTeX>{`y=bx-ax^2`}</LaTeX>: 
+<LaTeX block>{`y=x\\tan\\theta - x^2\\frac{g}{2v_{0}^2\\cos^2\\theta}`}</LaTeX>
+donde <LaTeX>{`x`}</LaTeX>, <LaTeX>{`\\Delta x`}</LaTeX> y <LaTeX>{`x_f`}</LaTeX> son intercambiables dado que se toma la posición inicial en <LaTeX>{`x`}</LaTeX> como <LaTeX>{`x_0=0`}</LaTeX>, por lo que <LaTeX>{`\\Delta x=x_f-x_0=x_f-0=x_f=x`}</LaTeX>.
+
+<h3>Velocidad relativa</h3>
+La velocidad observada en una partícula depende de la velocidad del observador con respecto a él, que es su marco de referencia. La velocidad de una partícula <LaTeX>{`A`}</LaTeX> observada por un observador <LaTeX>{`B`}</LaTeX>, es decir la velocidad de <LaTeX>{`A`}</LaTeX> relativa a <LaTeX>{`B`}</LaTeX>, se denota <LaTeX>{`\\boldsymbol{\\mathbf{v}}_{A/B}`}</LaTeX>. Sea <LaTeX>{`O`}</LaTeX> un observador con marco de referencia que arbitrariamente es tratado como estacionario, se tiene que:
+<LaTeX block>{`\\boldsymbol{\\mathbf{v}}_{A/B}=\\boldsymbol{\\mathbf{v}}_{A/O}+\\boldsymbol{\\mathbf{v}}_{O/B}`}</LaTeX>
+También se puede calcular la velocidad relativa derivando con respecto al tiempo una expresión que relacione las posiciones relativas de los cuerpos que se están midiendo. Para eso, es conveniente tomar como eje de referencia a un cuerpo que se considere estacionario, como un observador quieto o la tierra.
+
+<h2>Movimiento circular</h2>
+
+El <em>movimiento circular</em> o rotatorio es el movimiento que describe una partícula en una trayectoria curva. 
+
+Nótese que el desplazamiento angular <LaTeX>{`\\Delta \\theta`}</LaTeX>, la velocidad angular <LaTeX>{`\\omega`}</LaTeX>, y la aceleración angular <LaTeX>{`\\alpha`}</LaTeX>, son análogos al desplazamiento, velocidad y aceleración lineales descritos en secciones anteriores, pero no son cantidades vectoriales. Sumado a eso, nótese que la velocidad tangencial y la aceleración tangencial <em>son</em> propiamente de carácter lineal, como la velocidad y aceleración descritas en la sección previa.
+
+<h3>Vector radial de posición</h3>
+El vector de posición radial <LaTeX>{`\\boldsymbol{\\mathbf{r}}`}</LaTeX> da la posición de una partícula en desplazamiento circular. Su representación más conveniente tiene el punto inicial en el centro del círculo descrito por el desplazamiento y el punto terminal en la partícula en rotación. Su magnitud es igual al radio <LaTeX>{`R`}</LaTeX> del círculo y su dirección en un tiempo dado es el ángulo <LaTeX>{`\\theta`}</LaTeX> de la partícula. 
+
+<h3>Desplazamiento</h3>
+<h4>Desplazamiento</h4> 
+El desplazamiento <LaTeX>{`\\Delta \\boldsymbol{\\mathbf{r}}`}</LaTeX> es la variación del vector radial de posición: <LaTeX>{`\\Delta\\boldsymbol{\\mathbf{r}} \\equiv \\boldsymbol{\\mathbf{r}}_f-\\boldsymbol{\\mathbf{r}}_0.`}</LaTeX>
+<h4>Desplazamiento angular</h4>
+El <em>desplazamiento angular</em> <LaTeX>{`\\Delta \\theta`}</LaTeX> de una partícula es la diferencia entre los ángulos final e inicial de un movimiento circular:
+<LaTeX block>{` \\Delta \\theta = \\theta_f-\\theta_0.`}</LaTeX>
+Los ángulos están dados por la dirección del vector radial de posición en el tiempo dado. 
+
+{/* El desplazamiento angular se puede entender como una cantidad vectorial de la misma forma que el desplzamiento lineal, por lo que se tiene el <em>vector desplazamiento angular</em> <LaTeX>{`\\boldsymbol{\\mathbf{\\theta}}`}</LaTeX>. */}
+{/*  Mirar vector de desplazamiento angular. */}
+<h3>Distancia recorrida</h3>
+La distancia recorrida por una partícula en un movimiento rotacional es el fragmento de círculo que recorre la partícula en un intervalo de tiempo, que es una longitud de arco <LaTeX>{`\\Delta s`}</LaTeX> o <LaTeX>{`s`}</LaTeX>. La longitud de arco está dada geométricamente como <LaTeX>{`s=r \\theta`}</LaTeX> (o, para ángulos en grados, <LaTeX>{`s=\\frac{\\theta}{180 \\degree}\\pi r`}</LaTeX>). La distancia recorrida en un desplazamiento <LaTeX>{`\\Delta \\theta`}</LaTeX> está dada por
+<LaTeX block>{`s=r\\Delta \\theta.`}</LaTeX>
+Cuando el intervalo temporal tiende a 0, el arco se aproxima a una línea recta.
+
+<h3>Velocidad angular</h3>
+\unidad{Radianes por segundo (<LaTeX>{`\\frac{\\mathrm{rad}}{\\mathrm{s}}`}</LaTeX>) o revoluciones por segundo (<LaTeX>{`\\frac{\\mathrm{rev}}{\\mathrm{s}}`}</LaTeX>). <LaTeX>{`1\\frac{\\mathrm{rev}}{\\mathrm{s}}=2\\pi\\frac{\\mathrm{rad}}{\\mathrm{s}}=360\\degree/s`}</LaTeX> }
+La velocidad angular se define de forma análoga a la velocidad lineal: la velocidad angular es al desplazamiento angular como la velocidad lineal es al desplazamiento. La velocidad angular se puede entender como un vector perpendicular al plano en el que ocurre el movimiento circular, cuya dirección está dada por la regla de la mano derecha. 
+
+<h4>Velocidad angular media </h4>
+La velocidad angular media <LaTeX>{`\\omega_{\\text{med.}}`}</LaTeX> es una cantidad escalar que se define como la razón entre el desplazamiento angular y el intervalo de tiempo que toma:
+<LaTeX block>{`\\boldsymbol{\\mathbf{\\omega}}_{\\text{med.}}\\equiv\\frac{\\Delta \\boldsymbol{\\mathbf{\\theta}}}{\\Delta t}=\\frac{\\boldsymbol{\\mathbf{\\theta}}_f-\\boldsymbol{\\mathbf{\\theta}}_0}{t_f-t_0}.`}</LaTeX>
+<h4>Velocidad angular instantánea</h4> 
+La frecuencia angular instantánea <LaTeX>{`\\omega `}</LaTeX> es el límite de la frecuencia angular promedio cuando la diferencia de tiempo tiende a cero, es decir, la derivada del ángulo de movimiento con respecto al tiempo:
+<LaTeX block>{`\\boldsymbol{\\mathbf{\\omega}}=\\lim_{\\Delta t \\to 0}\\boldsymbol{\\mathbf{\\omega}}_{\\text{med.}}=\\frac{\\mathrm{d}\\boldsymbol{\\mathbf{\\theta}}}{\\mathrm{d}t}.`}</LaTeX>
+
+<h3>Aceleración angular</h3>
+Similarmente a como ocurre con la velocidad angular, la aceleración angular es la velocidad angular como la aceleración lineal es a la velocidad lineal.
+
+<h4>Aceleración angular media </h4>
+La aceleración angular promedio <LaTeX>{`\\boldsymbol{\\mathbf{\\alpha}}_{\\text{med.}}`}</LaTeX> es una cantidad escalar definida como la razón entre el cambio de la frecuencia angular media y la diferencia de tiempo:
+<LaTeX block>{` \\boldsymbol{\\mathbf{\\alpha}}_{\\text{med.}}\\equiv\\frac{\\Delta \\boldsymbol{\\mathbf{\\omega}}}{\\Delta t}=\\frac{\\boldsymbol{\\mathbf{\\omega}}_f-\\boldsymbol{\\mathbf{\\omega}}_0}{t_f-t_0}.`}</LaTeX>
+<h4>Aceleración angular instantánea </h4>
+La aceleración angular instantánea <LaTeX>{`\\alpha`}</LaTeX> se define como el límite de la aceleración angular promedio cuando la diferencia de tiempo tiende a cero, es decir, la derivada de la frecuencia angular con respecto al tiempo, que viene siendo la segunda derivada del ángulo de movimiento con respecto al tiempo:
+<LaTeX block>{`\\boldsymbol{\\mathbf{\\alpha}}\\equiv\\lim_{\\Delta t \\to 0}\\frac{\\Delta \\boldsymbol{\\mathbf{\\omega}}}{\\Delta t}=\\frac{\\mathrm{d}\\boldsymbol{\\mathbf{\\omega}}}{\\mathrm{d}t}=\\nder{2}[\\boldsymbol{\\mathbf{\\theta}}][t].`}</LaTeX>
+
+<h3>Velocidad tangencial</h3>
+La velocidad tangencial <LaTeX>{`\\boldsymbol{\\mathbf{v}}_t`}</LaTeX> es una velocidad de carácter lineal que está asociada a la dirección del movimiento circular. Por eso, la velocidad tangencial es un vector cuya dirección es siempre tangente a la curva, como se muestra en la . Esto se debe a que, por inercia, todo cuerpo tiende a mantener su estado de movimiento relativo, por lo que la partícula en rotación tiende a seguir un movimiento rectilíneo uniforme (la tendencia es contrarrestada por la aceleración centrípeta). 
+
+La magnitud de la velocidad tangencial con respecto a la velocidad angular se puede encontrar derivando la distancia recorrida con respecto al tiempo.
+<LaTeX block>{`\\\\begin{align*}
+	s=r\\boldsymbol{\\mathbf{\\theta}}\\notag\\\\ 
+	\\frac{\\mathrm{d}s}{\\mathrm{d}t}=\\frac{\\mathrm{d}r\\boldsymbol{\\mathbf{\\theta}}}{\\mathrm{d}t}\\notag\\\\
+	\\frac{\\mathrm{d}s}{\\mathrm{d}t}=r\\frac{\\mathrm{d}\\boldsymbol{\\mathbf{\\theta}}}{\\mathrm{d}t}\\notag\\\\
+	\\boldsymbol{\\mathbf{v}}_t=r\\boldsymbol{\\mathbf{\\omega}}
+\\\\end{align*}`}</LaTeX>
+
+<h3>Aceleración tangencial</h3>
+La aceleración tangencial es una aceleración de tipo lineal que mide el cambio en la velocidad tangencial. Se define acorde a su naturaleza como aceleración lineal.
+<h4>Aceleración tangencial media</h4>
+La aceleración tangencial media <LaTeX>{` \\boldsymbol{\\mathbf{a}}_{{t}_{\\text{med.}}} `}</LaTeX> se define como el cambio de la velocidad tangencial dividido entre el intervalo de tiempo que tarda:
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}_{{t}_{\\text{med.}}} \\equiv \\frac{\\Delta \\boldsymbol{\\mathbf{v}}_t}{\\Delta t}=\\frac{\\boldsymbol{\\mathbf{v}}_{t_f}-\\boldsymbol{\\mathbf{v}}_{t_0}}{t_f-t_0}=\\frac{\\boldsymbol{\\mathbf{v_t}}(t_0+\\Delta t)-\\boldsymbol{\\mathbf{v_t}}(t_0)}{\\Delta t}.`}</LaTeX>
+<h4>Aceleración tangencial instantánea</h4>
+El vector aceleración tangencial instantánea es el cambio de la velocidad tangencial en un intervalo de tiempo infinitesimalmente pequeño, es decir, el límite cuando el tiempo tiende a 0 de la aceleración tangencial media:
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}_t=\\lim_{\\Delta t \\to 0}\\boldsymbol{\\mathbf{a}}_{t_{\\text{med.}}}=\\frac{\\mathrm{d}\\boldsymbol{\\mathbf{v_t}}}{\\mathrm{d}t}.`}</LaTeX>
+
+Por la relación entre la velocidad tangencial y la velocidad angular, se puede trazar una relación entre la aceleración tangencial instantánea y la aceleración angular. Esta se encuentra derivando la velocidad tangencial con respecto al tiempo.
+<LaTeX block>{`\\\\begin{align*}
+	\\boldsymbol{\\mathbf{v}}_t=r\\boldsymbol{\\mathbf{\\omega}}\\notag\\\\ 
+	\\frac{\\mathrm{d}\\boldsymbol{\\mathbf{v}}_t}{\\mathrm{d}t}=r\\frac{\\mathrm{d}\\boldsymbol{\\mathbf{\\omega}}}{\\mathrm{d}t}\\notag\\\\
+	\\boldsymbol{\\mathbf{a}}_t=r \\alpha
+\\\\end{align*}`}</LaTeX>
+
+<h3>Aceleración centrípeta o radial</h3>
+La aceleración centrípeta o radial <LaTeX>{`\\boldsymbol{\\mathbf{a}}_c`}</LaTeX> es una cantidad vectorial cuya dirección apunta siempre desde la partícula al eje de rotación (el centro de la trayectoria) a lo largo del radio. Como la dirección de la velocidad tangencial cambia constantemente con el movimiento, se cumple que <LaTeX>{`\\Delta \\boldsymbol{\\mathbf{v}}_t=\\boldsymbol{\\mathbf{v}}_{t_f}-\\boldsymbol{\\mathbf{v}}_{t_0}\\neq 0`}</LaTeX> incluso si la magnitud de la velocidad tangencial es constante (con aceleración tangencial 0), donde <LaTeX>{`\\Delta \\boldsymbol{\\mathbf{v}}_t`}</LaTeX> es un vector que apunta hacia el centro del círculo descrito por la trayectoria, como se ve en la Figura . La aceleración centrípeta se define como 
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}_c\\equiv\\frac{\\Delta \\boldsymbol{\\mathbf{v}}_t}{\\Delta t}.`}</LaTeX>
+La aceleración centrípeta no afecta la magnitud de la velocidad sino su dirección, contrarrestando la tendencia inercial de la partícula a seguir un movimiento rectilíneo uniforme para mantener el movimiento circular. Su magnitud se puede expresar de la siguiente forma:
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}_c=\\frac{{\\boldsymbol{\\mathbf{v}}_t}^2}{r}=r \\boldsymbol{\\mathbf{\\omega}}^2.`}</LaTeX>
+
+<h3>Aceleración neta</h3>
+La aceleración neta <LaTeX>{`\\boldsymbol{\\mathbf{a}}_N`}</LaTeX> representa la suma vectorial de todas las aceleraciones que actúan en el sistema, que en caso del movimiento circular son dos. Dado que la aceleración tangencial <LaTeX>{` \\boldsymbol{\\mathbf{a}}_t `}</LaTeX> y centrípeta  <LaTeX>{` \\boldsymbol{\\mathbf{a}}_c `}</LaTeX> son ortogonales, se pueden entender como componentes del vector aceleración neta, que está dado por
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}_N=\\boldsymbol{\\mathbf{a}}_c+\\boldsymbol{\\mathbf{a}}_t.`}</LaTeX>
+<Tip>
+	Siempre en el movimiento circular se tiene aceleración centrípeta no nula, pero no siempre se tiene aceleración tangencial no nula.
+</Tip>
+
+<h3>Movimiento circular uniforme</h3>
+Si una partícula se encuentra en movimiento rotacional tal que la magnitud de la velocidad tangencial <LaTeX>{`\\boldsymbol{\\mathbf{v}}_t`}</LaTeX> se mantiene constante, está en movimiento circular uniforme (MCU), como la partícula en la Figura . 
+
+
+
+Dicho movimiento tiene velocidad angular constante, ahora denominada frecuencia angular, y aceleración angular igual a cero. Las ecuaciones del MCU son análogas a las del movimiento rectilíneo uniforme, con  <LaTeX>{`\\theta`}</LaTeX> tomando el lugar de <LaTeX>{`x`}</LaTeX> y <LaTeX>{`\\omega`}</LaTeX> tomando el lugar de <LaTeX>{`v`}</LaTeX>:
+<ul>
+<li> <LaTeX>{`\\alpha=\\alpha_{\\text{med.}}=0.`}</LaTeX> </li>
+<li> <LaTeX>{`\\omega=\\omega_0=\\omega_f=\\omega_{\\text{med.}}.`}</LaTeX></li>
+<li> <LaTeX>{` \\Delta \\theta = \\omega t  .`}</LaTeX></li>
+</ul>
+Además, el movimiento circular uniforme se convierte en un movimiento periódico. Por ello, se definen conceptos especiales que darán pie a ecuaciones adicionales. 
+
+<h4>Periodo</h4>
+El periodo <LaTeX>{`T`}</LaTeX> de un movimiento periódico es el intervalo de tiempo que le toma a la partícula realizar una oscilación completa. En el caso del movimiento circular uniforme, es el tiempo que tome a la partícula dar una vuelta completa al círculo descrito por la trayectoria.
+
+<h4>Frecuencia</h4>
+La frecuencia <LaTeX>{`f`}</LaTeX> de un movimiento periódico se define como la razón entre el número de oscilaciones <LaTeX>{`N`}</LaTeX> y el intervalo de tiempo que demoran: 
+<LaTeX block>{`f=\\frac{N}{t}.`}</LaTeX> 
+Si se toma una sola oscilación, con <LaTeX>{`N=1`}</LaTeX>, se dice que la frecuencia es el recíproco del periodo.
+<LaTeX block>{`f=\\frac{1}{T}.`}</LaTeX>
+
+<h4>Frecuencia angular</h4>
+La frecuencia angular es equivalente a la velocidad angular para el movimiento circular uniforme. Se define como la frecuencia del movimiento periódico aplicada a la circunferencia (<LaTeX>{` 2\\pi `}</LaTeX> radianes):
+<LaTeX block>{`\\omega=2\\pi f=\\frac{2\\pi}{T}.`}</LaTeX>
+
+<h4>Velocidad tangencial en el movimiento circular uniforme</h4>
+En el movimiento circular uniforme, la velocidad tangencial <LaTeX>{`\\boldsymbol{\\mathbf{v}}_t`}</LaTeX> es constante. Se puede expresar ya no con relación a la velocidad angular, sino con relación a la frecuencia angular, que a su vez está definida respecto a la frecuencia y el periodo del movimiento:
+<LaTeX block>{`\\boldsymbol{\\mathbf{v}}_t=r \\omega=2\\pi f r=\\frac{2 \\pi r}{T}.`}</LaTeX>
+
+<h4>Aceleración centrípeta en el movimiento circular uniforme</h4>
+Dado a que en el movimiento circular uniforme la velocidad tangencial se mantiene constante, la aceleración tangencial es nula. Eso hace que la aceleración centrípeta sea la aceleración neta del sistema. Se definición en términos de la velocidad tangencial, se puede expandir en función de la frecuencia y el periodo:
+<LaTeX block>{`\\boldsymbol{\\mathbf{a}}_c=\\frac{{\\boldsymbol{\\mathbf{v}}_t}^2}{r}=r \\omega^2=4 \\pi^2 f^2 r=\\frac{4\\pi^2 r}{T^2} .`}</LaTeX>
+
+<h3>Movimiento circular uniformemente acelerado</h3>
+El movimiento circular uniformemente acelerado (MCUA) es un movimiento circular en el que la magnitud de la aceleración angular es constante. 
+
+<h4>Ecuaciones del movimiento circular uniformemente acelerado</h4>
+
+<ul>
+<li> <LaTeX>{`\\alpha_f=\\alpha_0=\\alpha.`}</LaTeX></li>
+<li> <LaTeX>{`\\omega_{\\text{med.}}=\\dfrac{\\omega_f+\\omega_0}{t}`}</LaTeX></li>
+<li> <LaTeX>{`\\omega_f=\\omega_0+\\alpha t.`}</LaTeX></li>
+<li> <LaTeX>{`\\Delta \\theta = \\omega_0t+\\frac{1}{2}\\alpha t^2.`}</LaTeX></li>
+<li> <LaTeX>{`\\omega_f^2=\\omega_0^2+2 \\alpha \\Delta \\theta.`}</LaTeX></li>
+</ul>
+
+<Tip>
+	Las ecuaciones del movimiento circular uniformemente acelerado son análogas a las ya enunciadas del movimiento rectilíneo uniformemente acelerado.
+</Tip>
