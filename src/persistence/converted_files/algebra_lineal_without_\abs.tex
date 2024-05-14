@@ -1,0 +1,2472 @@
+\documentclass{fmbnotes}
+\usepackage{fmbmath}
+
+\begin{document}
+
+\includepdf{./Portada/Lineal.pdf}
+
+\newcommand*{\titulo}{Álgebra lineal}
+\portada{\titulo} 
+
+% Agradecimientos:
+% Carolina Benedetti Velasquez, profesora de Álgebra lineal 1 en segundo semestre en la Universidad de los Andes.
+% Nicolás Betancourt Cardona, profesor complementario de Álgebra lineal 1 en segundo semestre en la Universidad de los Andes.
+% Andrés Fernando Reyes Lega, profesor de Introducción a la Física en primer semestre en la Universidad de los Andes.
+
+\begin{center}
+{\Large\bfseries\sffamily \titulo}
+\end{center}
+
+\noindent El álgebra es la rama de la matemática que estudia la noción de cantidad en general, representándola mediante símbolos. En concreto, el álgebra lineal estudia ecuaciones lineales, transformaciones lineales y sus representaciones mediante objetos matemáticos como vectores y matrices.
+
+Este documento estudia el álgebra lineal en \textcolor{green!50!black}{tantas partes. Programa del documento}.  
+
+\section{Ecuaciones lineales}
+
+Una \emph{ecuación lineal} o \emph{ecuación de primer grado} es una ecuación en donde todas las variables tienen grado 1 (despreciando las variables de grado 0). La forma general de una ecuación lineal es \[a_1x_1+a_2x_2+\cdots+a_nx_n=b\] donde \(x_i\) son las \emph{variables} o \emph{incógnitas}, las constantes \(a_i\) son los \emph{coeficientes} y la constante \(b\) es el \emph{término independiente}. 
+
+\begin{notacion}
+	Un conjunto de elementos \(a_1,a_2,\ldots,a_n\) se denota por \(a_i\). \\
+	Si una ecuación lineal tiene menos de cuatro variables, las variables se denotan por las letras \(x\), \(y\) y \(z\) en lugar de \(x_i\)
+\end{notacion}
+
+Los coeficientes deben satisfacer que \(\left|a_1\right|+\left|a_2\right|+\cdots+\left|a_n\right|\neq0\) para que haya al menos una variable.
+
+\begin{tip}
+	La condición \(\left|a_1\right|+\left|a_2\right|+\cdots+\left|a_n\right|\neq0\) se puede escribir también como \(\sum_{i=1}^n \left|a_i\right|\neq0\) y significa que al menos uno de los elementos \(a_i\) debe ser diferente de 0.
+\end{tip}
+
+Si un conjunto ordenado de números satisface una ecuación lineal se dice que es \emph{solución} de esa ecuación. Si una ecuación lineal tiene \(n\) variables, sus soluciones consistirán de \(n\) números. Toda ecuación lineal tiene solución y dos ecuaciones con la misma solución se denominan \emph{equivalentes}. 
+
+Toda ecuación lineal con una variable, con forma general \(ax=b\), tiene única solución: \(x=b/a\). Dicha solución se interpreta geométricamente como un punto en \(\mathbb{R}\), la recta real, como se ilustra en la \autoref{fig:ecuacion_lineal_una_variable}.
+
+\begin{figure}[h]
+\centering
+\import{./Figuras}{ecuacion_lineal_una_variable.pdf_tex}
+\caption{Toda ecuación lineal con una variable describe un punto en \(\mathbb{R}\).}
+\label{fig:ecuacion_lineal_una_variable}
+\end{figure}
+
+Toda ecuación lineal con dos variables, con forma general \(a_1x+a_2y=b\), tiene infinitas soluciones. Las soluciones se interpretan geométricamente como coordenadas cartesianas de puntos en \(\mathbb{R}^{2}\), el plano euclidiano. Esos puntos describen una recta, como se muestra en la \autoref{fig:ecuacion_lineal_dos_variables}. Las ecuaciones lineales con dos variables generalmente se expresan en la forma canónica de la ecuación de la recta: \(y=mx+b\).
+
+\begin{figure}[h]
+\centering
+\import{./Figuras}{ecuacion_lineal_dos_variables.pdf_tex}
+\caption{Toda ecuación lineal con dos variables describe una recta en \(\mathbb{R}^{2}\).}
+\label{fig:ecuacion_lineal_dos_variables}
+\end{figure}
+
+En general, las ecuaciones lineales con más de dos variables tienen infinitas soluciones. Las soluciones de una ecuación lineal de \(n\) variables se interpretan geométricamente como un hiperplano en \(\mathbb{R}^{n}\), es decir, un subespacio de dimensión \(n-1\). Por ejemplo, las soluciones de una ecuación lineal de tres variables describen un plano en \(\mathbb{R}^{3}\), el espacio euclidiano.
+
+\section{Sistemas de ecuaciones lineales}
+
+Un sistema de ecuaciones lineales es un conjunto de ecuaciones de primer grado que se relacionan entre sí. A un sistema de ecuaciones lineales que consiste de \( m \) ecuaciones y de \( n \) variables distintas se le denomina \emph{sistema \(m \times n\)}.
+
+\subsection[Sistemas de ecuaciones \(2 \times 2\)]{Sistemas de ecuaciones \(\bm{2 \times 2}\)}
+Los sistemas de ecuaciones más simples son los sistemas \(2 \times 2\), con forma general
+\[\begin{cases}
+a_{11}x+a_{12}y=b_1 \\ a_{21}x+a_{22}y=b_2
+\end{cases}
+\label{eq:sistema_2x2}\]
+donde las variables \(x\) y \(y\) son las incógnitas, las constantes \(a_{ij}\) son los coeficientes y las constantes \(b_i\) son los términos independientes. 
+
+Entre los coeficientes del sistema, máximo uno puede ser 0, caso en el cual una de la ecuación que contiene a ese coeficiente describe un punto. Si ninguno de los coeficientes es 0, cada ecuación del sistema describe una recta en \(\mathbb{R}^{2}\). Todo par ordenado de números \( (x, y) \) que satisface ambas ecuaciones en el sistema se le denomina solución y geométricamente es la intersección de las dos rectas. Pueden haber infinitas soluciones, si las dos ecuaciones son equivalentes y describen la misma recta; ninguna solución, si las ecuaciones describen rectas paralelas; o única solución de lo contrario. Se ilustra en la \autoref{fig:soluciones_sistema_2x2}.
+
+\begin{figure}[h]
+\centering
+\import{./Figuras}{soluciones_sistema_2x2.pdf_tex}
+\caption{Posibles soluciones de un sistema \(2\times 2\).}
+\label{fig:soluciones_sistema_2x2}
+\end{figure}
+
+Los sistemas de ecuaciones \(2 \times 2\) usualmente se resuelven haciendo uso de métodos propios del álgebra elemental: el método de sustitución, el método de reducción y el método de eliminación. También se puede despejar \( y \) en las ecuaciones para llegar a que si existe solución única para \(x\), entonces está dada por
+\[x=\frac{a_{22}b_1-a_{12}b_2}{a_{11}a_{22}-a_{12}a_{21}}.\]
+Por ello, sólo hay solución única si \(a_{11}a_{22}-a_{12}a_{21} \neq 0\). A esa cantidad se le denomina \emph{determinante},  \(\Delta=a_{11}a_{22}-a_{12}a_{21}\). Si el determinante es nulo pueden existir infinitas o ninguna solución.
+
+\subsection[Sistemas de ecuaciones \(m \times n\)]{Sistemas de ecuaciones \(\bm{m \times n}\)}
+
+Se generalizan los sistemas de ecuaciones estudiando sistemas \(m \times n\):
+\begin{equation}
+\begin{cases}
+\, a_{11}x_1 \, + \, a_{12}x_2 \,\! + \,\! \cdots \,\! + \, a_{1n}x_n \, = \, b_1 \\ 
+\, a_{21}x_1 \, + \, a_{22}x_2 \,\! + \,\! \cdots \,\! + \, a_{2n}x_n \, = \, b_2 \\
+\quad \, \vdots \qquad \quad \, \, \, \vdots \qquad \quad \, \qquad \quad \vdots \qquad \quad \vdots \\
+a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n=b_m.
+\end{cases}
+\label{eq:sistema_mxn}
+\end{equation}
+
+Geométricamente, las ecuaciones del sistema pueden representar puntos, rectas, planos, hiperplanos o subespacios de \(\mathbb{R}^{n}\), dado que son ecuaciones lineales de a lo más \(n\) variables. Todo punto \((x_1,x_2,\ldots,x_n)\) con \(n\) coordenadas que satisface todas las ecuaciones es solución del sistema y representa la intersección de los elementos geométricos descritos por las ecuaciones. Para todo sistema de ecuaciones existen tres posibilidades:
+\begin{itemize}
+\item El sistema tiene única solución si y sólo si su determinante es distinto de cero. Geométricamente, la solución es un punto. El sistema es \emph{consistente determinado}. 
+\item El sistema tiene infinitas soluciones y es \emph{consistente indeterminado}. 
+\item El sistema tiene infinitas soluciones y es \emph{inconsistente}.  
+\end{itemize}
+
+Si todos los términos independientes \(b_i\) son iguales a 0, el sistema se denomina \emph{homogéneo} y es consistente. Dos sistemas de ecuaciones que tienen el mismo conjunto de soluciones son \emph{equivalentes}.
+
+Si un sistema tiene más variables \(n\) que ecuaciones \(m\) y es un sistema consistente, entonces es indeterminado (véase el \hyperlink{thm:teorema_rouche-frobenius}{teorema de Rouché-Frobenius}). Toda solución al sistema se puede escribir como \( x = x_p + x_h \) donde \( x_p \) es una solución particular y \(x_h\) representa toda solución del sistema homogéneo.
+
+% Teorema de Rouché-Frobenius: http://www.ecoribera.org/ciencias/matematicas/2-bachillerato/115-teorema-de-rouche-frobenius
+
+\subsection[Sistemas de ecuaciones como ecuación matricial]{Sistemas de ecuaciones como ecuación matricial}
+
+\begin{notacion}
+	Una matriz \(\bmat{A}\) de tamaño \(m \times n\) se denota por \(\bmat{A}_{m\times n}\).
+	\label{not:tamano_matriz}
+\end{notacion}
+
+Un sistema de ecuaciones \(m \times n\) puede ser expresado como una ecuación matricial. Para ello se establece una \emph{matriz de coeficientes} \(\bmat{A}_{m\times n}\) cuyos elementos son los coeficientes del sistema de ecuaciones, un vector columna \(\bvec{x} \in \mathbb{R}^{n}\) constituido por las variables y un vector columna \(\bvec{b} \in \mathbb{R}^{m}\) que contiene los términos independientes del sistema. Con eso se plantea la siguiente relación: 
+\begin{align}
+\begin{split}
+\bmat{A}\bvec{x} &= \bvec{b} \\
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn} 
+\end{pmatrix}\begin{pmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix} & =\begin{pmatrix}
+b_1 \\ b_2 \\ \vdots \\ b_m
+\end{pmatrix}.
+\label{eq:sistema_como_ecuacion_matricial}
+\end{split}
+\end{align}
+Si el sistema de ecuaciones es homogéneo, el vector \(\bvec{b}\) será el vector \(\bvec{0} \in \mathbb{R}^{m}\). 
+
+Para un sistema \(n \times n\) consistente determinado, la matriz de coeficientes \(\bmat{A}_{n \times n}\) es una matriz cuadrada invertible. La solución del sistema se obtiene multiplicando ambos lados de la \autoref{eq:sistema_como_ecuacion_matricial} por la inversa de la matriz de coeficientes:
+\begin{equation*}
+\bvec{x}=\bmat{A}^{-1}\bvec{b}.
+\end{equation*}
+
+%
+%\footnote{Actualmente, las matrices tienen innumerables aplicaciones y su estudio acapara gran parte del álgebra lineal, pero originalmente las matrices fueron introducidas a la matemática como una notación para expresar sistemas de ecuaciones lineales de forma más simple.}%REVISAR VERACIDAD.
+
+\subsection{Sistemas de ecuaciones como matriz aumentada}
+Un sistema de ecuaciones \(m \times n\) se puede representar como \emph{matriz aumentada}. Se forma una matriz de tamaño \(m \times (n+1)\) que consiste de la matriz de coeficientes \(\bmat{A}\) y el vector de términos independientes \(\bvec{b}\) separados por una línea vertical: 
+\begin{equation*}
+	\begin{cases}
+		\, a_{11}x_1 \, + \, a_{12}x_2 \,\! + \,\! \cdots \,\! + \, a_{1n}x_n \, = \, b_1 \\ 
+		\, a_{21}x_1 \, + \, a_{22}x_2 \,\! + \,\! \cdots \,\! + \, a_{2n}x_n \, = \, b_2 \\
+		\quad \, \vdots \qquad \quad \, \, \, \vdots \qquad \quad \, \qquad \quad \vdots \qquad \quad \vdots \\
+		a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n=b_m.
+	\end{cases} \implies
+	\begin{apmatrix}{4}
+		a_{11} & a_{12} & \cdots & a_{1n} & b_1 \\ 
+		a_{21} & a_{22} & \cdots & a_{2n} & b_2 \\
+		\vdots & \vdots & \ddots & \vdots & \vdots \\
+		a_{m1} & a_{m2} & \cdots & a_{mn} & b_m\\
+	\end{apmatrix}
+\end{equation*}
+
+\begin{notacion}
+	Una matriz aumentada conformada por la matriz \(\bmat{A}\) y el vector columna \(\bvec{v}\) se denota por \(\begin{apmatrix}{1}	\bmat{A} & \bvec{v} \end{apmatrix}\).
+\end{notacion}
+
+Cada renglón de la matriz aumentada \(\begin{apmatrix}{1} \bmat{A} & \bvec{b} \end{apmatrix}\) está asociado a una ecuación del sistema y cada columna está asociada a una variable del mismo, a excepción de la última que contiene los términos independientes. Si el sistema de ecuaciones es homogéneo, todos los elementos en la última columna de la matriz aumentada serán 0.
+
+\begin{definicion}{Matriz equivalente por renglones}{matriz_equivalente_por_renglones}
+Dos matrices aumentadas son equivalentes por renglones si los sistemas de ecuaciones que representan tienen el mismo conjunto de soluciones.
+\end{definicion}
+
+Las matrices equivalentes por renglones tienen igual tamaño e igual rango. Sumado a eso, los espacios de renglones \(R\) generados por los renglones de matrices equivalentes por renglones son iguales.
+
+\subsection{Reducción gaussiana y Gauss-Jordan}
+Los métodos de eliminación gaussiana y eliminación Gauss-Jordan son los más eficientes para la resolución de sistemas de ecuaciones. Consisten en expresar el sistema como matriz aumentada y usar tres operaciones para pasar las matrices a su forma escalonada por renglones (en el caso de la reducción gaussiana) o escalonada reducida por renglones (en el caso de Gauss-Jordan).  
+
+\begin{definicion}{Operaciones fundamentales por renglones}{operaciones_fundamentales_por_renglones}
+Sea \(R_n\) el enésimo renglón de la matriz \(\bmat{A}\) y \(a\) un escalar no nulo, existen tres operaciones fundamentales por renglones que pueden realizarse sobre \(\bmat{A}\):
+\begin{enumerate}
+\item Intercambiar dos renglones entre sí. Intercambiar el renglón \(i\) con el renglón \(j\) se denota por \(\xrightarrow{R_i \rightleftarrows R_j}\).
+\item Cambiar un renglón por un múltiplo escalar no nulo de sí mismo. Cambiar el renglón \(i\) por su producto con el escalar \(a\) se denota por \(\xrightarrow{R_i \to aR_i}\).
+\item Cambiar un renglón por él mismo más un múltiplo escalar no nulo de otro. Sumar el renglón \(j\) por el escalar \(a\) al renglón \(i\) se denota por \(\xrightarrow{R_i \to R_i+aR_j}\).
+\end{enumerate}
+Las operaciones fundamentales por renglones transforman una matriz en otra que es \hyperlink{def:matriz_equivalente_por_renglones}{equivalente por renglones} a la primera. 
+\end{definicion} 
+
+\begin{definicion}{Formas escalonada por renglones y escalonada reducida por renglones}{rref}
+Una matriz está en la \emph{forma escalonada por renglones} si y sólo si: 
+\begin{itemize}
+\item Los renglones cuyos elementos son todos 0, denominados \emph{renglones nulos}, están en la parte inferior de la matriz.
+\item El primer elemento no nulo de cada renglón, denominado \emph{pivote}, es 1. 
+\item El pivote de cada renglón está a la derecha del pivote del renglón anterior (por lo cual todo elemento que comparte columna con un pivote y está debajo de él debe ser 0).
+\end{itemize}
+Más aún, una matriz está en la \emph{forma escalonada reducida por renglones}\footnote{Abreviada RREF, de su nombre en inglés: \textit{reduced row echelon form}.} si satisface las condiciones anteriores y además todos los elementos que comparten columna con un pivote son 0.
+\end{definicion}
+
+A continuación ejemplos de matrices tras la aplicación de eliminación gaussiana y eliminación Gauss-Jordan, respectivamente:
+\begin{center}
+\begin{tabular}{ccc}
+	\makecell{Forma escalonada por\\renglones:} & \(\qquad \quad \qquad\)& \makecell{Forma escalonada reducida\\por renglones:} \\
+	\rule[4.7ex]{0pt}{2.5ex}\(\begin{pmatrix}
+		1 & a_1 & a_2 & a_3 & a_4 \\
+		0 & 0 & 1 & a_5 & a_6 \\
+		0 & 0 & 0 & 1 & a_7 \\
+		0 & 0 & 0 & 0 & 0
+	\end{pmatrix}\) && \(\begin{pmatrix}
+		1 & a_1 & 0 & 0 & a_2 \\
+		0 & 0 & 1 & 0 & a_3 \\
+		0 & 0 & 0 & 1 & a_4 \\
+		0 & 0 & 0 & 0 & 0
+	\end{pmatrix}\).
+\end{tabular}
+\end{center}
+
+Toda matriz tiene infinitas formas escalonadas por reglones y una única forma escalonada reducida por renglones.
+
+Nótese que por las definiciones anteriores si una matriz cuadrada \(\bmat{A}_{n \times n}\) se puede transformar a la forma escalonada reducida por renglones con las operaciones fundamentales, entonces es equivalente por renglones a la matriz identidad \(\bmat{I}_n\).
+
+El siguiente es un buen algoritmo para transformar matrices a la forma escalonada por renglones haciendo uso de las operaciones fundamentales:
+\begin{enumerate}[label=\arabic*\textdegree.]
+	\item Ordenar los reglones de arriba a abajo tal que estén más arriba los que tienen pivote más a la izquierda. 
+	\item Ubicarse en el primer renglón.
+	\item Transformar el pivote del renglón seleccionado a un 1.
+	\item Transformar todos los elementos debajo de dicho pivote y en su misma columna a 0.
+	\item Pasar al siguiente renglón y repetir desde el tercer paso hasta concluir la reducción gaussiana.
+\end{enumerate}
+Hecho eso, se puede completar la reducción Gauss-Jordan realizando el proceso inverso: se empieza en el pivote del último reglón, se convierten todos los elementos encima de dicho pivote y en su misma columna a 0, se pasa al pivote del renglón anterior y se repite.
+
+\subsubsection{Interpretación de la reducción gaussiana}
+
+Tras realizar la reducción gaussiana, la matriz aumentada en forma escalonada por renglones:
+
+\begin{itemize}
+\item Representa un sistema consistente si se tiene igual número de pivotes que número de renglones no nulos. Si se obtienen renglones nulos de forma \(\begin{apmatrix}{4} 0 & 0 & \cdots & 0 & 0 \end{apmatrix}\) deben ser los últimos renglones de la matriz e implica que hay ecuaciones en el sistema que son equivalentes. 
+\begin{itemize}
+\item Representa un sistema consistente definido si hay tantos pivotes como reglones no nulos y como columnas.
+\item Representa un sistema consistente indefinido si hay menos pivotes que columnas. Ocurre si hay más variables \(n\) que ecuaciones \(m\) o si hay renglones nulos. En ese caso, se obtiene al menos una columna sin pivote. La variable asociada a esa columna es entonces una \emph{variable libre} y puede reemplazarse por un \emph{parámetro} \(t \in \mathbb{R}\). 
+\end{itemize}
+\item Representa un sistema inconsistente si tiene algún renglón de forma \(\begin{apmatrix}{4} 0 & 0 & \cdots & 0 & a \end{apmatrix}, \: a \neq 0\). Eso se interpreta como \(0=a,\: a\neq 0\) por lo que se obtiene una inconsistencia y no existe solución.
+\end{itemize}
+
+Un sistema homogéneo siempre tiene al menos una solución, cuando todas las variables son iguales a 0, denominada \emph{solución trivial}. Sumado a eso, tiene infinitas soluciones no triviales si hay más variables \(n\) que ecuaciones \(m\).
+
+\subsubsection{Interpretación de la reducción Gauss-Jordan}
+
+Una vez completada la reducción Gauss-Jordan, la matriz aumentada en la forma escalonada reducida por renglones revela las soluciones del sistema. Como cada columna menos la última está asociada a una variable, el valor de una incógnita está dado por el término independiente que comparte renglón con el pivote en la columna asociada a dicha variable. Así pues, para el caso de un sistema consistente determinado:
+
+\begin{equation*}
+	\begin{blockarray}{ccccc}
+		x_1 & x_2 & \cdots & x_n & \\
+			\begin{block}{(cccc|c)}
+				1 & 0 & \cdots & 0 & c_1 \\ 
+				0 & 1 & \cdots & 0 & c_2 \\
+				\vdots & \vdots & \ddots & \vdots & \vdots \\
+				0 & 0 & \cdots & 1 & c_m\\
+			\end{block}
+	\end{blockarray} \implies \begin{cases}
+	x_1=c_1 \\
+	x_2=c_2 \\
+	\; \vdots \qquad \vdots \\
+	x_n=c_m.
+	\end{cases}
+\end{equation*}
+
+\subsection{Sistemas de ecuaciones como combinaciones lineales}
+Un sistema de ecuaciones \(m \times n \) se puede expresar como combinación lineal. Si se toma un conjunto \(H\) de vectores columna cuyos elementos son las columnas de la matriz de coeficientes \(\bmat{A}\), el sistema de la \autoref{eq:sistema_mxn} se puede expresar como las combinaciones lineales de \(H\):
+\[x_1\begin{pmatrix}
+a_{11} \\ a_{21} \\ \vdots \\ a_{m1}
+\end{pmatrix}+x_2\begin{pmatrix}
+a_{12} \\ a_{22} \\ \vdots \\ a_{m2}
+\end{pmatrix}+\cdots+x_n\begin{pmatrix}
+a_{1n} \\ a_{2n} \\ \vdots \\ a_{mn}
+\end{pmatrix} = \begin{pmatrix}
+b_1 \\ b_2 \\ \vdots \\ b_m
+\end{pmatrix}.\]
+El sistema es consistente si la ecuación matricial \(\bmat{A}\bvec{x}=\bvec{b}\) tiene solución, es decir, si y sólo si \(\bvec{b} \in \operatorname{span}(H)\): el vector de términos independientes \(\bvec{b}\) se puede obtener como combinación lineal de los vectores que son columnas de \(\bmat{A}\).
+
+Más aún, como el generado de \(H\) es el \hyperlink{def:espacio_de_columnas}{espacio de columnas} de \(\bmat{A}\), \(\operatorname{span}(H)=C_{\bmat{A}}\), entonces \(\bmat{A}\bvec{x}=\bvec{b}\) tiene solución si y sólo si \(\bvec{b} \in C_{\bmat{A}}\). Eso a su vez sucede si y sólo si \(\rho(\bmat{A})\) es igual al rango de la matriz aumentada \(\begin{apmatrix}{1}
+\bmat{A} & \bvec{b}
+\end{apmatrix}\).
+
+\section{Vectores}\label{sec:vectores}
+
+\subsection{Cantidades escalares}
+
+Un \emph{escalar} es una magnitud que puede ser representada completamente haciendo uso de un número. Son cantidades unidimensionales, cuyo sentido está dado por el signo negativo o positivo que las precede. Si se toman como constantes, se denotan con letras minúsculas, generalmente las primeras del alfabeto.
+
+\subsection{Cantidades vectoriales}
+
+Intuitivamente, un \emph{vector} se puede entender como una cantidad con magnitud y dirección, representado geométricamente con una \say{flecha}, un segmento de recta dirigido. La longitud del segmento de recta dirigido es proporcional a la magnitud del vector y su orientación provee la dirección del vector. Los vectores se denotan por letras en negrilla (\(\bvec{v}\)) o por letras con una flecha encima (\(\vec{v}\)). 
+
+Formalmente, un vector es una tupla de números, es decir, una lista ordenada de números. Esos números, denominados \emph{componentes} o \emph{elementos} del vector, proveen información sobre la magnitud y dirección del vector. 
+
+\begin{definicion}{Vector}{vector}
+Un \emph{vector} \(\bvec{v} \in \mathbb{R}^{n}\) es una lista ordenada de \(n\) números reales.
+\end{definicion}
+
+Para interpretar un vector geométricamente, es conveniente trabajar con vectores que tienen dos componentes. A partir de la \hyperlink{def:vector}{definición anterior}, un vector \( \bvec{v} \in \mathbb{R}^{2} \) es un par ordenado de números reales \( \bvec{v}=(a,b) \).
+
+El símbolo \(\mathbb{R}^{2}\) refiere al espacio real de dos dimensiones, es decir, al plano euclidiano. Similarmente, el símbolo \( \mathbb{R}^{n} \) refiere al espacio real de \(n\) dimensiones. Dicho espacio de dimensión \( n \) surge del producto cartesiano del conjunto \(\mathbb{R}\) de números reales consigo mismo \(n\) veces: 
+\[ \mathbb{R}^{n}=\underbrace{\mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R}}_{\text{\(n\) veces}}.\]
+
+Geométricamente, el vector \(\bvec{v}=(a,b)\) se puede representar como un segmento de recta dirigido desde el origen hasta el punto \(P=(a,b)\). Se dice entonces que \(\bvec{v}\) es el \emph{vector posición} del punto \(P\), denotado por \(\overrightarrow{0P}\). El conjunto de todos los segmentos de recta dirigidos que tienen igual magnitud y dirección que \(\bvec{v}\) se denominan \emph{representaciones} de \( \bvec{v}\). Si dos segmentos de recta dirigidos tienen igual magnitud y dirección, entonces son representaciones del mismo vector independientemente de su ubicación espacial. Este concepto se ilustra en la \autoref{fig:representaciones_vector}, en donde se muestran cuatro representaciones del vector \(\bvec{v} \in \mathbb{R}^{2}\), una de ellas el vector posición del punto \(P\).
+
+\begin{figure}[h]
+\centering
+\import{./Figuras}{representaciones_vector.pdf_tex}
+\caption{Cuatro representaciones en \(\mathbb{R}^{2}\) del vector \(\bvec{v}=(a,b)\).}
+\label{fig:representaciones_vector}
+\end{figure}
+
+El vector que tiene como punto inicial el punto \( P=(a,b) \) y como punto terminal el punto \( Q=(c,d) \) se denota por \( \overrightarrow{PQ}\) y está dado por \(\overrightarrow{PQ}=Q-P =(c-a,d-b)\). El vector cuyas componentes son todas 0, se denomina \emph{vector cero} y se denota \(\bvec{0}\) o \(\vec{0}\). 
+
+Se puede diferenciar entre vectores renglón y vectores columna.
+
+\begin{definicion}{Vector renglón}{vector_renglón}
+Un \emph{vector renglón} o vector fila en \( \mathbb{R}^{n} \) es una tupla de \( n \) números reales escritos de forma horizontal:
+\[\bvec{v}=(v_1,v_2,\cdots,v_n )\]
+\end{definicion} 
+
+\begin{definicion}{Vector columna}{vector_columna}
+Un \emph{vector columna} en \( \mathbb{R}^{n} \) es una tupla de \( n \) números reales escritos de forma vertical:
+\[\bvec{v}=\begin{pmatrix}
+v_1 \\ v_2 \\ \vdots \\ v_n
+\end{pmatrix}\]
+\end{definicion}
+
+Un vector fila en \(\mathbb{R}^{n}\) se puede entender como una matriz \(1 \times n \) y un vector columna como una matriz \(n \times 1\). 
+
+El símbolo \(V_n\) denota el conjunto de todos los vectores de dimensión \( n \). Se explora en la \autoref{sec:espacios_vectoriales}.
+
+\begin{advertencia}
+	Tal como existe un espacio real de \(n\) dimensiones \( \mathbb{R}^{n} \), existe un espacio complejo \(\mathbb{C}^{n}\).
+\end{advertencia}
+
+La magnitud de un vector se mide con su norma, llamada también módulo. Dicha magnitud está relacionada a la longitud de las representaciones del vector. 
+
+\begin{definicion}{Norma de un vector}{norma}
+Sea \(\bvec{v} \in \mathbb{R}^{n}\), la \emph{norma} o \emph{módulo} de \(\bvec{v}\) es una cantidad relacionada a la longitud del vector, denotada por \(v\), \(\left|\bvec{v}\right|\) o \(\norm{\bvec{v}}\), que está dada por
+\[\norm{\bvec{v}}=\sqrt{\bvec{v}\cdot\bvec{v}}=\sqrt{v_1^2+v_2^2+\cdots+v_n^2}.\]
+\end{definicion}
+
+La norma de un vector es una cantidad escalar positiva porque \(\bvec{v}\cdot\bvec{v}\geq0\) para todo \(\bvec{v}\in\mathbb{R}^{n}\). Más aún, \(\norm{\bvec{v}}=0\) si y sólo si \(\bvec{v}=\bvec{0}\). 
+
+\subsubsection{Vectores unitarios de base estándar}
+Los vectores unitarios son vectores  con magnitud igual a 1, denotados por \(\uvec{v}\). En \( \mathbb{R}^{2} \) y \( \mathbb{R}^{3} \) se usan vectores unitarios de base estándar, que son vectores unitarios asociados a cada eje, para describir otros vectores. Se usa la siguiente convención:
+\begin{itemize}
+\item El vector unitario de base estándar para el eje \( x \), denotado \( \uvec{x} \) o \( \uvec{i} \), es \((1,0,0)\).
+\item El vector unitario de base estándar para el eje \( y \), denotado \( \uvec{y} \) o \( \uvec{j} \), es \((0,1,0)\).
+\item El vector unitario de base estándar para el eje \( z \), denotado \( \uvec{z} \) o \( \uvec{k} \), es \((0,0,1)\).
+\end{itemize}
+Así, todo vector \(\bvec{v}=(a,b,c)\) en \(\mathbb{R}^{3}\) se puede escribir como
+\[ \bvec{v}=a\uvec{i}+b\uvec{j}+c\uvec{k}.\]
+
+\subsubsection{Dirección de un vector y vector unitario}
+Sea \( \bvec{v} = (v_x,v_y) \) un vector en \( \mathbb{R}^{2} \), la \emph{dirección} de \( \bvec{v} \) es el ángulo \(0 \leq \theta \leq 2\uppi\) que forma toda representación de \( \bvec{v} \) con el lado positivo del eje \( x \). La dirección de \( \bvec{v} \) está dada por:
+\[\theta=\arctan\left(\frac{v_y}{v_x}\right) \: \text{ si } \: v_x \neq 0\]
+Por convención, la dirección del vector debe ser medida desde el eje \( x \) positivo, es decir, partiendo del eje \( x \) en el sentido positivo (en contra de las manecillas del reloj). Es posible obtener la dirección de cualquier vector \(\bvec{v} \in \mathbb{R}^{2} \) evaluando la arco tangente del valor absoluto de las componentes y sirviéndose del siguiente análisis de cuadrantes:
+\begin{itemize}
+\item Si \( \bvec{v} = (v_x,v_y) \) está en el cuadrante \barroman{I}, su dirección está dada por \( \theta = \arctan \left|\frac{v_y}{v_x}\right| \).
+\item Si \( \bvec{v} = (v_x,v_y) \) está en el cuadrante \barroman{II}, su dirección está dada por \( \theta = \uppi - \arctan \left|\frac{v_y}{v_x}\right| \).
+\item Si \( \bvec{v} = (v_x,v_y) \) está en el cuadrante \barroman{III}, su dirección está dada por \( \theta = \uppi + \arctan \left|\frac{v_y}{v_x}\right| \).
+\item Si \( \bvec{v} = (v_x,v_y) \) está en el cuadrante \barroman{IV}, su dirección está dada por \( \theta = 2\uppi - \arctan \left|\frac{v_y}{v_x}\right| \).
+\end{itemize}
+El porqué del análisis se muestra gráficamente en la \autoref{fig:direccion-de-un-vector}
+\begin{figure}[h]
+\centering
+\import{./Figuras}{Dirección de un vector.pdf_tex}
+\caption{Direcciones de distintos vectores.}
+\label{fig:direccion-de-un-vector}
+\end{figure}
+
+Para expresar la dirección de \( \bvec{v} \in \mathbb{R}^{n}\) tal que \(\bvec{v} \neq \bvec{0}\), se utiliza el vector unitario \(\uvec{v}\) que satisface \(\left|\uvec{v}\right|=1\), tiene igual dirección que \( \bvec{v} \) y está dado por
+\[\uvec{v}=\frac{\bvec{v}}{\left|\bvec{v}\right|}.\]
+Obtener el vector unitario a partir de un vector dado haciendo uso de la expresión anterior se conoce como \emph{normalizar}.
+
+Un vector unitario en \( \mathbb{R}^{2} \) se puede representar como \(\uvec{u}=(\cos \theta)\uvec{i}+(\sin \theta )\uvec{j}\) donde \(\theta\) es la dirección de \(\uvec{u}\). Adicionalmente, dado un vector \(\bvec{v}=(v_x,v_y,v_z)\), se dice que \(\cos \alpha=\frac{v_x}{\left|\bvec{v}\right|}\), \(\cos \beta=\frac{v_y}{\left|\bvec{v}\right|}\) y \(\cos \gamma=\frac{v_z}{\left|\bvec{v}\right|}\) son los \emph{cosenos directores} del vector \( \bvec{v} \in \mathbb{R}^{3}\).
+
+\subsection{Componentes cartesianos de un vector}
+Los componentes de un vector son las proyecciones del mismo en los ejes de un plano cartesiano. Un vector \(\bvec{v} \in \mathbb{R}^{3} \) se puede representar como la suma de sus componentes: \(\bvec{v}=\bvec{v}_x+\bvec{v}_y+\bvec{v}_z\). Dados dos puntos \(P=(x_1, y_1, z_1)\) y \(Q=(x_2, y_2, z_2)\), un vector \(\bvec{v}=\overrightarrow{PQ}\) tiene componentes:
+\begin{itemize}
+\item \(\bvec{v}_x = v_x\uvec{i}=(x_2-x_1)\uvec{i}\).
+\item \(\bvec{v}_y = v_y\uvec{j}=(y_2-y_1)\uvec{j}\).
+\item \(\bvec{v}_z = v_z\uvec{k}=(z_2-z_1)\uvec{k}\).
+\end{itemize}
+
+\subsection{Componentes cartesianos con coordenadas polares}
+Se puede usar la dirección \(\theta\) de un vector \(\bvec{v} \in \mathbb{R}^{2}\) para representar sus componentes:
+\begin{itemize}
+\item \(v_x=\left|\bvec{v}\right| \cos \theta\).
+\item \(v_y=\left|\bvec{v}\right| \sin \theta\).
+\end{itemize}
+Independientemente del eje coordenado que se utilice, el primer componente de un vector siempre irá acompañado de coseno y el segundo siempre irá acompañado de seno.
+
+\subsection{Adición vectorial}
+
+\subsubsection{Sumar vectores algebraicamente}
+
+Para la adición de los vectores \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \) se suman los componentes correspondientes de cada vector:
+\[ \bvec{u} + \bvec{v} = (u_1 + v_1, u_2 + v_2, \cdots , u_n + v_n).\]
+
+Para la adición de los vectores \( \bvec{u}, \bvec{v} \in \mathbb{R}^{3} \) haciendo uso de vectores unitarios para expresar los vectores, de forma \(\bvec{u} = u_x\uvec{i}+u_y\uvec{j}+u_z\uvec{k}\) y \(\bvec{v} = v_x\uvec{i}+v_y\uvec{j}+v_z\uvec{k}\), la suma se expresa como:
+\[ \bvec{u} + \bvec{v} = (u_x + v_x)\uvec{i} + (u_y + v_y)\uvec{j} + (u_z + v_z)\uvec{k}.\]
+
+\subsubsection{Sumar vectores geométricamente}
+
+\paragraph{Método del paralelogramo.} El método del paralelogramo se utiliza para sumar dos vectores \( \bvec{u} \) y \( \bvec{v} \) con punto inicial en el mismo punto. Se traza un vector igual a \(\bvec{v}\) desde el punto terminal de \( \bvec{u} \) y un vector igual a \(\bvec{u}\) desde el punto terminal de \(\bvec{v}\), formando un paralelogramo. El vector suma es igual a la diagonal principal del paralelogramo, compartiendo punto inicial con \(\bvec{v}\) y \( \bvec{u} \) y punto terminal con sus copias.
+\begin{figure}[H]
+\centering
+\import{./Figuras}{Método del paralelogramo suma.pdf_tex}
+\caption{Método del paralelogramo para \(\bvec{u}+\bvec{v}\).}
+\label{fig:metodo-del-paralelogramo-suma}
+\end{figure}
+
+\paragraph{Método del triángulo.} El método del triángulo se emplea para sumar dos vectores \( \bvec{u} \) y \( \bvec{v} \) posicionados tal que el punto inicial de \(\bvec{v}\) está en el punto terminal de \(\bvec{u}\). El vector suma se traza desde el punto inicial de \(\bvec{u}\) hasta el punto terminal de \(\bvec{v}\).
+\begin{figure}[H]
+\centering
+\import{./Figuras}{Método del triángulo.pdf_tex}
+\caption{Método del triangulo para \(\bvec{u}+\bvec{v}\).}
+\label{fig:metodo-del-triangulo}
+\end{figure}
+
+\subsubsection{Propiedades de la adición vectorial}
+
+\begin{tabular}{lp{\textwidth/2+3em}}
+	\rule[1ex]{0pt}{2.5ex} Cerradura para la adición vectorial: & Sean \(\bvec{v},\bvec{u} \in \mathbb{R}^{n}\), \(\bvec{u}+\bvec{v} \in \mathbb{R}^{n}\).\\
+	\rule[1ex]{0pt}{2.5ex} Asociatividad de la adición vectorial: & \((\bvec{u}+\bvec{v})+\bvec{w}=\bvec{u}+(\bvec{v}+\bvec{w})\).\\
+	\rule[1ex]{0pt}{2.5ex} Elemento neutro aditivo: &  Existe un único \(\bvec{0} \in \mathbb{R}^{n}\) tal que \(\bvec{u}+\bvec{0}=\bvec{0}+\bvec{u}=\bvec{u}\). \\
+	\rule[1ex]{0pt}{2.5ex} Inverso aditivo: &  Existe un único \(-\bvec{u} \in \mathbb{R}^{n}\) tal que \(\bvec{u}+(-\bvec{u})=(-\bvec{u})+\bvec{u}=\bvec{0}\). \\
+	\rule[1ex]{0pt}{2.5ex} Conmutatividad de la adición vectorial: & \(\bvec{u}+\bvec{v}=\bvec{v}+\bvec{u}\).\\
+\end{tabular}
+
+\subsection{Sustracción vectorial}
+\subsubsection{Restar vectores algebraicamente}
+
+Para la sustracción de los vectores \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \) se restan los componentes correspondientes de cada vector:
+\[ \bvec{u} - \bvec{v} = (u_1 - v_1, u_2 - v_2, \cdots , u_n - v_n).\]
+Esa resta se puede entender también como la adición del vector minuendo con el negativo del vector sustraendo:
+\( \bvec{u} - \bvec{v} = \bvec{u} + (-\bvec{v})\). Nótese que la resta es anti conmutativa, es decir, en general \(\bvec{u} - \bvec{v} \neq \bvec{v} - \bvec{u}\).
+
+Para la sustracción de los vectores \( \bvec{u}, \bvec{v} \in \mathbb{R}^{3} \) haciendo uso de vectores unitarios para expresar los vectores, haciendo uso de vectores unitarios para expresar los vectores, de forma \(\bvec{u} = u_x\uvec{i}+u_y\uvec{j}+u_z\uvec{k}\) y \(\bvec{v} = v_x\uvec{i}+v_y\uvec{j}+v_z\uvec{k}\), la resta se expresa como:
+\[ \bvec{u} - \bvec{v} = (u_x - v_x)\uvec{i} + (u_y - v_y)\uvec{j} + (u_z - v_z)\uvec{k}.\]
+
+\subsubsection{Restar vectores geométricamente}
+
+\paragraph{Método del paralelogramo.} Al igual que en la adición vectorial, el método del paralelogramo se utiliza para sumar dos vectores \( \bvec{u} \) y \( \bvec{v} \) con punto inicial en el mismo punto. Se traza un vector igual a \( \bvec{u} \) desde el punto terminal de \( \bvec{v} \) y un vector igual a \( \bvec{v} \) desde el punto terminal de \( \bvec{u} \), formando un paralelogramo. El vector diferencia es igual a la diagonal secundaria del paralelogramo, con su punto inicial en el punto terminal de \( \bvec{v} \) y compartiendo punto terminal con el vector \( \bvec{u} \).
+\begin{figure}[H]
+\centering
+\import{./Figuras}{Método del paralelogramo resta.pdf_tex}
+\caption{Método del paralelogramo para \(\bvec{u}-\bvec{v}\).}
+\label{fig:metodo-del-paralelogramo-resta}
+\end{figure}
+
+\subsection{Producto de un vector por un escalar}
+
+Para la multiplicación de un vector por un escalar, se multiplica cada componente del vector por el escalar. La multiplicación del vector \( \bvec{v} \) por el escalar \( c > 0 \) produce un vector con igual dirección que \( \bvec{v} \) y módulo \(c \left| \bvec{v} \right| \). Si \( c < 0 \), el vector resultado tendrá dirección opuesta, es decir su dirección será la dirección original más \(\uppi\). 
+\[\bvec{v}c=(v_1 c,v_2 c,\cdots,v_n c).\]
+
+\subsubsection{Propiedades del producto de un vector por un escalar}
+
+\begin{tabular}{lp{\textwidth/2-70.4pt}}
+	\rule[1ex]{0pt}{2.5ex} Cerradura para el producto de vector por escalar: & Sea \(\bvec{u} \in \mathbb{R}^{n}\), \(a\bvec{u} \in \mathbb{R}^{n}\).\\
+	\rule[1ex]{0pt}{2.5ex} Distributividad de escalares para el producto de vector por escalar: & \(a(\bvec{u}+\bvec{v})=a\bvec{u}+a\bvec{v}\).\\
+	\rule[1ex]{0pt}{2.5ex} Distributividad de vectores para el producto de vector por escalar: & \(\bvec{u}(a+b)=a\bvec{u}+b\bvec{u}\).\\
+	\rule[1ex]{0pt}{2.5ex} Asociatividad del producto de vector por escalar: & \(a(b\bvec{u})=(ab)\bvec{u}\).\\
+	\rule[1ex]{0pt}{2.5ex} Elemento neutro multiplicativo: & Existe un único número escalar 1 tal que \(1\bvec{u}=\bvec{u}\).\\
+\end{tabular}
+
+\subsection{Cociente de vector con un escalar}
+
+Para la división de un vector por un escalar, se divide cada componente del vector por el escalar. La división del vector \( \bvec{v} \) por el escalar \( c > 0 \) produce un vector con igual dirección que \( \bvec{v} \) y módulo \(\frac{\left|\bvec{v}\right|}{c}\). Si \( c < 0 \), el vector resultado tendrá dirección opuesta, es decir su dirección será la dirección original más \(\uppi\). 
+\[\frac{\bvec{v}}{c}=\left(\frac{v_1}{ c},\frac{v_2} {c},\cdots,\frac{v_n}{c}\right).\]
+
+\subsection{Producto punto}
+
+El \emph{producto punto}, \emph{producto escalar} o \emph{producto interior} de \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \), denotado por \( \bvec{u} \cdot \bvec{v}\), es igual a un escalar dado por:
+\[\bvec{u} \cdot \bvec{v}=(u_1,u_2,\ldots,u_n) \begin{pmatrix}
+v_1 \\ v_2 \\ \vdots \\ v_n
+\end{pmatrix} = u_1 v_1 + u_2 v_2 + \cdots + u_n v_n=\sum_{i=1}^{n}u_i v_i\]
+
+Como la operación involucra solo sumas y restas, el producto punto es conmutativo: \( \bvec{u} \cdot \bvec{v} = \bvec{v} \cdot \bvec{u}\).
+
+Dados \(\bvec{u} = u_x\uvec{i}+u_y\uvec{j}+u_z\uvec{k}\) y \(\bvec{v} = v_x\uvec{i}+v_y\uvec{j}+v_z\uvec{k}\), el producto punto se puede obtener multiplicando todas las componentes de los vectores entre sí. No obstante, solo es necesario multiplicar entre sí los componentes que corresponden al mismo eje, dado que \(\uvec{i} \perp \uvec{j} \perp \uvec{k}\) y por ende \(a\uvec{i}\cdot b\uvec{j} \cdot c \uvec{k}=0\)
+Los vectores unitarios iguales se cancelan debido a que \(a\uvec{i}\cdot b\uvec{i}=1\). Por ello, se tiene que:
+\[\bvec{u} \cdot \bvec{v}=u_x v_x + u_y v_y + u_z v_z\]
+
+\subsubsection{Formula polar para el producto punto}
+%Revisar el orden de esta sección (cuando digo que el producto punto mide qué tan paralelos son y donde pongo la demostración). Esta sección es nueva, está diferente del documento original a propósito.
+
+El producto punto de \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \), separados por un ángulo \(\varphi\), está también dado por
+\[\bvec{u} \cdot \bvec{v} = \left|\bvec{u}\right| \left|\bvec{v}\right| \cos \varphi.\]
+Por lo que el producto punto mide qué tan paralelos son dos vectores: un producto punto igual a cero implica vectores perpendiculares, dado que \(\cos \left(\frac{\uppi}{2}\right)=0\)
+
+Esto se puede demostrar usando un triángulo de lados \(\left|\bvec{u}\right|\), \(\left|\bvec{v}\right|\) y \(\left|\bvec{u}-\bvec{v}\right|\). Sea \(\varphi\) el ángulo entre \( \bvec{u} \) y \( \bvec{v} \), por ley de cosenos se tiene \[\left|\bvec{u}-\bvec{v}\right|^2=\left| \bvec{v} \right|^2+\left|\bvec{u}\right|^2-2\left|\bvec{u}\right|\left| \bvec{v} \right|\cos \varphi.\]
+Tomando en en en cuenta el hecho de que 
+\[\left|\bvec{u}-\bvec{v}\right|^2=(\bvec{u}-\bvec{v}) \cdot (\bvec{u}-\bvec{v}) = \left|\bvec{u}\right|^2-2\bvec{u} \cdot \bvec{v}+\left| \bvec{v} \right|^2\]
+Se pueden igualar ambas expresiones para obtener
+\[ \left|\bvec{u}\right|^2-2\bvec{u} \cdot \bvec{v}+\left| \bvec{v} \right|^2 = \left| \bvec{v} \right|^2+\left|\bvec{u}\right|^2-2\left|\bvec{u}\right|\left| \bvec{v} \right|\cos \varphi.\]
+Restando \( \left|\bvec{u}\right|^2 \) y \( \left| \bvec{v} \right|^2 \) a ambos lados y dividiendo entre \( -2 \), se llega a la expresión.
+
+\begin{figure}[H]
+\centering
+\import{./Figuras}{Triángulo con lados u, v, u-v.pdf_tex}
+\caption{Triángulo con lados \(\left| \bvec{u} \right|, \left| \bvec{v} \right|, \left|\bvec{u}-\bvec{v}\right|\).}
+\label{fig:triangulo con lados u, v, u-v}
+\end{figure}
+
+\subsubsection{Propiedades del producto punto}
+
+\begin{longtable}{lll}
+	\rule[1ex]{0pt}{2.5ex}i.&Producto punto en términos de la magnitud de un vector: &\(\bvec{v} \cdot \bvec{v}=\norm{\bvec{v}}^{2}\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Propiedad del 0 del producto punto: &\(\bvec{v} \cdot \bvec{0}=0\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Propiedad conmutativa del producto punto: &\(\bvec{u} \cdot \bvec{v}=\bvec{v} \cdot \bvec{u}\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Propiedad distributiva del producto punto: &\( \bvec{u} \cdot(\bvec{v}+\bvec{w})=\bvec{u} \cdot \bvec{v}+\bvec{u} \cdot \bvec{w}\). \\
+	\rule[1ex]{0pt}{2.5ex}v.&Propiedad homogénea del producto punto: &\( (c \bvec{u}) \cdot \bvec{v}=c(\bvec{u} \cdot \bvec{v})=\bvec{u} \cdot(c \bvec{v}) \). \\
+\end{longtable}
+
+\subsection{Ángulo entre vectores}
+
+El ángulo entre dos vectores \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \) tal que \( \bvec{u}, \bvec{v} \neq \bvec{0} \) está definido como el único valor \( \varphi \in [0, \uppi] \) en radianes entre las representaciones de \( \bvec{u} \) y \( \bvec{v} \) que tienen el origen como punto inicial. El ángulo entre dos vectores satisface
+\[ \cos \varphi=\frac{\bvec{u} \cdot \bvec{v}}{|\bvec{u}||\bvec{v}|}.\]
+Nótese que la fórmula origina directamente de la definición polar del producto punto.
+
+\subsubsection{Vectores ortogonales}
+
+Dados \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \), se dice que son perpendiculares u ortogonales si el ángulo entre ellos es \( \frac{\uppi}{2}  \). La ortogonalidad entre dos vectores se denota por \( \bvec{u} \perp \bvec{v} \). Dos vectores son ortogonales si y sólo si su producto punto es igual a cero; esto se puede probar de la fórmula del ángulo entre vectores, dado que \( \cos \left(\frac{\uppi}{2}\right)=0  \). Así,
+
+\[ \bvec{u} \perp \bvec{v} \quad \text{si y sólo si} \quad  \bvec{u} \cdot \bvec{v}=0 \]
+
+\subsubsection{Vectores paralelos}
+
+Sean \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \) dos vectores con igual dirección, tal que el ángulo entre ellos es \( 0 \), se dice que son paralelos, lo que se denota \( \bvec{u} \parallel \bvec{v} \). Nótese que dos vectores paralelos que tienen igual magnitud son en realidad dos representaciones del mismo vector. Por eso, dos vectores son paralelos si y sólo si uno es múltiplo escalar del otro:
+\[ \bvec{u} \parallel \bvec{v} \quad \text{si y sólo si} \quad  \bvec{u}=a \bvec{v}, \; a \in \mathbb{R} \]
+Adicionalmente, que dos vectores sean paralelos implica que su producto cruz sea cero, por lo que también se cumple que \(\bvec{u} \parallel \bvec{v} \quad \text{si y sólo si} \quad  \bvec{u} \times \bvec{v}=0 \)
+
+\subsubsection{ Vectores anti paralelos}
+
+Sean \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \) dos vectores con dirección opuesta, tal que que el ángulo entre ellos es \( \uppi \), se dice que \( \bvec{u} \) y \( \bvec{v} \) son vectores anti paralelos. Por tanto, \( \bvec{u} \parallel -\bvec{v} \).
+
+\subsection{ Proyección ortogonal de vectores}
+
+Dados dos vectores \( \bvec{u}, \bvec{v} \in \mathbb{R}^{n} \) tal que \( \bvec{u}, \bvec{v} \neq \bvec{0} \), la proyección de \( \bvec{u} \) sobre \( \bvec{v} \) es un vector \( \proy_{\bvec{v}} \bvec{u} \) que es paralelo a \( \bvec{v} \), como se muestra en la \autoref{fig:proy_v-u}. Por ende:
+
+\[ \proy_{\bvec{v}} \bvec{u}=a \bvec{v}, \; a \in \mathbb{R} \]
+
+Para determinar el valor del escalar \( a \), debemos servirnos del hecho de que \( \bvec{v} \perp \proy_{\bvec{v}} \bvec{u}-\bvec{u} \) para plantear la ecuación \( (a \bvec{v}-\bvec{u}) \cdot \bvec{v}=0 \). Despejando esa ecuación se obtiene \( a \), con lo que se llega a la siguiente definición:
+\[ \proy_{\bvec{v}} \bvec{u}=\left(\frac{\bvec{u} \cdot \bvec{v}}{\bvec{v} \cdot \bvec{v}}\right) \bvec{v} = \left(\frac{\bvec{u} \cdot \bvec{v}}{\left|\bvec{v}\right|^{2}}\right) \bvec{v} = \left(\frac{\bvec{u} \cdot \bvec{v}}{\left|\bvec{v}\right|}\right) \frac{\bvec{v}}{\left|\bvec{v}\right|}\]
+donde \(\left(\frac{\bvec{u} \cdot \bvec{v}}{\bvec{v}\cdot\bvec{v}}\right)=\left(\frac{\bvec{u} \cdot \bvec{v}}{\left|\bvec{v}\right|^{2}}\right)=a\) es el escalar que acompaña al vector \(\bvec{v}\). 
+
+También se puede interpretar como que \( \frac{\bvec{u} \cdot \bvec{v}}{\left|\bvec{v}\right|} \) es la componente de \( \bvec{u} \) en la dirección de \( \bvec{v} \) y \( \frac{\bvec{v}}{\left|\bvec{v}\right|} \) es el vector unitario \(\uvec{v}\) que da la dirección a \(\proy_{\bvec{v}} \bvec{u} \). Con el vector unitario \(\uvec{v}\) se puede escribir la proyección ortogonal como
+\begin{equation*}
+	\proy_{\bvec{v}} \bvec{u} = (\bvec{u} \cdot \uvec{v}) \uvec{v}.
+\end{equation*}
+
+La proyección \( \proy_{\bvec{v}} \bvec{u} \) es la respuesta a la siguiente pregunta: ¿cómo sería el vector \( \bvec{u} \) si se expresara con relación a un plano cartesiano con ejes \( \bvec{v} \) y \( \bvec{v}^{T} \) en lugar de uno con ejes \( x \) y \( y \)? 
+
+\begin{figure}[H]
+\centering
+\import{./Figuras}{proy_v u.pdf_tex}
+\caption{\( \proy_{\bvec{v}} \bvec{u} \).}
+\label{fig:proy_v-u}
+\end{figure}
+
+A partir de la definición se puede llegar a dos conclusiones:
+
+
+\begin{tabular}{lp{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex} Proyección de vectores ortogonales: &  \( \quad \bvec{u} \perp \bvec{v} \Longrightarrow \proy_{\bvec{v}} \bvec{u}=\proy_{\bvec{u}} \bvec{v}=\bvec{0}\) \\
+	\rule[1ex]{0pt}{2.5ex} Proyección de vectores paralelos: & \( \bvec{u} \parallel \bvec{v} \Longrightarrow \proy_{\bvec{v}} \bvec{u}=\bvec{u} \quad\) y \(\quad \proy_{\bvec{u}} \bvec{v}=\bvec{v} \) \\
+\end{tabular}
+
+
+\subsection{ Producto cruz}
+El \emph{producto cruz} o \emph{producto vectorial} de \( \bvec{u}, \bvec{v} \in \mathbb{R}^{3} \), denotado por \( \bvec{u} \times \bvec{v} \), es una operación binaria entre vectores que tiene como producto un \emph{vector axial} que es perpendicular a los dos operandos. Está dado por:
+ \[ \bvec{u} \times \bvec{v}= \begin{pmatrix}
+ 	u_yv_z-u_zv_y \\
+ 	u_zv_x - u_xv_z \\
+ 	u_xv_y - u_yv_x
+ \end{pmatrix}.\]
+\begin{advertencia}
+	El producto cruz es una operación exclusiva de \( \mathbb{R}^{3} \). No existe el producto cruz en otros espacios vectoriales.
+\end{advertencia} 
+ 
+El producto cruz se puede obtener también como el determinante de una matriz \( 3 \times 3 \) cuyo primer renglón contiene a los vectores unitarios y los renglones siguientes son los dos vectores. Dados \( \bvec{u}=u_{x} \uvec{i}+u_{y} \uvec{j}+u_{z} \uvec{k} \) y \( \bvec{v}=v_{x} \hat{\mathbf{1}}+v_{y} \uvec{j}+v_{z} \uvec{k} \), su producto cruz se expresa como:
+ \[ \bvec{u} \times \bvec{v}=\begin{vmatrix}
+ \uvec{i} & \uvec{j} & \uvec{k} \\
+ u_{x} & u_{y} & u_{z} \\
+ v_{x} & v_{y} & v_{z}
+ \end{vmatrix} = \left(u_{y} v_{z}-u_{z} v_{y}\right) \uvec{i}-\left(u_{x} v_{z}-u_{z} v_{x}\right) \uvec{j}+\left(u_{x} v_{y}-u_{y} v_{x}\right) \uvec{k}.\]
+
+El producto cruz o producto vectorial de dos vectores mide qué tan perpendiculares son: un producto cruz igual a cero implica vectores paralelos. El módulo del vector axial es igual al producto de los módulos de los factores por el seno del ángulo entre ellos,
+\[ \left|\bvec{u} \times \bvec{v}\right| = \left|\bvec{u}\right|\left|\bvec{v}\right| \sin \varphi,\]
+lo que a su vez es igual al área del paralelogramo de lados \( \bvec{u} \) y \( \bvec{v} \). El vector axial es normal al plano en el que están ubicados \( \bvec{u} \) y \( \bvec{v} \). 
+
+\subsubsection{Regla de la mano derecha}
+
+La \emph{regla de la mano derecha} permite conocer la dirección del vector axial haciendo uso de la mano derecha. Como el vector axial es normal al plano en el que están los dos operandos (siendo ortogonal a ambos), entonces sólo existen dos direcciones posibles (hacia afuera de las dos \say{caras} del plano). Dado un producto cruz \(\bvec{u}\times\bvec{v}\), la regla de la mano derecha consta de los siguientes pasos:
+
+\begin{enumerate}[label=\arabic*\textdegree.]
+	\item Extender los dedos de la mano derecha tal que apunten en la dirección del primer factor, \(\bvec{u}\)
+	\item Doblar los dedos hacia la palma de la mano siguiendo el menor ángulo entre \(\bvec{u}\) y \(\bvec{v}\), para lo cual puede ser necesario rotar la mano \(180\) grados.
+	\item Alzar el dedo pulgar, que representa la dirección del vector axial, hacia arriba o abajo, como se ilustra en la \autoref{fig:regla_mano_derecha}.
+\end{enumerate}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth/3]{./Figuras/regla_mano_derecha.png}
+\caption{\centering Regla de la mano derecha para determinar la dirección del vector axial. \break {\footnotesize Tomada de: https://www.geometriaanalitica.info/regla-o-ley-de-la-mano-derecha/}}
+\label{fig:regla_mano_derecha}
+\end{figure}
+
+Nótese que los dedos se ponen primero en la dirección del primer factor, \(\bvec{u}\), y se doblan hacia la dirección del segundo. Por esa razón, el vector axial \(\bvec{v}\times\bvec{u}\) tendría dirección opuesta al vector axial \(\bvec{u}\times\bvec{v}\) que se muestra en la \autoref{fig:regla_mano_derecha}.
+
+\subsubsection{Propiedades del producto cruz}
+
+\begin{tabular}{lp{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex} Propiedad anti conmutativa del producto cruz: & Si \(\bvec{v},\bvec{u} \neq \bvec{0}\), \( \bvec{u} \times \bvec{v} \neq \bvec{v} \times \bvec{u} \).\\
+	\rule[1ex]{0pt}{2.5ex} Dirección del vector axial: & \(\bvec{u} \times \bvec{v}\) es ortogonal tanto a \(\bvec{u}\) como a \(\bvec{v}\).\\
+	\rule[1ex]{0pt}{2.5ex} Implicación de la dirección del vector axial: & \(\bvec{u} \times \bvec{v}=-\bvec{v} \times \bvec{u} \).\\
+	\rule[1ex]{0pt}{2.5ex} Propiedad homogénea del producto cruz: & \( (a \bvec{u}) \times \bvec{v}=a(\bvec{u} \times \bvec{v})=\bvec{u} \times (a\bvec{v}) \).\\
+	\rule[1ex]{0pt}{2.5ex} Propiedad distributiva del producto cruz: & \( \bvec{u} \times(\bvec{v}+\bvec{w})=(\bvec{u} \times \bvec{v})+(\bvec{u} \times \bvec{w}) \) \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad asociativa del producto cruz con el producto punto: & \( \bvec{u} \cdot (\bvec{v} \times \bvec{w})=(\bvec{u} \times \bvec{v}) \cdot (\bvec{u} \times \bvec{w}) \) \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad del cero del producto cruz:  & \(\bvec{u} \times \bvec{0}=\bvec{0} \times \bvec{u}=\bvec{0} \). \\
+	\rule[1ex]{0pt}{2.5ex} Vectores paralelos: & Si \( \bvec{u}, \bvec{v} \neq \bvec{0} \), entonces \( \bvec{u} \parallel \bvec{v} \) si y sólo si \( \bvec{u} \times \bvec{v}=\bvec{0}\).\\	
+	\rule[1ex]{0pt}{2.5ex} Triple producto escalar: & \( \bvec{u} \times \bvec{v} \cdot \bvec{w}=\bvec{u} \cdot(\bvec{v} \times \bvec{w})\). \\
+	\rule[1ex]{0pt}{2.5ex} Triple producto vectorial: & \( \bvec{u} \times (\bvec{v} \times \bvec{w})=(\bvec{u} \cdot \bvec{w})\bvec{v}-(\bvec{u} \cdot \bvec{v})\bvec{w}\). \\	
+\end{tabular}
+
+\subsubsection{El triple producto escalar como volumen} 
+
+Por la forma en la que se calcula el producto cruz, el triple producto escalar es un número y se puede escribir como un determinante:
+\[\bvec{u} \cdot(\bvec{v} \times \bvec{w})=\begin{vmatrix}
+\bvec{u} \\ \bvec{v} \\ \bvec{w}
+\end{vmatrix}=\begin{vmatrix}
+u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3 \\ w_1 & w_2 & w_3
+\end{vmatrix}\]
+Por ello, tiene una interpretación geométrica. Dados tres vectores no coplanarios en \( \mathbb{R}^{3} \), sus representaciones con punto inicial en el mismo punto forman los lados de un paralelepípedo. El volumen del paralelepípedo queda determinado por el valor absoluto del triple producto escalar de los vectores.
+
+\begin{definicion}{Volumen de poliedros generados por tres vectores}{}
+Dados tres vectores \( \bvec{u}, \bvec{v}, \bvec{w} \in \mathbb{R}^{3} \):
+El \emph{volumen del paralelepípedo} generado por los tres vectores, con lados \( \bvec{u}, \bvec{v} \) y \( \bvec{w} \), está dado por el triple producto escalar de los vectores:
+\begin{equation*}
+	V_{\text{paralelepípedo }}=\left|(\bvec{u} \times \bvec{v}) \cdot \bvec{w}\right|.
+\end{equation*}
+El \emph{volumen del tetraedro} generado por los tres vectores está dado por \(1/6\) del volumen del paralelepípedo:
+\begin{equation*}
+	V_{\text{tetraedro}}=\frac{1}{6}\left|(\bvec{u} \times \bvec{v}) \cdot \bvec{w}\right|.
+\end{equation*}
+\end{definicion}
+Si el triple producto escalar de los vectores es \(0\), se sabe entonces que los tres vectores no describen un poliedro. A partir de eso se puede concluir que son \emph{coplanarios}.
+
+% FIGURA PARALELEPÏPEDO. FIGURA TETRAEDRO.
+
+\section{Rectas}
+Una recta es una figura geométrica unidimensional, constituida por una colección infinita de puntos en línea. Las rectas se denotan comúnmente con la letra \(\ell\). Una recta se determina conociendo un punto en ella y su dirección.
+
+\subsection[Rectas en \(\mathbb{R}^{2}\)]{Rectas en \(\bm{\mathbb{R}^{2}}\)}
+Una recta \( \ell \in \mathbb{R}^{2} \) se determina por medio de la ecuación de la recta: una expresión que satisfacen todos los puntos en la recta. La ecuación se formula conociendo la dirección de \(\ell\), provista por su pendiente \(m\), y el punto de intersección de la recta con el eje \(y\), denotado por \(b\). Con eso, \(\ell\) se puede describir como
+\[\ell: y=m x+b \]
+La pendiente \( m \) de una recta \( \ell \in \mathbb{R}^{2} \) que contiene los puntos \( \left(x_{1}, y_{1}\right) \) y \( \left(x_{2}, y_{2}\right) \) se puede obtener haciendo uso del teorema de Pitágoras. Está dada por
+\[ m=\frac{\Delta y}{\Delta x}=\frac{y_{2}-y_{1}}{x_{2}-x_{1}} .\]
+
+Las rectas horizontales, paralelas al eje \( x \) tienen pendiente igual a 0 y las rectas verticales, paralelas al eje \( y \), tienen pendiente indefinida. Dos rectas distintas son paralelas si tienen la misma pendiente. Si dos rectas son perpendiculares, \( \ell_{1} \perp \ell_{2} \), entonces se cumple que sus pendientes son opuestas e inversas (recíprocas):
+\[ m_{1}=-\frac{1}{m_{2}} \]
+
+Alternativamente, la ecuación de una recta se puede escribir como \( a x+b y=c \) donde \( m=-\frac{a}{b} \). 
+
+FÓRMULA DE DISTANCIA ENTRE DOS PUNTOS:
+
+\subsection{ Ecuaciones de la recta}
+Al igual que con una recta en \(\mathbb{R}^{2}\), una recta \(\ell \in \mathbb{R}^{n}\) se determina con una expresión que abarca todos los puntos que constituyen la recta, denominada ecuación de la recta. De la misma forma, la ecuación de la recta se determina conociendo un punto sobre la recta y la dirección de la recta, que por conveniencia se da con un vector paralelo a la recta denominado \emph{vector director}. Alternativamente, la ecuación de una recta se puede obtener si se conocen dos puntos sobre la recta, dado que con esos dos puntos se puede hallar un vector director.
+
+\subsubsection{Ecuación vectorial de la recta}
+Se requiere de un punto y la dirección de una recta para establecer su ecuación vectorial. Para una recta \(\ell \in \mathbb{R}^{n}\), se utiliza un punto \(P\) en la recta y un vector director \(\bvec{v}\in \mathbb{R}^{n}\) que es paralelo a la recta y provee su dirección. Cada múltiplo escalar de \(\bvec{v}\) sumado al vector posición del punto \(P\) da el vector posición de un punto en \(\ell\). Para tomar todos los múltiplos escalares de \(\bvec{v}\), se multiplica por un \emph{parámetro} \(t \in \mathbb{R}\) que es un número que varía entre los reales, tal que para cada valor de \(t\) se tiene un múltiplo escalar diferente de \(\bvec{v}\) y la ecuación arroja el vector posición de un punto particular en \(\ell\). Así, todos los puntos de forma \(x_1, x_2, \ldots, x_n\) que están en \(\ell\) se determinan como
+\[\begin{pmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix} =\overrightarrow{0P}+t \bvec{v}, \quad \text{para todo} \quad t \in \mathbb{R}\]
+para todos los valores posibles de \(t\).
+
+A partir de dos puntos \( P \) y \( Q \) sobre la recta \( \ell \in \mathbb{R}^{n} \), se puede obtener la ecuación vectorial determinando un vector director \(\overrightarrow{PQ}=Q-P\), que se puede colocar en la ecuación en lugar de \(\bvec{v}\). Una forma de interpretar la ecuación es que todos los múltiplos escalares de \( \bvec{v} \) son los vectores posición de todos los puntos en una recta \( \ell^{\prime} \), que es una recta idéntica a \( \ell \) pero que pasa por el origen. Como \( \ell \) no necesariamente pasa por el origen, para obtener todos los puntos en \(\ell\) se suma uno de los puntos sobre \( \ell \), el punto \(P\), a los puntos en \(\ell^{\prime}\), y se obtiene la ecuación vectorial de \(\ell\).
+
+\subsubsection{Ecuaciones paramétricas de la recta}
+Las ecuaciones paramétricas de una recta \( \ell \in \mathbb{R}^{n} \) surgen de igualar entre sí las componentes de los vectores presentes en la ecuación vectorial de dicha recta. Son \( n \) igualdades lineales en torno al parámetro \( t \in \mathbb{R} \) que varía en los números reales. Para la recta \( \ell\), si se tiene un punto \( P=\left(p_{1}, p_{2}, \ldots p_{n}\right) \) en la recta y un vector director \( \bvec{v}=\left(v_{1}, v_{2}, \ldots, v_{n}\right) \) paralelo a ella, se pueden expresar sus ecuaciones paramétricas como
+\[ \begin{cases}
+x_{1}=p_{1}+t v_{1} \\
+x_{2}=p_{2}+t v_{2}\\
+\: \vdots \qquad \vdots \qquad \; \vdots \\
+x_{n}=p_{n}+t v_{n}
+\end{cases}, \quad \text{para todo} \quad t \in \mathbb{R}. \]
+
+\subsubsection{Ecuaciones simétricas de la recta}
+Las ecuaciones simétricas de una recta se obtienen a partir de las ecuaciones paramétricas de una recta, despejando el parámetro \( t \in \mathbb{R} \) en cada una de ellas e igualándolas entre sí. Para una recta en \( \mathbb{R}^{n} \) con un punto \( P=\left(p_{1}, p_{2}, \ldots p_{n}\right) \) que es paralela a un vector director \( \bvec{v}=\left(v_{1}, v_{2}, \ldots, v_{n}\right) \) las ecuaciones simétricas son la igualdad entre sus ecuaciones paramétricas:
+\[\frac{x_{1}-p_{1}}{v_{1}}=\frac{x_{2}-p_{2}}{v_{2}}=\cdots=\frac{x_{n}-p_{n}}{v_{n}}\]
+Nótese que para que un punto \( (x_1,x_2,\ldots,x_3) \) esté en la, recta debe satisfacer la igualdad completamente, es decir, debe cumplir las tres ecuaciones. Obsérvese también que los denominadores de las ecuaciones simétricas son los componentes de un vector director de la recta, y reciben el nombre de \emph{números de dirección}.
+
+\subsection{Segmentos de recta}
+Sea \(\ell \in \mathbb{R}^{n}\) una recta que pasa por dos puntos \(P\) y \(Q\), tal que un vector director de la recta es el vector \(\overrightarrow{PQ}\). Para determinar el segmento de esa recta entre los puntos \(P\) y \(Q\) basta con usar \(\overrightarrow{PQ}\) como vector director y restringir los posibles valores para el parámetro \(t\) en la ecuación vectorial de la recta tal que \(0 \leq t \leq 1\). De esa forma no se tienen todos los múltiplos escalares del vector director y por tanto solo se tiene una serie finita de puntos en línea desde el punto \(P\) hasta \(Q\). Así, la ecuación vectorial para un segmento de recta \(\overline{PQ}\) está dada por 
+\[ \begin{pmatrix}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n}
+\end{pmatrix}
+=\overrightarrow{0P}+t\overrightarrow{PQ}, \; t \in [0,1].\]
+Si se expresa \(\overrightarrow{PQ}\) como \(P-Q\) y se toman los vectores posición de los puntos \(P\) y \(Q\), se tiene
+\[ \begin{pmatrix}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n}
+\end{pmatrix}
+=(1-t)\overrightarrow{0P}+t\overrightarrow{0Q}, \; t \in [0,1].\]
+
+\subsection{Rectas paralelas, sesgadas, ortogonales y coincidentes}
+\subsubsection{Rectas paralelas, sesgadas e intersección de rectas}
+Dos rectas \( \ell_{1}, \ell_{2} \in \mathbb{R}^{n} \) son paralelas si sus vectores directores son paralelos, es decir, si sus vectores directores son múltiplos escalares entre sí.
+
+Si dos rectas \( \ell_{1}, \ell_{2} \in \mathbb{R}^{2} \) no son paralelas, necesariamente interceptan en un punto \( P=\left(p_{x}, p_{y}\right) \), cuyas coordenadas satisfacen las ecuaciones de ambas rectas. Esto no se cumple en \( \mathbb{R}^{n}, n>2 \), porque dos rectas no coplanarias pueden no ser paralelas y aún así jamás interceptar, caso en el cual se denominan rectas \emph{sesgadas} o rectas \emph{que se cruzan}.
+
+Para encontrar la intersección entre dos o más rectas o saber si son rectas que se cruzan, se escriben las ecuaciones de las rectas en forma paramétrica. Se despejan dos de las variables y se igualan las variables correspondientes de cada recta para formar un sistema de ecuaciones \( 2 \times 2 \) cuyas variables son los parámetros de cada recta y cuya solución, si la hay, es la intersección de las rectas.
+
+\subsubsection{ Rectas ortogonales}
+
+Dos rectas \( \ell_{1}, \ell_{2} \in \mathbb{R}^{n} \) son ortogonales si sus vectores directores son ortogonales, es decir, si el producto punto de sus vectores directores es igual a cero.
+
+\subsubsection{Rectas coincidentes}
+
+Se dice que dos rectas son coincidentes cuando son equivalentes, es decir, son la misma recta. Las ecuaciones de rectas coincidentes son múltiplos escalares entre sí.
+
+\subsection{ Distancias a rectas}
+\subsubsection{ Distancia de un punto a una recta}
+La distancia de un punto a una recta se define como la distancia más corta del punto a la recta, es decir, como la norma de un vector ortogonal a la recta con punto inicial en el punto y punto terminal en la recta (o viceversa). Sea \( \ell \) una recta con un punto \( P \) y sea \( Q \) un punto fuera de la recta, la distancia del punto a la recta \( d(Q, \ell) \) está dada como la norma de la proyección de \( \overrightarrow{Q P} \) sobre un vector \( \bvec{n} \) que es ortogonal a la recta:
+\[ d(Q, \ell)=\left|\proy_{\bvec{n}} \overrightarrow{Q P}\right| \]
+
+Un vector \( \bvec{n} \) ortogonal a la recta será también ortogonal al vector director de la recta \( \bvec{v} \), así que a partir del vector director de la recta se puede encontrar uno ortogonal a ella haciendo uso de la ecuación \( \bvec{n} \cdot \bvec{v}=0 \).
+\subsubsection{ Distancia entre rectas}
+La distancia entre dos rectas \( \ell_{1} \) y \( \ell_{2} \) se mide a partir de un vector \( \bvec{n} \) ortogonal a ambas rectas. Para hallar la distancia entre dos rectas primero debe cumplirse que las rectas no intercepten jamás, es decir, que \( \ell_{1} \parallel \ell_{2}  \) o que las rectas sean rectas que se cruzan. Sea \( P_1 \) un punto en \( \ell_{1} \) y \( P_2 \) un punto en \( \ell_{2} \), entonces la norma de la proyección de \( \overrightarrow{P_1 P_2} \) sobre \( \bvec{u} \) es la distancia \( d\left(\ell_{1}, \ell_{2}\right) \) entre las rectas, medida a lo largo del vector perpendicular a ambas:
+\[ d\left(\ell_{1}, \ell_{2}\right)=\left|\proy_{\bvec{n}} \overrightarrow{P_1 P_2}\right| \]
+
+\section{Planos}
+
+Un plano es una superficie bidimensional constituida por infinitos puntos y rectas. Los planos suelen denotarse con la letra griega \(\pi\). Al igual que una recta, un plano se determina conociendo un punto en él y su dirección.
+
+\begin{definicion}{Plano}{plano}
+	Un \emph{plano} \( \pi \in \mathbb{R}^{n} \) se define como el conjunto de todos los puntos \( P \) para los que dado un punto fijo \( Q \) y un vector \( \bvec{n} \in \mathbb{R}^{n} \) se cumple que \( \overrightarrow{P Q} \perp \bvec{n} \) y por tanto \( \overrightarrow{P Q} \cdot \bvec{n}=0 \).
+\end{definicion}
+
+\subsection{Ecuaciones del plano}
+
+La ecuación de un plano es una expresión que contiene todos los puntos que constituyen el plano. Se determina de dos maneras: o bien por medio de un vector ortogonal a todos los vectores en el plano, denominado \emph{vector normal} al plano, o bien con dos vectores no paralelos que pertenecen al plano.
+
+\subsubsection[Ecuación cartesiana del plano en \(\mathbb{R}^{3}\)]{Ecuación cartesiana del plano en \(\bm{\mathbb{R}^{3}}\)}
+
+En contraposición a una recta, un vector paralelo a un plano no provee información suficiente sobre su dirección, mientras que un vector ortogonal al plano dicta completamente su dirección. Por ello, la \emph{ecuación cartesiana} de un plano \(\pi \in \mathbb{R}^{3}\) se obtiene usando un punto \( P=\left(p_{x}, p_{y}, p_{z}\right) \) sobre el plano y un vector ortogonal a todos los vectores en el plano, denominado \emph{vector normal} al plano y denotado \( \bvec{n}=\left(n_{x}, n_{y}, n_{z}\right) \).
+
+La ecuación para todos los puntos \( Q=(x, y, z) \) que están en el plano \( \pi \) se obtiene del hecho de que todo vector en el plano es perpendicular al vector normal. Por ende, todo vector \( \overrightarrow{P Q} \), del punto particular \(P\) a cualquier punto \(Q\), satisface que  \( \overrightarrow{P Q} \cdot \bvec{n}=0  \). A partir de eso, se puede llegar a una ecuación cartesiana:
+\begin{gather*}
+	\overrightarrow{P Q} \cdot \bvec{n} =0 \\
+	\big( (x, y, z)-\left(p_{x}, p_{y}, p_{z}\right) \big) \cdot \left(n_{x}, n_{y}, n_{z}\right) = 0 \\
+	(x-p_{x}, y-p_{y}, z-p_{z}) \cdot \left(n_{x}, n_{y}, n_{z}\right) = 0 \\
+	n_{x}\left(x-p_{x}\right)+n_{y}\left(y-p_{y}\right)+n_{z}\left(z-p_{z}\right)=0
+\end{gather*}
+Así, el plano consiste de todos los posibles vectores cuyo punto incial es \(P\) y que son perpendiculares al vector normal \(\bvec{n}\).
+
+La ecuación cartesiana se escribe más comúnmente como
+\begin{gather*}
+	\bvec{n} \cdot (x,y,z) = d \quad \iff \quad n_{x} x+n_{y} y+n_{z} z=d \\
+	\text{ donde } \quad d=n_{x} p_{x}+n_{y} p_{y}+n_{z} p_{z}=\overrightarrow{0 P} \cdot \bvec{n}.
+\end{gather*}
+\begin{tip}
+	Nótese que si \(d=0\), el plano pasa por el origen.
+\end{tip}
+
+Alternativamente, dados tres puntos \( P, Q, R \in \mathbb{R}^{n} \) no colineales, se puede determinar la ecuación del plano que los contiene estableciendo dos vectores en el plano \( \overrightarrow{P Q} \) y \( \overrightarrow{Q R} \). Como todos los vectores en el plano son ortogonales a un vector normal, \( \bvec{n} \) se puede obtener como el vector axial del producto cruz entre \( \overrightarrow{P Q} \) y \( \overrightarrow{Q R} \) :
+\[ \overrightarrow{P Q} \times \overrightarrow{Q R}=\bvec{n} .\]
+Luego, a partir de un vector normal y uno de los puntos se obtiene la ecuación.
+
+\subsubsection{ Ecuaciones de los planos coordenados}
+
+Las ecuaciones cartesianas de los tres planos coordenados se pueden obtener con el procedimiento explicado en el apartado anterior, conociendo que los tres pasan por el origen \( O=(0,0,0) \) y que cualquier vector a lo largo del eje que no hace parte del respectivo plano coordenado es normal a él. Haciendo las operaciones, se tiene que:
+\begin{itemize}
+    \item El plano \( x y \) tiene ecuación \( z=0 \) y cualquier vector paralelo a \( \uvec{k} \) es normal a él.
+	\item El plano \( x z \) tiene ecuación \( y=0 \) y cualquier vector paralelo a \( \uvec{j} \) es normal a él.
+	\item El plano \( y z \) tiene ecuación \( x=0 \) y cualquier vector paralelo a \( \uvec{i} \) es normal a él.
+\end{itemize}
+
+\subsubsection[Ecuación cartesiana del plano en \(\mathbb{R}^{n}\)]{Ecuación cartesiana del plano en \(\bm{\mathbb{R}^{n}}\)}
+
+La ecuación de un cartesiana de un plano \( \pi \) con un vector normal \( \bvec{n} \) y un punto \( P \) siempre debe ser de la forma
+\[ \bvec{n} \cdot\left(x_{1}, x_{2}, \ldots, x_{n}\right)=0+d \quad \text { donde } \quad d=\overrightarrow{0 P} \cdot \bvec{n} .\]
+
+\subsubsection{Ecuación vectorial del plano}
+La \emph{ecuación vectorial} de un plano \(\pi\in\mathbb{R}^{n}\) consiste de la combinación lineal de dos vectores cualquiera que sean linealmente independientes y se encuentran en el plano más un punto en el plano. Los vectores deben ser linealmente independientes porque dos vectores paralelos no pueden describir un plano, al ser múltiplos escalares entre sí y estar en la misma recta.
+
+Dados tres puntos \( P, Q, R \in \pi \) no colineales, se pueden establecer dos vectores en el plano \( \overrightarrow{P Q} \) y \( \overrightarrow{Q R} \) que no son paralelos y por tanto son linealmente independientes. Con ellos, se puede escribir la ecuación vectorial de \(\pi\) como: 
+\[ \begin{pmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix}=\overrightarrow{0P} + t\overrightarrow{PQ} + s\overrightarrow{QR}\quad \text{para todos} \quad t,s \in \mathbb{R}.\]
+Si el plano pasa por el origen, entonces
+un posible \(\overrightarrow{0P}\) es \(\bvec{0}\) y se puede escribir la ecuación como:
+\[ \begin{pmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix}=t\overrightarrow{PQ} + s\overrightarrow{QR}\quad \text{para todos} \quad t,s \in \mathbb{R}.\]
+Lo anterior muestra que los dos vectores generan al plano, es decir \(\pi = \operatorname{span}\{\overrightarrow{P Q},\overrightarrow{Q R}\}\). Sumado a eso, como el plano pasa por el origen es un subespacio propio de \(\mathbb{R}^{n}\), ergo una base del plano es \(\mathcal{B}=\{\overrightarrow{P Q},\overrightarrow{Q R}\}\).
+
+\subsubsection{Ecuaciones paramétricas de la recta}
+Las \emph{ecuaciones paramétricas} de una plano \( \pi \in \mathbb{R}^{n} \) son análogas a las ecuaciones paramétricas de una recta y provienen de igualar entre sí las componentes de los vectores presentes en la ecuación vectorial de dicho plano. Por ello, son \( n \) igualdades lineales en torno a los parámetros \( t,s \in \mathbb{R} \) que varían en los números reales. Sea  \( P=\left(p_{1}, p_{2}, \ldots p_{n}\right) \) un punto en el plano y sean \( \bvec{u}=\left(u_{1}, u_{2}, \ldots, u_{n}\right)  \) y \( \bvec{v}=\left(v_{1}, v_{2}, \ldots, v_{n}\right) \) dos vectores no paralelos en el plano, la ecuaciones paramétricas de \(\pi\) son:
+\[ \begin{cases}
+x_{1}=p_{1}+t u_{1} + s v_1\\
+x_{2}=p_{2}+t u_{2} + s v_2\\
+\: \vdots \qquad \vdots \qquad \; \vdots \\
+x_{n}=p_{n}+t u_{n} + s v_3
+\end{cases} \quad \text{para todos} \quad t,s \in \mathbb{R}. \]
+
+\subsubsection[Ecuación vectorial del plano a partir de la ecuación cartesiana del plano en \(\mathbb{R}^{3}\)]{Ecuación vectorial del plano a partir de la ecuación cartesiana del plano en \(\bm{\mathbb{R}^{3}}\)}
+
+Dado un plano que pasa por el origen con vector normal \(\bvec{n} \in \mathbb{R}^{3}\), se puede escribir su \emph{ecuación vectorial} a partir del vector normal. Se tiene que su ecuación cartesiana está dada por 
+\[n_{x} x+n_{y} y+n_{z} z=\bvec{n} \cdot \begin{pmatrix}
+x\\y\\z
+\end{pmatrix}=0.\]
+Esa expresión se puede escribir como la matriz aumentada de tamaño \(1 \times n+1\) que tiene al vector normal terminado en 0 como fila: 
+\[\begin{apmatrix}{1}
+\bvec{n}&0
+\end{apmatrix}=\begin{apmatrix}{3}
+n_x&n_y&n_z&0
+\end{apmatrix}\]
+donde la segunda y tercera columna son variables libres. A partir de esa matriz aumentada se obtiene la ecuación vectorial del plano \(\pi\in\mathbb{R}^{3}\): 
+\[\begin{pmatrix}
+x \\y \\ z
+\end{pmatrix} = t\begin{pmatrix}
+-n_y/n_x\\1\\0
+\end{pmatrix}+s\begin{pmatrix}
+-n_z/n_x\\0\\1
+\end{pmatrix}, \quad \text{para todos} \quad t,s \in \mathbb{R}\]
+
+Como el plano pasa por el origen, \(\pi\) es un subespacio propio de \(\mathbb{R}^{3}\) y los dos vectores en la ecuación vectorial son una base de \(\pi\).
+
+\subsection{ Planos paralelos, ortogonales y coincidentes}
+
+\subsubsection{Planos paralelos}
+Dos planos \( \pi_{1}, \pi_{2} \in \mathbb{R}^{n} \) son \emph{paralelos} si sus vectores normales son paralelos, es decir, si sus vectores normales son múltiplos escalares entre sí.
+
+\subsubsection{Intersección de planos}
+
+Si dos planos \( \pi_{1}, \pi_{2} \in \mathbb{R}^{n} \) no son paralelos, necesariamente interceptan. Para dos planos \( \pi_{1}, \pi_{2} \in \mathbb{R}^{3} \) no coincidentes, la intersección en una recta \( \ell \) y las coordenadas de cualquier punto en \( \ell \) satisfacen las ecuaciones tanto de \( \pi_{1} \) como de \( \pi_{2} \).
+
+Para encontrar la \emph{intersección} entre dos o más planos se resuelve un sistema de ecuaciones con las ecuaciones de los planos. En el caso de \( \mathbb{R}^{3} \), la recta de intersección se obtiene de la resolución de un sistema de ecuaciones \( 2 \times 3 \), cuyas infinitas soluciones son los puntos en la recta.
+
+\subsubsection{ Planos ortogonales}
+
+Dos planos \( \pi_{1}, \pi_{2} \in \mathbb{R}^{n} \) son \emph{ortogonales} si sus vectores normales son ortogonales, es decir, si el producto punto de sus vectores normales es igual a cero.
+
+\subsubsection{ Planos coincidentes}
+
+Se dice que dos planos son \emph{coincidentes} cuando sus ecuaciones son equivalentes, es decir, son el mismo plano. Las ecuaciones de planos coincidentes son múltiplos escalares entre sí.
+
+\subsection{Distancias a planos}
+
+\subsubsection{  Distancia entre un punto y un plano}
+
+Análogamente a la distancia entre un punto y una recta, la distancia de un punto a un plano es la distancia más corta del punto al plano, es decir, la magnitud de un vector normal al plano con punto inicial en el punto y punto terminal en el plano (o viceversa). Sea \( P=\left(p_{x}, p_{y}, p_{z}\right) \) un punto en el plano \( \pi \) y \( Q=(x, y, z) \) un punto afuera de él. Se puede formar un triángulo rectángulo con hipotenusa \( \overrightarrow{P Q} \) y cateto la distancia \( d(Q, \pi) \) del punto al plano, con un ángulo \( \varphi \) entre ellos, de forma
+\[ \cos \varphi =\frac{d(Q, \pi)}{\left|\overrightarrow{P Q}\right|} \]
+
+El ángulo \( \varphi \) entre \( \overrightarrow{P Q} \) y \( d(Q, \pi) \) es el mismo que entre \( \overrightarrow{P Q} \) y cualquier vector normal al plano \( \bvec{n} \), dado que \( d(Q, \pi) \) es paralelo a \( \bvec{n}  \). Se despeja \( d(Q, \pi) \) y se multiplica por \( 1=\frac{\left|\bvec{n}\right|}{\left|\bvec{n}\right|} \), para obtener una fórmula para la distancia entre un punto y un plano:
+\[ d(Q, \pi)=\left|\overrightarrow{P Q}\right| \cos \varphi=\frac{\left|\bvec{n}\right|\left|\overrightarrow{P Q}\right| \cos \varphi}{\left|\bvec{n}\right|}=\frac{\bvec{n} \cdot \overrightarrow{P Q}}{\left|\bvec{n}\right|} \]
+
+Expandiendo la expresión anterior se tiene que
+\[ d(Q, \pi)=\frac{\left|\left(x-p_{x}\right) n_{x}+\left(y-p_{y}\right) n_{y}+\left(z-p_{z}\right) n_{z}\right|}{\sqrt{n_{x}^{2}+n_{y}^{2}+n_{z}^{2}}}=\frac{\left|n_{x} x+n_{y} y+n_{z} z-d\right|}{\sqrt{n_{x}^{2}+n_{y}^{2}+n_{z}^{2}}}\]
+donde \(d=n_{x} p_{x}+n_{y} p_{y}+n_{z} p_{z} \).
+
+Si el plano es un subespacio vectorial, es decir si pasa por el origen, se puede hacer uso del concepto de \hyperlink{def:proyeccion_ortogonal}{proyección ortogonal} y del vector posición del punto para hallar la distancia \(d(Q,\pi)\) del punto al plano. Se resta el vector posición con su proyección sobre el plano para obtener un vector normal al plano cuyo punto terminal es en el punto \(Q\) y se obtienen la magnitud de ese vector para conocer la distancia:
+\[d(Q,\pi)=\norm{\overrightarrow{0Q}-\proy_{\pi}\overrightarrow{0Q}}=\norm{\proy_{\pi^\perp}\overrightarrow{0Q}}.\]
+Como se muestra en la ecuación, la norma es a su vez la norma del complemento ortogonal del plano.
+
+% Gráfica de un vector que es oblicuo al plano, el plano \(\pi\), y la proyección del vector sobre el plano. Se muestra como el vector menos la proyección da un vector normal al plano cuyo punto inicial es en el plano y cuyo punto terminal es en el punto. 
+
+\begin{tip}
+	En ocasiones se habla de la distancia de un vector a un plano. Como un vector es una tupla de números, \(\bvec{v}\in\mathbb{R}^{n}\) se puede entender como un punto, el punto terminal de su representación geométrica. Así, la distancia es la distancia entre dicho punto y el plano.  
+\end{tip}
+
+\subsubsection{ Distancia entre una recta y un plano}
+
+La distancia entre una recta y un plano está definida como la magnitud de un vector ortogonal a la recta y normal al plano que tiene origen en uno y punto terminal en otro. Para hallar la distancia entre una recta \( \ell \) y un plano \( \pi \), primero debe cumplirse que la recta y el plano jamás intercepten. Es decir, \( \ell \) debe estar en un plano \( \pi_{2} \) tal que \( \pi \parallel \pi_{2}\). Si se cumple esa condición, la distancia entre una recta y un plano se puede hallar de dos formas:
+\begin{itemize} \item Determinar un punto \( P \) sobre \( \ell \) y determinar la distancia de \( P \) a \( \pi\)
+\item Determinar una recta en \( \pi \) y hallar la distancia entre ella y \( \ell \)
+\end{itemize}
+En el segundo caso, para determinar una recta en \( \pi \) se utiliza cualquier punto en \( \pi \) y un vector director \( \bvec{v} \) que sea ortogonal al vector \( \bvec{n} \) que es normal a \( \pi \), tal que \( \bvec{n} \cdot \bvec{v}=0 \). Con un punto y un vector director se puede expresar la recta.
+\subsubsection{  Distancia entre planos}
+La distancia entre planos se define como la magnitud de un vector normal a ambos planos con origen en uno y punto terminal en otro. De igual manera al caso anterior, para hallar la distancia entre dos planos \( \pi_{1} \) y \( \pi_{2} \) los planos deben ser paralelos. Se puede elegir entonces alguno de los siguientes métodos:
+\begin{itemize}
+\item Determinar un punto \( P \) sobre \( \pi_{1} \) y determinar la distancia de \( P \) a \( \pi_{2} \).
+\item Determinar un punto \( Q \) sobre \( \pi_{2} \) y determinar la distancia de \( Q \) a \( \pi_{1} \).
+\item Determinar una recta \( \ell_{1} \) en \( \pi_{1} \) y hallar la distancia entre \( \ell_{1} \) y \( \pi_{2} \).
+\item Determinar una recta \( \ell_{2} \) en \( \pi_{2} \) y hallar la distancia entre \( \ell_{2} \) y \( \pi_{1} \).
+\item Determinar una recta \( \ell_{1} \) en \( \pi_{1} \) y otra recta \( \ell_{2} \) en \( \pi_{2} \) y hallar la distancia entre \( \ell_{1} \) y \( \ell_{2} \).
+\end{itemize}
+Nótese que no serviría determinar un punto \( P \) en \( \pi_{1} \) y un punto \( Q \) en \( \pi_{2} \) y hallar la distancia entre los dos puntos debido a que esa distancia no necesariamente sería la menor distancia entre los planos.
+
+\section{Matrices}
+
+\subsection{Matriz}
+
+Una matriz en un arreglo ordenado de cantidades, que se pueden visualizar como escalares si se mira la matriz elemento por elemento o como vectores si se mira por columnas o renglones.
+
+\begin{definicion}{Matriz}{}
+	Una \emph{matriz} \( \bmat{A} \) de tamaño \( m \times n \) es un arreglo de \( mn \) números reales distribuidos en \( m \) renglones y \( n \) columnas, representado como
+	\[\bmat{A}_{m\times n}=\begin{pmatrix}
+	a_{11} & a_{12} & \cdots & a_{1n} \\
+	a_{21} & a_{22} & \cdots & a_{2n} \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	a_{m1} & a_{m2} & \cdots & a_{mn} \\
+	\end{pmatrix}.\]
+\end{definicion}
+
+La matrices se denotan con letras mayúsculas, y se pueden denotar con su tamaño como subíndice, como \( \bmat{A}_{m\times n} \). Sus elementos se denotan como \( (a_{ij}) \) donde \( i \in [1,m] \) es un número que varía entre el número de renglones y \( j \in [1, n] \) es un número que varía entre el número de columnas de la matriz.
+
+Dos matrices son iguales si y sólo si son del mismo tamaño y sus elementos correspondientes son iguales. Nótese que los vectores columna y los vectores renglón son en realidad casos particulares de matrices.
+
+\subsubsection{Matrices cuadradas y triangulares}
+
+Las matrices con el mismo número de renglones y columnas se denominan \emph{matrices cuadradas} y se denotan como \( \bmat{A}_{n\times n} \). Una matriz cuadrada \( \bmat{A} = (a_{ij}) \) se designa \emph{triangular superior} si todos los elementos debajo de su diagonal principal son cero, tal que \( a_{ij} = 0 \) para todo \( i > j \). Similarmente, se denomina \emph{triangular inferior} si todos los elementos encima de la diagonal principal son cero, es decir si \( a_{ij} = 0 \) para todo \( i < j \). Más aún, si todos los elementos que no están en la diagonal principal son cero, tal que \( a_{ij} = 0 \) para todo \( i \neq j \), la matriz se llama \emph{matriz diagonal} y es tanto triangular superior como triangular inferior.
+
+\subsection{Adición y sustracción matricial}
+
+Para la adición o sustracción de dos matrices es necesario que estas tengan el mismo tamaño. La suma de \(\bmat{A}_{m \times n } = (a_{ij})\) y \(\bmat{B}_{m \times n } = (\bmat{B}_{ij})\) consiste en sumar los elementos correspondientes de las dos matrices:
+\[\bmat{A}_{m \times n } + \bmat{B}_{m \times n } = (a_{ij}+b_{ij}) = \begin{pmatrix}
+	a_{11}+b_{11} & a_{12}+b_{12} & \cdots & a_{1n}+b_{1n} \\
+	a_{21}+b_{21} & a_{22}+b_{22} & \cdots & a_{2n}+b_{2n} \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	a_{m1}+b_{m1} & a_{m2}+b_{m2} & \cdots & a_{mn}+b_{mn} \\
+\end{pmatrix}.\]
+Similarmente, la resta consiste en hallar la diferencia de los elementos correspondientes de las matrices:
+\[\bmat{A}_{m \times n } - \bmat{B}_{m \times n } = (a_{ij}-b_{ij}) = \begin{pmatrix}
+	a_{11}-b_{11} & a_{12}-b_{12} & \cdots & a_{1n}-b_{1n} \\
+	a_{21}-b_{21} & a_{22}-b_{22} & \cdots & a_{2n}-b_{2n} \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	a_{m1}-b_{m1} & a_{m2}-b_{m2} & \cdots & a_{mn}-b_{mn} \\
+\end{pmatrix}.\]
+
+\subsubsection{Propiedades de la adición y sustracción matricial}
+
+
+\begin{tabular}{lp{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex} Propiedad del elemento neutro aditivo: &  \( \bmat{A} \pm 0 = \bmat{A} \). \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad conmutativa de la adición matricial: &  \( \bmat{A} + \bmat{B} = \bmat{B} + \bmat{A} \).   \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad anti conmutativa de la sustracción matricial: &  En general, \( \bmat{A} - \bmat{B} \neq \bmat{B} - \bmat{A} \).   \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad asociativa de la adición matricial: &  \(\bmat{A} + (\bmat{B} + \bmat{C}) = (\bmat{A} + \bmat{B}) + \bmat{C}\).
+\end{tabular}
+
+
+\subsection{Producto de matriz por escalar}
+
+El producto de una matriz \( \bmat{A}_{m\times n} = (a_{ij}) \) por un escalar \( c \) es igual a un una matriz \( c\bmat{A} \) del mismo tamaño que la matriz original. El número escalar se multiplica por cada elemento de la matriz:
+\[c \cdot \bmat{A}_{m\times n}=(a_{ij}c)=\begin{pmatrix}
+	a_{11}c & a_{12}c & \cdots & a_{1n}c \\
+	a_{21}c & a_{22}c & \cdots & a_{2n}c\\
+	\vdots & \vdots & \ddots & \vdots  \\
+	a_{m1}c & a_{m2}c & \cdots & a_{mn}c \\
+	\end{pmatrix}.\]
+
+\subsubsection{Propiedades del producto entre matriz y escalar}
+
+
+\begin{tabular}{lp{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex} Propiedad del cero para la multiplicación por un escalar: &  \(0\bmat{A} = 0.\) \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad del elemento neutro para la multiplicación por un escalar: &  \(1\bmat{A} = \bmat{A}.\)   \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad distributiva para la multiplicación por un escalar: &  \(c(\bmat{A} + \bmat{B}) = c\bmat{A} + c\bmat{B}.\)
+\end{tabular}
+
+
+\subsection{Producto matricial}
+
+El producto de matrices es una generalización del producto punto entre vectores. Si el número de columnas
+de \( \bmat{A} \) es igual al número de renglones de \( \bmat{B} \), el producto de las matrices \( \bmat{A} \) y \( \bmat{B} \) está definido y se dice que las matrices son compatibles bajo la multiplicación. El producto de dos matrices \( \bmat{A}_{m \times n} \) y \( \bmat{B}_{n \times p} \) consiste en el producto punto de las renglones de \( \bmat{A} \) por cada columna de \( \bmat{B} \). Sea \(\bvec{r}_{n\bmat{A}}\) el enésimo renglón de \( \bmat{A} \) y \( \bvec{c}_{n\bmat{B}} \) la enésima columna de \( \bmat{B} \), se tiene:
+\[ \bmat{A}_{m \times n} \times \bmat{B}_{n \times p} = \bmat{P}_{m \times p} =\begin{pmatrix}
+	\bvec{r}_{1\bmat{A}} \cdot  \bvec{c}_{1\bmat{B}} & \bvec{r}_{1\bmat{A}} \cdot  \bvec{c}_{2\bmat{B}} & \cdots & \bvec{r}_{1\bmat{A}} \cdot  \bvec{c}_{p\bmat{B}} \\
+	\bvec{r}_{2\bmat{A}} \cdot  \bvec{c}_{1\bmat{B}} & \bvec{r}_{2\bmat{A}} \cdot  \bvec{c}_{2\bmat{B}} & \cdots & \bvec{r}_{2\bmat{A}} \cdot  \bvec{c}_{p\bmat{B}} \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	\bvec{r}_{m\bmat{A}} \cdot  \bvec{c}_{1\bmat{B}} & \bvec{r}_{m\bmat{A}} \cdot  \bvec{c}_{2\bmat{B}} & \cdots & \bvec{r}_{m\bmat{A}} \cdot  \bvec{c}_{p\bmat{B}} \\
+	\end{pmatrix}.\]
+
+Se hace evidente que la multiplicación de matrices no es conmutativa, \( \bmat{A} \cdot \bmat{B} \neq \bmat{B} \cdot \bmat{A} \), y que un producto entre matrices cualquiera no necesariamente está definido. También se puede notar que la multiplicación de una matriz \( \bmat{A}_{m \times n} \) por un vector \( \bvec{v} \) solo está definida si \(\bvec{v} \in \mathbb{R}^{n}\) y que la multiplicación de una matriz por un vector renglón resulta en un vector renglón como el producto entre una matriz y un vector columna es un vector columna.
+
+\subsubsection{Propiedades de la multiplicación matricial}
+
+\begin{tabular}{lp{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex} Propiedad de compatibilidad para el producto matricial: &  \(\bmat{A}_{m \times n} \times \bmat{B}_{i \times j}\) solo está definido si \(n=i\).\\
+	\rule[1ex]{0pt}{2.5ex} Propiedad anti conmutativa del producto matricial: &  En general, \(\bmat{A} \cdot \bmat{B} \neq \bmat{B} \cdot \bmat{A}.\)   \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad asociativa del producto matricial: &  \(\bmat{A}(\bmat{B}\bmat{C}) = (\bmat{A}\bmat{B})\bmat{C}.\) \\
+	\rule[1ex]{0pt}{2.5ex} Propiedad distributiva del producto matricial: &  \(\bmat{A}(\bmat{B} + \bmat{C}) = \bmat{A}\bmat{B} + \bmat{A}\bmat{C}.\)
+\end{tabular}
+
+\begin{tip}
+	Como la multiplicación matricial es anti conmutativa, al multiplicar por una matriz a ambos lados de una ecuación matricial se debe aclarar si se multiplica \say{por derecha} o \say{por izquierda}. En otras palabras, se debe aclarar si la matriz que se multiplica irá a la izquierda en ambos lados de la igualdad (al inicio de cada expresión) o si irá a la derecha en ambos lados (al final de cada expresión).
+\end{tip}
+
+\subsection{Matriz transpuesta y transposición}
+
+Transponer una matriz es obtener su matriz transpuesta \(\transpose{\bmat{A}}\). Para una matriz \(\bmat{A}_{m \times n}=(a_{ij})\), la matriz transpuesta es una matriz \(n \times m\) de forma \(\transpose{\bmat{A}}=(a_{ji})\), tal que cada renglón de \( \bmat{A} \) es una columna de \(\transpose{\bmat{A}}\) y cada columna de \( \bmat{A} \) es un renglón de \(\transpose{\bmat{A}}\). Las renglones y columnas guardan su orden después de traspuestas:
+
+\[\bmat{A}=\begin{pmatrix}
+	a_{11} & a_{12} & \cdots & a_{1n} \\
+	a_{21} & a_{22} & \cdots & a_{2n} \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	a_{m1} & a_{m2} & \cdots & a_{mn} \\
+\end{pmatrix} \implies \transpose{\bmat{A}}=
+\begin{pmatrix}
+		a_{11} & a_{21} & \cdots & a_{n1} \\
+		a_{12} & a_{22} & \cdots & a_{n2} \\
+		\vdots & \vdots & \ddots & \vdots  \\
+		a_{1m} & a_{2m} & \cdots & a_{nm} 
+\end{pmatrix}.\]
+		
+ La traspuesta de un vector renglón es el mismo vector como vector columna y viceversa. Para un columna  \(\bvec{v} \in \mathbb{R}^{n} \):
+\[\bvec{v}=(v_1,v_2,\cdots,v_n) \implies \transpose{\bvec{v}}=\begin{pmatrix}
+v_1 \\ v_2 \\ \vdots \\ v_n
+\end{pmatrix}.\]
+Nótese que el producto punto de dos vectores columna \(\bvec{u}\) y \(\bvec{v}\) se puede expresar en forma de producto matricial como \(\bvec{v} \cdot \bvec{u}=\transpose{\bvec{v}}\bvec{u}\).
+
+\subsubsection{Matrices normales, simétricas, antisimétricas y ortogonales}
+
+Una matriz cuadrada \(\bmat{A}_{n \times n}\) se denomina matriz \emph{normal} si satisface que el producto con su matriz transpuesta es conmutativo: \[\bmat{A}\transpose{\bmat{A}}=\transpose{\bmat{A}}\bmat{A}.\]
+
+Además, se denomina matriz \emph{simétrica} si cumple que es igual a su matriz transpuesta, satisfaciendo
+\[\bmat{A}=\transpose{\bmat{A}},\]
+por lo que todas las matrices simétricas son normales. Para que una matriz sea simétrica, todos los elementos en posiciones simétricas deben ser iguales, tal que si \(A=(a_{ji})\) es simétrica, se cumple que \(a_{ij}=a_{ji}|i\neq j\).
+
+Similarmente, se designa matriz \emph{antisimétrica} si cumple que es igual al negativo o inverso aditivo de su matriz transpuesta. Una matriz antisimétrica satisface 
+\[\bmat{A}=-\transpose{\bmat{A}}.\] 
+Para que una matriz sea antisimétrica, todos los elementos en posiciones simétricas deben tener igual valor absoluto y signo opuesto, tal que si \(A=(a_{ji})\) es antisimétrica, se cumple que 
+\[a_{ij}=\begin{cases}
+-a_{ji} \text{ si } i\neq j. \\
+0 \text{ si } i= j.
+\end{cases}\]
+Toda matriz cuadrada puede expresarse como la suma de una matriz simétrica y una matriz antisimétrica. 
+
+Una matriz cuadrada e invertible se denomina \emph{ortogonal} si su matriz transpuesta es igual a su matriz inversa, tal que \[\transpose{\bmat{A}}=\inv{\bmat{A}}.\]
+La matriz \(\bmat{A}\) de \(n\times n \) es ortogonal si y sólo si las columnas de \(\bmat{A}\) formal una base ortonormal para \(\mathbb{R}^{n}\).
+
+\subsubsection{Propiedades de la transposición}
+Mientras las sumas y productos estén definidos, se cumple lo siguiente para matrices cualquiera \(\bmat{A}\) y \(\bmat{B}\).
+\begin{tabular}{lp{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex} Transposición de la matriz transpuesta: &  \(\transpose{\left(\transpose{\bmat{A}}\right)}=\bmat{A}.\) \\
+	\rule[1ex]{0pt}{2.5ex} Producto de transpuestas: &  \(\transpose{(\bmat{A}\bmat{B})}=\transpose{\bmat{A}}\transpose{\bmat{B}}.\)   \\
+	\rule[1ex]{0pt}{2.5ex} Adición y sustracción de transpuestas: &  \(\transpose{(\bmat{A}\pm \bmat{B})}=\transpose{\bmat{A}}\pm\transpose{\bmat{B}}.\)  
+\end{tabular}
+
+\subsection{Matriz identidad}
+
+La matriz identidad es una matriz cuadrada tal que los elementos en su diagonal principal son unos y el resto de sus elementos son cero. \( \bmat{I}_n \) denota la matriz identidad \( n \times n \):
+\[\bmat{I}_n=\begin{pmatrix}
+1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & 1
+\end{pmatrix}=(b_{ij}) \: \text{ donde } \:  b_{ij}=\begin{cases}
+1 \text{ si } i=j \\ 0 \text{ si } i \neq j
+\end{cases}\]
+La matriz identidad cumple el rol del elemento neutro multiplicativo en el producto matricial, de forma que para
+cualquier matriz cuadrada \( \bmat{A}_{n \times n} \) se cumple que:
+\[\bmat{A} \cdot \bmat{I} = \bmat{I} \cdot \bmat{A} = \bmat{A}.\]
+\subsection{Matriz inversa e invertibilidad}
+Una matriz cuadrada \( \bmat{A}_{n \times n} \) es invertible si existe una matriz inversa \(\bmat{A}^{-1}\) tal que
+\[\bmat{A} \cdot \bmat{A}^{-1} = \bmat{A}^{-1} \cdot \bmat{A} = \bmat{I}.\]
+Por lo anterior, si \( \bmat{A}^{-1} \) existe es una matriz del mismo tamaño que \( \bmat{A} \). \(\bmat{A}^{-1}\) existe si y sólo si \( \bmat{A} \) es equivalente a \(\bmat{I}_n\) y si su determinante \(\det \bmat{A}\) es diferente de 0.
+
+La matriz inversa es única, por lo que se cumple que \((\bmat{A}^{-1})^{-1}=\bmat{A}\). Una matriz cuadrada que no es invertible se denomina \emph{singular}. La matriz producto de matrices invertibles es siempre invertible y se cumple que \((\bmat{A}\bmat{B})^{-1}=\bmat{B}^{-1}\bmat{A}^{-1}\).
+
+Si \(\bmat{A}_{n\times n}\) es invertible, se cumple que:
+\begin{itemize}
+\item Dado un sistema  \(\bmat{A}\bvec{x}=\bvec{b}\), se tiene una solución única para todo \(\bvec{b} \in \mathbb{R}^{ n }\).
+\item Dado un sistema homogéneo \(\bmat{A}\bvec{x}=\bvec{0}\), su única solución es la solución trivial \(\bvec{x}=\bvec{0}\). 
+\item \( \bmat{A} \) es equivalente por renglones a \(\bmat{I}_n\)
+\item \( \bmat{A} \) es el producto de matrices elementales.
+\item La forma escalonada reducida de \( \bmat{A} \) tiene \( n \) pivotes.
+\item \( \det \bmat{A} \neq 0 \).
+\end{itemize}
+
+\subsubsection{Calcular la matriz inversa}
+Para el cálculo de la matriz inversa \(\bmat{A}_{n \times n}^{-1}\), se resuelve la ecuación dada por la definición mediante los siguientes pasos:
+\begin{enumerate}
+\item Plantear la matriz aumentada \(\begin{apmatrix}{1}
+\bmat{A}_{n \times n } & \bmat{I}_n
+\end{apmatrix}.\)
+\item Aplicar reducción Gauss-Jordan:
+\begin{itemize}
+\item Si se obtiene una inconsistencia, es decir un renglón de ceros a la izquierda, \( \bmat{A}_{n \times n } \) no es invertible.
+\item Si se logra completar la eliminación Gauss-Jordan, se obtiene una matriz aumentada de la forma \(\begin{apmatrix}{1}
+ \bmat{I}_n & \bmat{A}^{-1}
+\end{apmatrix}\) y se ha calculado la matriz inversa.
+\end{itemize}
+\end{enumerate}
+
+Alternativamente, se puede hacer uso del determinante de la matriz y la matriz adjunta para calcular la matriz inversa. Se usa la siguiente fórmula:
+\[\bmat{A}^{-1}=\frac{1}{\det \bmat{A}}\adj \bmat{A} \quad \text{ si } \quad \det \bmat{A} \neq 0\]
+
+Lo anterior puede probarse, entre otros métodos, usando la definición de determinante con relación a la matriz adjunta para obtener que \((\bmat{A})(\adj \bmat{A})=(\det \bmat{A})\bmat{I}\).
+
+\begin{tip}
+La matriz inversa de una matriz \(2 \times 2\) es particularmente fácil de calcular con ese método. Sea \(\bmat{A}=\begin{psmallmatrix}
+a_{11} & a_{12} \\ a_{21} & a_{22}
+\end{psmallmatrix}\):
+\[ \inv{\bmat{A}}=\frac{1}{a_{11}a_{22}-a_{12}a_{21}}\begin{pmatrix}
+a_{22} & -a_{12} \\ -a_{21} & a_{11}
+\end{pmatrix}\]
+\end{tip}
+
+\subsubsection{Propiedades de la matriz inversa}
+Sean \(\bmat{A}\) y \(\bmat{B}\) matrices \(n \times n\) invertibles:
+\begin{longtable}{lp{\textwidth/2-1.8cm}p{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex}i.&Definición de la matriz inversa: &\( \bmat{A} \cdot \bmat{A}^{-1} = \bmat{A}^{-1} \cdot \bmat{A} = \bmat{I}_n \). \\
+	\rule[2ex]{0pt}{2.5ex}ii.&Obtención de la matriz inversa: &\( \inv{\bmat{A}} = \dfrac{1}{\left|\bmat{A}\right|} \adj\bmat{A} \quad\text{si}\quad\left|\bmat{A}\right|\neq0 \). \\
+	\rule[1ex]{0pt}{2.5ex}iii.& Inversa de la matriz inversa: &\( \inv{(\inv{\bmat{A}})}=\bmat{A} \). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Producto de matrices inversas: &\( \inv{(\bmat{A} \cdot \bmat{B})}= \inv{\bmat{B}} \cdot \inv{\bmat{A}}\). Nótese el cambio de orden de las matrices. \\
+	\rule[1ex]{0pt}{2.5ex}v.&Invertibilidad de la transpuesta: &Si \(\bmat{A}\) es invertible, entonces \(\transpose{\bmat{A}}\) también es invertible. \\
+	\rule[1ex]{0pt}{2.5ex}vi.&Inversa de la transpuesta: & \(\inv{(\transpose{\bmat{A}})}=\transpose{(\bmat{A}^{-1})}\). % \\
+%	\rule[1ex]{0pt}{2.5ex}vii.&Nombre7: &Propiedad7. \\
+%	\rule[1ex]{0pt}{2.5ex}viii.&Nombre8: &Propiedad8. \\
+%	\rule[1ex]{0pt}{2.5ex}ix.&Nombre9: &Propiedad9. \\
+%	\rule[1ex]{0pt}{2.5ex}x.&Nombre10: &Propiedad10. \\
+%	\rule[1ex]{0pt}{2.5ex}xi.&Nombre11: &Propiedad11. \\
+%	\rule[1ex]{0pt}{2.5ex}xii.&Nombre12: &Propiedad12. \\
+%	\rule[1ex]{0pt}{2.5ex}xiii.&Nombre13: &Propiedad13. \\
+%	\rule[1ex]{0pt}{2.5ex}xiv.&Nombre14: &Propiedad14. \\
+%	\rule[1ex]{0pt}{2.5ex}xv.&Nombre15: &Propiedad15. \\
+%	\rule[1ex]{0pt}{2.5ex}xvi.&Nombre16: &Propiedad16. \\
+%	\rule[1ex]{0pt}{2.5ex}xvii.&Nombre17: &Propiedad17. \\
+%	\rule[1ex]{0pt}{2.5ex}xviii.&Nombre18: &Propiedad18. \\
+%	\rule[1ex]{0pt}{2.5ex}xix.&Nombre19: &Propiedad19. \\
+%	\rule[1ex]{0pt}{2.5ex}xx.&Nombre20: &Propiedad20. \\
+\end{longtable}
+
+\subsection{Matrices menores y cofactores}
+Sea \( \bmat{A}_{n \times n } \) una matriz cuadrada, el \emph{menor \( ij \)} de \( \bmat{A} \), denotado \(\tilde{\bmat{A}}_{ij}\), es la matriz \( (n - 1) \times (n - 1) \) resultante de eliminar la renglón \( i \) y la
+columna \( j \) de \( \bmat{A} \). El \emph{cofactor \( ij \)}, denotado \( c_{ij} \), es un número escalar que se calcula para el elemento \(a_{ij}\) de la matriz \( \bmat{A} \), haciendo uso del menor \( ij \). El cofactor \(ij\) está dado por
+\[c_{ij}=(-1)^{i+j}\det \tilde{\bmat{A}}_{ij} \quad \text{ donde } \quad (-1)^{i+j}=\begin{cases}
+\; \, 1 \; \text{ si } i+j \text{ es par.} \\ -1 \text{ si } i+j \text{ es impar.}
+\end{cases}\]
+La matriz de cofactores es una matriz \(\bmat{B}=(b_{ij})\) tal que \( b_{ij}= (-1)^{i+j}\det \tilde{\bmat{A}}_{ij} \).
+
+\subsection{Matriz adjunta}
+
+Sea \(\bmat{A}_{n \times n}\) una matriz cuadrada, su \emph{matriz adjunta} \(\adj \bmat{A}\) está dada por la transpuesta de la matriz de cofactores
+\[\adj \bmat{A}=\transpose{\begin{pmatrix}
+	c_{11} & c_{12} & \cdots & c_{1n} \\
+	c_{21} & c_{22} & \cdots & c_{2n} \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	c_{n1} & c_{n2} & \cdots & c_{nn} \\
+\end{pmatrix}}=\begin{pmatrix}
+	c_{11} & c_{21} & \cdots & c_{n1} \\
+	c_{12} & c_{22} & \cdots & c_{n2} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	c_{1n} & c_{2n} & \cdots & c_{nn} \\
+\end{pmatrix}.\]
+
+\subsection{Determinantes}
+El determinante de una matriz es un número asociado a las matrices cuadradas. El determinante de una matriz \( \bmat{A}_{n \times n } \)  se denota de la misma forma que \( \bmat{A} \) pero usando barras verticales como delimitadores, en lugar de paréntesis, o por medio de la notación \( \det(\bmat{A}) \).
+
+\subsubsection[Determinante de matriz \(2 \times 2\)]{Determinante de matriz \(\bm{2 \times 2}\)}
+
+Para una matriz \(\bmat{A}_{2 \times 2}=\begin{psmallmatrix}
+a_{11} & a_{12} \\ a_{21} & a_{22}
+\end{psmallmatrix}\) el determinante está dado por:
+\[\det(\bmat{A})=\begin{vmatrix}
+a_{11} & a_{12} \\ a_{21} & a_{22}
+\end{vmatrix}=a_{11}a_{22}-a_{12}a_{21}.\]
+
+\begin{definicion}{Área generada por dos vectores}{}
+El \emph{área} \(A\) generada por \(\bvec{u},\bvec{v} \in \mathbb{R}^{2}\) está definida como el paralelogramo con lados \( \bvec{u} \) y \( \bvec{v} \) y está dada por el determinante de la matriz \(\bmat{A}_{2 \times 2}\) que contiene a los vectores como renglones o columnas:
+\[A_{\text{Paralelogramo}}=\det \bmat{A}=\begin{vmatrix}
+u_x & u_y\\ v_x & v_y
+\end{vmatrix}=\begin{vmatrix}
+u_x & v_x \\ u_y & v_y
+\end{vmatrix}.\]
+Si el determinante es igual a 0, se sabe que los vectores \( \bvec{u} \) y \( \bvec{v} \) no forman un paralelogramo y por tanto son paralelos o equivalentes.
+\end{definicion}
+
+\subsubsection[Determinante de matriz \( 3 \times 3 \)]{Determinante de matriz \( \bm{3 \times 3 }\)}
+El determinante de una matriz \(\bmat{A}_{3 \times 3}\) se obtiene a través del cálculo de determinantes \(2 \times 2\):
+\[\det(\bmat{A})=\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33}
+\end{vmatrix}=a_{11}\begin{vmatrix}
+a_{22} & a_{23} \\ a_{32} & a_{33}
+\end{vmatrix}+a_{12}\begin{vmatrix}
+a_{21} & a_{23} \\ a_{31} & a_{33}
+\end{vmatrix}+a_{13}\begin{vmatrix}
+a_{21} & a_{22} \\ a_{31} & a_{32}
+\end{vmatrix}.\]
+El cálculo extendido deriva en expresiones como la regla de Sarrus.
+
+\subsubsection{Regla de Sarrus}
+La regla de Sarrus permite realizar el cálculo del determinante de una matriz \(\bmat{A}_{3 \times 3}\) de forma directa. Está dada por la siguiente fórmula:
+\[ \det(\bmat{A})=\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33}
+\end{vmatrix}= a_{11}a_{22}a_{33}+a_{13}a_{21}a_{32}+a_{31}a_{12}a_{23}-a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{33}a_{12}a_{21}.\]
+La fórmula sigue un patrón. Es el producto de los elementos de la diagonal principal, más el producto de los elementos del triángulo isósceles con vértice \( a_{13} \), más el producto de los elementos del triángulo isósceles con vértice \( a_{31} \), menos el producto de los elementos de la diagonal secundaria, menos el producto de los elementos del triángulo isósceles con vértice \( a_{11} \), menos el producto de los elementos del triángulo isósceles con vértice \( a_{33} \).
+
+\subsubsection[Determinante de matriz \(n \times n\)]{Determinante de matriz \(\bm{n \times n}\)}
+Para hallar el determinante de una matriz \(\bmat{A}_{n \times n}\) se elige un renglón o columna de la matriz y se calcula el determinante como la suma de los productos de cada elemento de la renglón o columna por su respectivo cofactor, a lo que se le denomina expansión por cofactores en la renglón o renglón seleccionado. El determinante dado por la expansión por cofactores de la renglón 1 es
+\[\det(\bmat{A})=\begin{vmatrix}
+	a_{11} & a_{12} & \cdots & a_{1n} \\
+	a_{21} & a_{22} & \cdots & a_{2n} \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	a_{m1} & a_{m2} & \cdots & a_{mn} \\
+	\end{vmatrix}=a_{11}c_{11}+a_{12}c_{12}+\cdots+a_{1n}c_{1n}=\sum_{k=i}^{n}a_{1k}a_{1k}.\]
+Se puede elegir un renglón o columna arbitraria para el cálculo, que se facilita sustancialmente si se selecciona la renglón
+o columna con el mayor número de ceros.
+
+\subsubsection{Propiedades de los determinantes}
+
+\begin{longtable}{p{\textwidth/2-3em}p{\textwidth/2+1em}}
+	\rule[1ex]{0pt}{2.5ex}Determinante de matrices triangulares: &  Sea \( \bmat{A}_{n \times n} = (a_{ij}) \) una matriz triangular, su determinante es el producto de los elementos en la diagonal principal: \(\det \bmat{A} = a_{11}\cdot a_{12} \cdots a_{nn}=\sum_{k=1}^{n}a_{kk}\) \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de la matriz identidad: &  \(\det \bmat{I}_n=1.\)   \\
+	\rule[1ex]{0pt}{2.5ex}Producto de determinantes: &  \( \displaystyle \det \bmat{A} \det \bmat{B} = \det( \bmat{A}\bmat{B}).\) \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de potencias: &  \( \displaystyle \det (\bmat{A}^n) =(\det \bmat{A})^{n} \) \\
+	\multicolumn{2}{l}{\rule[1ex]{0pt}{2.5ex} \hspace{0.5in}Prueba: \( \det (\bmat{A}^n) = \det(\bmat{A})\det(\bmat{A}^{n-1}) = (\det(\bmat{A}))^{2} \det(\bmat{A}^{n-2}) =\cdots=\det (\bmat{A})^n \det(\bmat{A}^{0})= \det (\bmat{A})^n \).} \\ 
+	\rule[1ex]{0pt}{2.5ex}Determinante de la matriz transpuesta: & \(\det \transpose{\bmat{A}} = \det \bmat{A}.\) \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de la matriz inversa: & Si \( \det \bmat{A}_{n \times n} \neq 0 \) entonces \(\det \bmat{A}^{-1}=\dfrac{1}{\det \bmat{A}}\).\\
+	\multicolumn{2}{l}{\rule[1ex]{0pt}{2.5ex} \hspace{0.5in}Prueba: \( \det(\bmat{A} \bmat{A}^{-1})=\det (\bmat{I})=\det (\bmat{A}) \det (\bmat{A}^{-1}) \implies \det (\bmat{A}) = 1/ \det (\bmat{A}^{-1}) \).} \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de la matriz transpuesta: & \(\det \transpose{\bmat{A}} = \det \bmat{A}.\) \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de la matriz adjunta: & Dada una matriz cuadrada \(\bmat{A}_{n \times n}\), se cumple que \(\left|\adj \bmat{A}\right|=(\det \bmat{A})^{n-1}.\) \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de matriz con renglón o columna nula: & Sea \( \bmat{A}_{n \times n}\) una matriz con un renglón o columna de ceros: \\
+	\multicolumn{2}{c}{\rule[1ex]{0pt}{2.5ex} \( \det \bmat{A} = \begin{vmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \vdots & \vdots  \\
+		0 & 0 & 0 & 0  \\
+		\vdots & \vdots & \vdots & \vdots  \\
+		a_{m1} & a_{m2} & \cdots & a_{mn} \\
+	\end{vmatrix} = \begin{vmatrix}
+		a_{11} & a_{12} & \cdots & 0 & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & 0 & \cdots & a_{2n} \\
+		\vdots & \vdots & \vdots & 0 & \vdots & \vdots  \\
+		a_{m1} & a_{m2} & \cdots & 0 & \cdots & a_{mn} \\
+		\end{vmatrix}=0\)} \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de matriz con renglones o columnas múltiplos escalares entre sí: & Si un renglón o columna de \( \bmat{A} \) es múltiplo escalar de otra renglón o columna, \( \det \bmat{A} = 0 \). Sea \( \bvec{r}_{n} \) el enésimo renglón de \( \bmat{A} \), \( \bvec{c}_{n} \) su enésima columna y \(a \in \mathbb{R}| a\neq 0\): \newline \mbox{ }Si 
+	\( \bvec{r}_{i} = a\bvec{r}_{j}\) o \(\bvec{c}_{i}  = a\bvec{c}_{j}  \) , entonces  \( \det \bmat{A} = 0 \).\\
+\end{longtable}
+
+% ACTUALIZAR TABLA A MI MACRO
+
+%METER \rule[1ex]{0pt}{2.5ex}iv.&Determinante en términos de valores propios: & \(\lambda_1\lambda_2\cdots\lambda_n = \det\bmat{A}\).
+
+\subsubsection{Propiedades de los determinantes con respecto a las operaciones fundamentales por renglones}
+Se pueden definir propiedades para los determinantes de matrices que son transformadas con las operaciones fundamentales por renglones definidas en \S Reducción gaussiana y Gauss-Jordan. Sea \( \bmat{A} \) la matriz original y \(\bmat{T}\) la matriz transformada:
+
+
+\begin{tabular}{p{\textwidth/2-3em}p{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex}Intercambiar dos renglones entre sí: & Si \(\bmat{A}\xrightarrow{R_i \rightleftarrows R_j}\bmat{T}\) entonces \(\det \bmat{T}=-\det \bmat{A}\).\\
+	\rule[1ex]{0pt}{2.5ex}Cambiar un renglón por un múltiplo escalar de ella misma: &  Si \(\bmat{A}\xrightarrow{R_i \to aR_i}\bmat{T}\) entonces \(\det \bmat{T}=a\det \bmat{A}\).  \\
+	\rule[1ex]{0pt}{2.5ex}Determinante de múltiplo escalar de matriz: &  Dada \(\bmat{A}_{n \times n}\), si se realiza la operación anterior en todas las renglones tal que \(a\bmat{A}=\bmat{T}\), entonces \(\det (a\bmat{A})=a^{n} \det \bmat{A}\).  \\
+	\rule[1ex]{0pt}{2.5ex}Cambiar un renglón por ella más un múltiplo escalar de otra: &  Si \(\bmat{A}\xrightarrow{R_i \to R_i+aR_j}\bmat{T}\) entonces \(\det \bmat{T}=\det \bmat{A}\). \\
+\end{tabular}
+
+
+Nótese de las propiedades arriba que si se realizan indefinidas combinaciones arbitrarias de las operaciones fundamentales por renglones, la matriz \(\bmat{T}\) a la que se llega tendrá un determinante que difiere del determinante de la matriz original a lo sumo por una constante escalar \(k\) y un signo: \(\det \bmat{T} = -k \det \bmat{A}\). Por ende, si realizando eliminación gaussiana se llega a un renglón de ceros a la izquierda, se saben dos cosas:
+\begin{itemize}
+\item \(\bmat{A}^{-1}\) no existe porque no se llegó a una matriz aumentada de forma \(\begin{apmatrix}{1}
+ \bmat{I}_n & \bmat{A}^{-1}
+\end{apmatrix}\).
+\item El determinante de la matriz original \( \bmat{A} \) es 0 porque \(\det \bmat{T} = -k \det \bmat{A}\) y \(\det \bmat{T}=0\)
+\end{itemize} 
+De ahí se concluye que si \(\det \bmat{A}=0\) entonces \(\bmat{A}^{-1}\) no existe y que existe \(\bmat{A}^{-1}\) si y sólo si \(\det \bmat{A} \neq 0\).
+
+\subsection{Espacio nulo e imagen}
+
+\begin{definicion}{Espacio nulo de una matriz}{espacio_nulo_matriz}
+	Sea \(\bmat{A}\) una matriz \(m \times n \), el \emph{espacio nulo} de \(\bmat{A}\), denotado \(N_{\bmat{A}}\), se define como
+	\[N_{\bmat{A}}=\{\bvec{x}\in\mathbb{R}^{n}|\bmat{A}\bvec{x}=\bvec{0}\} \subseteq \mathbb{R}^{n}.\]
+\end{definicion}
+
+Como el espacio nulo de una matriz \(m \times n \) es subespacio de \(\mathbb{R}^{n}\), el mínimo espacio nulo es el subespacio trivial de \(\mathbb{R}^{n}\), es decir aquel que sólo contiene al vector cero.
+
+\begin{definicion}{Nulidad de una matriz}{nulidad_de_una_matriz}
+	Sea \(\bmat{A}\) una matriz \(m \times n \), la \emph{nulidad} de \(\bmat{A}\), denotada \(\nu(\bmat{A})\), es la dimensión de su espacio nulo: 
+	\[\nu(\bmat{A})=\dim(N_{\bmat{A}}).\]
+\end{definicion}
+
+Para conocer el espacio nulo de una matriz \(\bmat{A}\), se plantea la ecuación \( \bmat{A}\bvec{v}=\bvec{0} \). Ese sistema homogéneo lleva a plantear la matriz aumentada \(\begin{apmatrix}{1}
+	A & \bvec{0}
+\end{apmatrix}\) y en ella realizar reducción gaussiana. Con dicha reducción, se puede escribir \(\bvec{v}\) como combinación lineal y por ende se tiene una base de \(N_{\bmat{A}}\). El número de columnas sin pivotes será entonces la nulidad de la matriz.
+
+Tanto los renglones como las columnas de una matriz pueden ser vistas como conjuntos de vectores. Los espacios vectoriales generados por dichos conjuntos reciben nombres propios.
+
+\begin{definicion}{Espacio de renglones de una matriz}{espacio_de_renglones}
+	Sea \(\bmat{A}\) una matriz \(m \times n \) y sea \(\bvec{r}_n\) el enésimo renglón de \(\bmat{A}\), el \emph{espacio de renglones} de \(\bmat{A}\), denotado \(R_{\bmat{A}}\), está dado por
+	\[R_{\bmat{A}}=\operatorname{span}\{\bvec{r}_1,\bvec{r}_2,\ldots,\bvec{r}_m\} \subseteq \mathbb{R}^{n}\]
+\end{definicion}
+
+Para hallar el espacio de renglones de una matriz, se busca una base. Si las filas de la matriz son linealmente independientes, se tiene una base \(\mathcal{B}_{R_{\bmat{A}}}\) del espacio de renglones sin proceso adicional. De lo contrario, se realiza reducción gaussiana en la matriz: las filas que tengan pivote tres la reducción indican que en la matriz original dichas filas  son vectores linealmente independientes que constituyen una base \(\mathcal{B}_{R_{\bmat{A}}}\) del espacio de columnas, ergo \(R_{\bmat{A}}=\operatorname{span}(\mathcal{B}_{R_{\bmat{A}}})\).
+
+\begin{advertencia}
+	La reducción gaussiana muestra cuáles renglones de la matriz original son linealmente independientes, porque son las que tras la reducción tienen pivote. Los vectores que constituyen la base son esos renglones de la matriz original, los que son linealmente independientes. No se deben tomar los renglones de alguna otra matriz equivalente por reglones.
+\end{advertencia}
+
+\begin{definicion}{Espacio de columnas de una matriz}{espacio_de_columnas}
+	Sea \(\bmat{A}\) una matriz \(m \times n \) y sea \(\bvec{c}_n\) la enésima columna de \(\bmat{A}\), el \emph{espacio de columnas} de \(\bmat{A}\), denotado \(C_{\bmat{A}}\), está dado por
+	\[C_{\bmat{A}}=\operatorname{span}\{\bvec{c}_1,\bvec{c}_2,\ldots,\bvec{c}_n\} \subseteq \mathbb{R}^{m}.\]
+\end{definicion}
+
+El espacio de columnas de una matriz se encuentra de forma similar al espacio de renglones. Si las columnas de la matriz son linealmente independientes, se tiene ya una base del espacio de columnas. Si no, se realiza reducción gaussiana y las columnas que tienen pivote tras la reducción indican que esas columnas en la matriz original son vectores linealmente independientes que constituyen una base \(\mathcal{B}_{C_{\bmat{A}}}\) del espacio de columnas. 
+
+Si un vector pertenece al espacio de columnas de una matriz, se dice que es parte de la imagen de dicha matriz. 
+
+\begin{definicion}{Imagen de una matriz}{imagen_de_una_matriz}
+	Sea \(\bmat{A}\) una matriz \(m \times n \), la \emph{imagen} de \(\bmat{A}\), denotada \(\im(\bmat{A})\), se define como
+	\[\im A=\{\bvec{b}\in\mathbb{R}^{m}|\text{ existe } \bvec{x} \in \mathbb{R}^{n} \text{ tal que }\bmat{A}\bvec{x}=\bvec{b}\} \subseteq \mathbb{R}^{m}.\]
+\end{definicion}
+
+\begin{tip}
+	La imagen y el espacio de columnas son dos formas de ver lo mismo. Siempre, \(C_{\bmat{A}}=\im(\bmat{A})\).
+\end{tip}
+
+Para conocer la imagen de una matriz, se obtiene su espacio de columnas: \(\im(\bmat{A})=C_{\bmat{A}}=\operatorname{span}(\mathcal{B}_{C_{\bmat{A}}})\). 
+
+\begin{definicion}{Rango de una matriz}{rango_de_una_matriz}
+	Sea \(\bmat{A}\) una matriz \(m \times n \), el \emph{rango} de \(\bmat{A}\), denotado \(\rho(\bmat{A})\), es la dimensión de su imagen:
+	\[\rho(\bmat{A})=\dim(\im(\bmat{A})).\]
+\end{definicion}
+
+
+Al realizar reducción gaussiana en una matriz, su rango será el número de columnas con pivote, porque ese es el número de elementos de una base \(\mathcal{B}_{C_{\bmat{A}}}\) del espacio de columnas. El rango de una matriz se relaciona con sus espacios de filas y columnas.
+
+\begin{teorema}{Equivalencias del rango}{equivalencias_del_rango}
+	Sea \(\bmat{A}\) una matriz \(m \times n \), 
+	\[\dim(R_{\bmat{A}})=\dim(C_{\bmat{A}})=\dim(\im(\bmat{A}))=\rho(\bmat{A}).\]
+\end{teorema}
+
+Todo vector en el espacio de renglones de una matriz real es ortogonal a todo vector en su espacio nulo. \(R_{\bmat{A}} \perp N_{\bmat{A}}\).
+% Mirar qué carajos.
+
+\begin{teorema}{}{}
+Sea \(\bmat{A}\) una matriz de \(m\times n \), la suma su rango y su nulidad es igual a su número de columnas:
+\[\nu(\bmat{A})+\rho(\bmat{A})=n.\]
+\end{teorema}
+
+\subsection{Teorema de resumen}
+
+\begin{teorema}{Teorema de resumen: Matriz cuadrada invertible}{teorema_de_resumen}
+	Sea \(\bmat{A}\) una matriz cuadrada de tamaño \(n \times n\) y \(\bvec{x},\bvec{b} \in \mathbb{R}^{n}\), todos los postulados a continuación son equivalentes, tal que se cumple uno si y sólo si se cumplen todos.
+	\begin{itemize}
+	\item \(\bmat{A}\) es invertible, \( \exists! \inv{\bmat{A}} \).
+	\item \(\det \bmat{A} \neq 0\).
+	\item \(\bmat{A}\) es equivalente por renglones a \(\bmat{I}_n\).
+	\item La forma escalonada por renglones de \(\bmat{A}\) tiene \(n\) pivotes. 
+	\item El sistema homogéneo \(\bmat{A}\bvec{x}=\bvec{0}\) solo tiene solución trivial \(\bvec{x}=\bvec{0}\).  
+	\item El sistema \(\bmat{A}\bvec{x}=\bvec{b}\) tiene solución única \(\bvec{x}=\inv{\bmat{A}}\bvec{b}\).
+	\item Las columnas de \(\bmat{A}\) forman un conjunto de vectores linealmente independientes. También las renglones de \(\bmat{A}\), que son las columnas de \(\transpose{\bmat{A}}\).
+	\item \(\bmat{A}\) se puede expresar como producto de matrices elementales.
+	\item \(N_{\bmat{A}}=\{\bvec{0}\}\) y \( \nu(\bmat{A}) = 0 \).
+	\item \( \rho(\bmat{A})=n \).
+	\item La transformación lineal \(T\colon\mathbb{R}^{n}\to\mathbb{R}^{n}\) definida por \(T(\bvec{x})=\bmat{A}\bvec{x}\) es un isomorfismo.
+	\item Cero no es un valor propio de \(\bmat{A}\), \(\lambda \neq 0 \text{ para todo } \lambda\).  
+	\end{itemize} 
+\end{teorema}
+
+% p. 557 de Grossman, S. I. y Flores, J. J. (2012). Álgebra lineal (7ma ed.). McGraw Hill.
+
+
+\section{Espacios vectoriales}\label{sec:espacios_vectoriales}
+
+\subsection{Espacio vectorial}
+Los espacios vectoriales generalmente se denotan con la letra mayúscula \(V\). Su definición formal requiere el cumplimiento de diez axiomas.
+
+\begin{definicion}{Espacio vectorial}{}
+Sea \(V\) un conjunto con elementos designados \emph{vectores}, que interactúan a través de dos operaciones: la \emph{suma}, denotada \(\bvec{u}+\bvec{v}\) y la \emph{multiplicación por escalar} denotada \(a\bvec{v}\). \(V\) es un \emph{espacio vectorial} si para todo \(\bvec{u}, \bvec{v}, \bvec{w} \in V\) y pata todo \(a,b \in \mathbb{R}\) se satisfacen los siguientes axiomas:
+
+\begin{longtable}{lp{\textwidth/2-1.8cm}p{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex}i.&Cerradura para la adición vectorial: &\(\bvec{u}+\bvec{v} \in V\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Asociatividad de la adición vectorial: &\((\bvec{u}+\bvec{v})+\bvec{w}=\bvec{u}+(\bvec{v}+\bvec{w})\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Elemento neutro aditivo: &Existe un único \(\bvec{0} \in V\) para todo \(\bvec{u}\) tal que \(\bvec{u}+\bvec{0}=\bvec{0}+\bvec{u}=\bvec{u}\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Inverso aditivo: &Existe un único \(-\bvec{u} \in V\) para todo \(\bvec{u}\) tal que \(\bvec{u}+(-\bvec{u})=(-\bvec{u})+\bvec{u}=\bvec{0}\). \\
+	\rule[1ex]{0pt}{2.5ex}v.&Conmutatividad de la adición vectorial: &\(\bvec{u}+\bvec{v}=\bvec{v}+\bvec{u}\). \\
+	\rule[1ex]{0pt}{2.5ex}vi.&Cerradura para el producto de vector por escalar: &\(a\bvec{u} \in V\). \\
+	\rule[1ex]{0pt}{2.5ex}vii.&Distributividad de escalares para el producto de vector por escalar: &\(a(\bvec{u}+\bvec{v})=a\bvec{u}+a\bvec{v}\). \\
+	\rule[1ex]{0pt}{2.5ex}viii.&Distributividad de vectores para el producto de vector por escalar: &\(\bvec{u}(a+b)=a\bvec{u}+b\bvec{u}\). \\
+	\rule[1ex]{0pt}{2.5ex}ix.&Asociatividad del producto de vector por escalar: &\(a(b\bvec{u})=(ab)\bvec{u}\). \\
+	\rule[1ex]{0pt}{2.5ex}x.&Elemento neutro multiplicativo: &Existe un único número escalar 1 tal que \(1\bvec{u}=\bvec{u}\). \\
+\end{longtable}
+
+\end{definicion}
+
+Para determinar un espacio vectorial se debe disponer de cuatro elementos matemáticos, que se usan para evaluar el cumplimiento de los diez axiomas estipulados en la definición. Los elementos se listan a continuación. 
+\begin{enumerate}
+\item El conjunto candidato a ser espacio vectorial, que contiene objetos matemáticos que hacen el papel de vectores en el espacio vectorial.
+\item Un conjunto de objetos matemáticos que hacen el papel de números escalares en el espacio vectorial.
+\item Una operación matemática que haga el papel de adición vectorial en el espacio vectorial.
+\item Una operación matemática que haga el papel del producto por escalar en el espacio vectorial.
+\end{enumerate}
+
+Nótese que los diez axiomas necesarios para determinar un espacio vectorial son las propiedades de la adición  convencional, denominada \emph{suma usual} y del producto por escalar convencional, designado \emph{producto usual}. 
+
+\subsubsection{Espacios vectoriales comunes}
+
+Hay conjuntos de uso frecuente que cumplen con los diez axiomas enunciados en la definición y constituyen espacios vectoriales.
+
+\begin{itemize}
+\item Todo espacio de forma \(\mathbb{R}^{n}\) que constituye el conjunto de todos los puntos con \(n\) coordenadas, de forma  \[\mathbb{R}^{n}=\{(x_1,x_2,\ldots,x_n)\, |\,x_i \in \mathbb{R}; i \in \mathbb{N}\}\] y opera con la suma usual y el producto usual es un espacio vectorial.
+\item El conjunto \(P_n\) que contiene a todos los polinomios de grado menor o igual a \(n\), tal que
+\[P_n= \{p(x)=a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 \, | \, a_i \in \mathbb{R}; i,n \in \mathbb{N}\}\] 
+y opera con la suma usual y el producto usual es un espacio vectorial. Nótese, sin embargo, que el conjunto de todos los polinomios de grado \(n\) no constituye un espacio vectorial.
+\item El conjunto \(\bmat{M}_{mn}\) que contiene a todas las matrices con elementos reales, de forma \[\bmat{M}_{mn}=\{\bmat{A}_{m \times n}=(a_{ij})\,|\,a_{ij}\in \mathbb{R}\}\] y opera con la suma usual y el producto usual es un espacio vectorial.
+\item El conjunto \(C[a,b]\) que contiene a todas las funciones reales continuas en un intervalo arbitrario \([a,b]\) y opera con la suma usual y el producto usual es un espacio vectorial.
+\end{itemize}
+
+Como se estipula en la definición de espacio vectorial, todos los elementos de un espacio vectorial se denominan vectores, por lo que los puntos, polinomios, matrices y funciones reales pueden ser interpretadas como vectores al interior de su respectivo espacio vectorial.
+
+\subsection{Subespacios vectoriales}
+
+Todos los espacios vectoriales tienen subconjuntos que también tienen estructura de espacio vectorial. Dichos subconjuntos se denominan subespacios vectoriales y generalmente se denotan con la letra mayúscula \(H\). A continuación se da su definición.
+
+\begin{definicion}{Subespacio vectorial}{subespacio_vectorial}
+Sea \(V\) un espacio vectorial, un conjunto \(H \subseteq V\) es un \emph{subespacio vectorial} de \(V\) si \(H \neq \varnothing\) y \(H\) es un espacio vectorial, con las mismas operaciones de adición vectorial y multiplicación por un escalar definidas para \(V\). 
+\end{definicion}
+
+Nótese que un espacio vectorial \(V\) es subespacio de sí mismo. Un subespacio vectorial \(H\) siempre hereda las operaciones del espacio vectorial \(V\) del que origina. De la \autoref{def:subespacio_vectorial} se obtiene un teorema indispensable para la determinación de subespacios vectoriales.
+
+\begin{teorema}{Teorema de cerradura para subespacios vectoriales}{}
+Sea \(V\) un espacio vectorial, \(H \subseteq V\) y \(H \neq \varnothing\), \(H\) es un subespacio vectorial de \(V\) si
+\begin{enumerate}
+\item \( H \) es cerrado para la suma de vectores. 
+\item \( H \) es cerrado para el producto por escalar.
+\end{enumerate}
+\end{teorema}
+Es importante resaltar dos implicaciones del teorema anterior:
+
+\begin{corolario}{}{}
+Todo subespacio vectorial de \(V\) contiene al subespacio vectorial trivial de \(V\). 
+\end{corolario} 
+
+\begin{corolario}{}{cor:corolario2}
+Sea \(V\) un espacio vectorial y \(H_1, H_2\) subespacios de \(V\), \(H_1 \cap H_2\) es subespacio de \(V\).
+\end{corolario}
+
+\subsubsection{Subespacio vectorial trivial}
+El elemento neutro aditivo \( \bvec{0} \) de cualquier espacio vectorial \(V\) siempre es un subespacio vectorial de \(V\) y se le denomina \emph{subespacio trivial}.
+\begin{itemize}
+\item El subespacio trivial de \(\mathbb{R}^{n}\) es el origen \(O_n\) del espacio, \(\bvec{0}=\{(0_1,0_2,\ldots,0_n)\}\). Constituye el único subespacio vectorial de \(\mathbb{R}^{n}\) con un número finito de elementos, concretamente un elemento.
+\item El subespacio trivial de \(P_n\) es el polinomio 0: \(\bvec{0}=\{0x^{n}+0x^{n-1}+\cdots+0x+0\}=\{0\}\).
+\item El subespacio trivial de \(\bmat{M}_{m\times n}\) es la matriz nula de tamaño \(m \times n\):
+\[\bvec{0}=\begin{pmatrix}
+0_{11} & 0_{12} & \cdots & 0_{1n} \\ 0_{21} & 0_{22} & \cdots & 0_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ 0_{m1} & 0_{m2} & \cdots & 0_{mn}
+\end{pmatrix}.\]
+\end{itemize}
+
+\subsubsection{Subespacios vectoriales propios}
+
+Los subespacios vectoriales de un espacio vectorial que no son ni él mismo ni su subespacio trivial se denominan \emph{subespacios vectoriales propios}. A continuación se listan una serie de subespacios propios de uso frecuente. 
+
+\begin{itemize}
+\item El espacio unidimensional \(\mathbb{R}\) no tiene subespacios propios. El espacio bidimensional \(\mathbb{R}^{2}\) solo tiene un tipo de espacio propio: el conjunto de puntos sobre una recta que pasa por el origen. De \(\mathbb{R}^{3}\) en adelante, los espacios propios toman la forma de cualquier ecuación lineal en \( \mathbb{R}^{n} \) que contenga al subespacio trivial de \( \mathbb{R}^{n} \). En otras palabras, los subespacios propios de \( \mathbb{R}^{n} \) son rectas, hiperplanos o planos que pasan por el origen de \( \mathbb{R}^{n} \).
+\item Para el espacio vectorial \(P_n\) de todos los polinomios de grado menor o igual a \(n\), se tienen infinitos subespacios propios \(P_m\) tal que \(0 \leq m <n\).
+\item Del \customref{Corolario }{cor:corolario2} se sabe que la intersección de subespacios vectoriales es un subespacio vectorial. Por ello, la intersección de planos en \(\mathbb{R}^{n}\) es un subespacio vectorial de \(\mathbb{R}^{n}\). Representando la intersección de planos como un sistema de ecuaciones en forma matricial, se tiene que todas las soluciones de \(\bmat{A}_{m \times n}\bvec{x}=\bvec{0}\) constituyen un subespacio vectorial de \(\mathbb{R}^{n}\).
+\end{itemize}
+
+\subsection{Combinación lineal, dependencia e independencia lineal}
+La operación fundamental de los espacios vectoriales es la combinación lineal.
+\begin{definicion}{Combinación lineal}{combinacion_lineal}
+Sean \(\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n\) vectores es un espacio vectorial. Una \emph{combinación lineal} de dichos vectores es cualquier vector \( \bvec{v} \) de forma 
+\[\bvec{v}=\sum_{i=1}^{n}a_i\bvec{v}_i=a_1\bvec{v}_1+a_2\bvec{v}_2+\cdots+a_n\bvec{v}_n \quad\]
+Donde los números \(a_i\) son escalares arbitrarios y se designan \emph{coeficientes}.
+\end{definicion}
+
+Como expuesto en la \autoref{sec:vectores}, cualquier vector en \( \mathbb{R}^{3} \) se puede escribir como la combinación lineal de los vectores unitarios de base estándar \(\uvec{i}, \uvec{j}\) y \( \uvec{k} \). Similarmente, todo polinomio en el espacio vectorial \(P_n\) puede escribirse como la combinación lineal de los monomios \(1, x, x^2,\ldots,x^n\) que son vectores de \( P_n \).
+
+\begin{definicion}{Dependencia lineal}{dependencia_lineal}
+Dado un conjunto de vectores \(S=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) en un espacio vectorial \(V\), se dice que son \emph{linealmente dependientes} si existen \(n\) escalares \(a_1,a_2,\ldots,a_n\) no todos iguales a 0 tal que
+\[a_1\bvec{v}_1+a_2\bvec{v}_2+\cdots+a_n\bvec{v}_n=\bvec{0}.\]
+Donde \(\bvec{0}\) es el subespacio trivial de \(V\), es decir su vector cero. 
+\end{definicion}
+Un conjunto con el subespacio trivial de \(V\), \(\set{\bvec{0}}\), siempre es linealmente dependiente.
+
+Sea \(S \subseteq \mathbb{R}^{n}\) un conjunto con dos vectores \(S=\set{\bvec{u},\bvec{v}}\), \( \bvec{u} \) y \( \bvec{v} \) son linealmente dependientes si y sólo si son paralelos. Por ende, si \( \bvec{u} \) y \( \bvec{v} \) son linealmente dependientes, satisfacen \(\bvec{u}=a\bvec{v}\) donde \( a\in\mathbb{R} \). Por ello, dos vectores linealmente dependientes en \( \mathbb{R}^{2} \) son colineales. Sumado a eso, tres vectores linealmente dependientes en \( \mathbb{R}^{3} \) son coplanarios.
+
+Si un conjunto de vectores no es linealmente dependiente, entonces es linealmente independiente. Concretamente:
+\begin{definicion}{Independencia lineal}{independencia_lineal}
+Dado un conjunto de vectores \(S=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) en un espacio vectorial \(V\), se dice que son \emph{linealmente independientes} si la única forma de obtener el subespacio trivial \( \bvec{0} \) es a través de una combinación lineal en la cual todos los coeficientes son iguales a 0.
+\end{definicion}
+Si un conjunto es linealmente independiente, entonces ninguno de sus vectores es una combinación lineal de alguno de los otros en él. Un conjunto en \( \mathbb{R}^{n} \) que es linealmente independiente no puede contener más de \( n \) vectores. 
+
+Se puede determinar la dependencia o independencia lineal de un conjunto de vectores haciendo uso de un sistema de ecuaciones. Dado un conjunto de vectores \(S=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\), se sabe por la \autoref{def:dependencia_lineal} que es linealmente dependiente si existe una combinación lineal de los vectores con escalares no nulos que es igual al vector \( \bvec{0} \). Por ello, si se realiza una matriz con los vectores como columnas, tal que \(\bmat{A}=\begin{pmatrix}
+\bvec{v}_1 & \bvec{v}_2 & \cdots & \bvec{v}_n
+\end{pmatrix}\) y se tiene un vector columna \(\bvec{b}\) de números escalares arbitrarios no todos cero, se concluye que:
+\begin{itemize}
+\item Si el sistema homogéneo \(\bmat{A}\bvec{b}=\bvec{0}\) tiene soluciones no triviales, \(S\) es linealmente dependiente.
+\item Si el sistema homogéneo \(\bmat{A}\bvec{b}=\bvec{0}\) únicamente tiene solución trivial, \(S\) es linealmente independiente.
+\end{itemize}
+Si la matriz \(A\) es cuadrada, se puede evaluar cualquiera de los postulados del \autoref{thm:teorema_de_resumen} para saber si las columnas de \(A\) constituyen un conjunto de vectores linealmente independientes. Si la matriz resultante tiene más columnas que renglones, tal que \(A_{m \times n}|m<n\), el sistema homogéneo tendrá más variables que ecuaciones y tendrá infinitas soluciones, por lo que el conjunto es linealmente dependiente. 
+
+\subsection{Espacios generados y conjuntos generadores}
+
+\begin{definicion}{Espacio generado}{espacio_generado}
+Dado un conjunto de vectores \(S=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) en un espacio vectorial \(V\), el \emph{espacio generado} (en inglés \textit{span}) de \(S\), denotado \(\operatorname{span} S\) o \(\langle S \rangle\), es el conjunto de todas las combinaciones lineales de sus elementos:
+\[\operatorname{span}(S) = \set{\bvec{v}|\bvec{v}=\sum_{i=1}^{n}a_i\bvec{v}_i=a_1\bvec{v}_1+a_2\bvec{v}_2+\cdots+a_n\bvec{v}_n,\: a_i \in \mathbb{R}.}\] 
+\end{definicion}
+Si el conjunto de vectores \(S\) pertenece a un espacio vectorial \(V\), tal que \(S \subseteq V\), entonces \(\operatorname{span} S\) es un subespacio vectorial de \(V\).
+
+Para determinar el espacio generado por un conjunto \(S\) se plantea un sistema de ecuaciones a partir de la \autoref{def:espacio_generado}. Para un conjunto \(S=\set{\bvec{u},\bvec{w}}\) con \(S \subseteq \mathbb{R}^{n}\), se plantean las siguientes igualdades
+\begin{gather}
+\operatorname{span}(S) = \set{\bvec{v}|\bvec{v}=a\bvec{u}+b\bvec{w}} \notag \\
+(v_1,v_2,\ldots,v_n)=a(u_1,u_2,\ldots,u_n)+b(w_1,w_2,\ldots,w_n)
+\label{eq:igualdad_espacio_generado} 
+\end{gather}
+donde el vector \( (v_1,v_2,\ldots,v_n) \) representa todos los vectores en \(\operatorname{span}(S)\). Las igualdades en la \autoref{eq:igualdad_espacio_generado}
+se pueden escribir como un sistema de ecuaciones con incógnitas los escalares \(a\) y \(b\):
+\[ \begin{apmatrix}{2}
+u_1 & w_1 & v_1 \\
+u_2 & w_2 & v_2 \\
+u_3 & w_3 & v_3 \\
+\end{apmatrix} \]
+La solución del sistema dará una expresión en términos de \(\bvec{v}\), que es la forma general del espacio \(\operatorname{span} S\). 
+
+\begin{definicion}{Conjunto generador}{}
+Un conjunto \(S\subseteq V\) es un \emph{conjunto generador} del espacio vectorial \(V\) si \(\operatorname{span} S=V\), es decir, si todo vector en \(V\) se puede escribir como una combinación lineal de los vectores en \(S\). Si ese es el caso, se dice que \(S\) \emph{genera} a \(V\).
+\end{definicion}
+
+Un espacio vectorial cualquiera tiene infinitos conjuntos generadores y no todo conjunto generador tiene los mismos elementos ni en la misma cantidad. De hecho, agregar vectores adicionales a un conjunto generador crea un nuevo conjunto generador, por lo que si \(S\) es generador de un espacio vectorial \(V\) y \(S \subseteq A\), entonces \(A\) es un conjunto generador de \(V\). 
+
+Para determinar si dos conjuntos generan el mismo espacio vectorial, se construyen matrices con los vectores de los conjuntos como renglones. Si las matrices son \hyperlink{def:matriz_equivalente_por_renglones}{equivalentes por renglones}, entonces los dos conjuntos son generan el mismo espacio.
+
+\subsection{Base de un espacio vectorial}
+
+La base de un espacio vectorial \(V\) es un conjunto \(S\) que genera a \(V\) con la menor cantidad de elementos posibles.
+
+\begin{definicion}{Base}{base}
+Un conjunto ordenado de vectores \(B=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) tal que \(B \subseteq V\) es una \emph{base} de \(V\) si
+\begin{itemize}
+\item \(B\) es linealmente independiente.
+\item \(B\) genera a \(V\), tal que \(\operatorname{span} B =V\).
+\end{itemize}
+\end{definicion}
+\begin{advertencia}
+	Nótese que una base no es solo un conjunto, es un \emph{conjunto ordenado}. Así, sean \(\mathcal{B}_1=\set{\bvec{u},\bvec{v}}\) y \(\mathcal{B}_2=\set{\bvec{v},\bvec{u}}\) bases de un espacio vectorial, \(\mathcal{B}_1\neq\mathcal{B}_2\).
+\end{advertencia}
+
+Si \(B\) es una base, se denota \(\mathcal{B}\). Todas las bases de un espacio vectorial \(V\) tienen el mismo número de elementos, el mínimo necesario para generar \(V\). Todo conjunto de \(n\) vectores linealmente independiente en \(\mathbb{R}^{n}\) es una base de \(\mathbb{R}^{n}\).
+
+\begin{teorema}{}{}
+Sea \(\mathcal{B}=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) una base de \(V\), existe un único conjunto de escalares \(a_i\) que generan cada elemento de \(V\). Si \(\bvec{v} \in V\):
+\[\bvec{v}=a_1\bvec{v}_1+a_2\bvec{v}_2+\cdots+a_n\bvec{v}_n\]
+\end{teorema}
+Lo anterior cimenta el concepto de vector de coordenadas.
+
+\begin{definicion}{Dimensión}{}
+Sea \(V\) un espacio vectorial, la \emph{dimensión} de \(V\), denotada \( \dim V \), es igual al número de elementos de todas sus bases. 
+\end{definicion}
+Nótese que, como dicho antes, el número de elementos en todas las bases de un espacio vectorial \(V\) es el mismo. Ese número puede ser 0 o pueden existir una cantidad no finita de elementos, caso en el cual la dimensión es infinita.
+
+\begin{propiedad}{Dimensión de un subespacio vectorial}{dimension_de_un_subespacio_vectorial}
+Sea \(V\) un espacio vectorial con dimensión finita y \(H\) un subespacio de \(V\), entonces \(\dim H \leq \dim V\)
+\end{propiedad}
+La dimensión de un espacio vectorial se puede entender como una medida de qué tan grande es el espacio en comparación con otros. Todos los subespacios propios de un espacio vectorial tienen dimensiones sucesivamente menores, hasta llegar al subespacio trivial que tiene dimensión 0. Por ejemplo, en \(\mathbb{R}^{3}\), la dimensión del espacio es \(3\), la dimensión de los planos que pasan por el origen es \(2\), la dimensión de las rectas que pasan por el origen es \(1\) y la dimensión del origen es \(0\).
+
+\subsubsection{Bases canónicas}
+Para los espacios vectoriales más comunes se definen bases que se denominan \emph{canónicas}, denotadas \(\mathcal{C}\).
+
+\begin{itemize}
+\item Para \(\mathbb{R}^{n}\), se definen los \emph{vectores unitarios de base estándar} como
+\[\mathbf{e}_1=\begin{pmatrix}
+1 \\ 0 \\ 0 \\ \vdots \\ 0
+\end{pmatrix}, \mathbf{e}_2=\begin{pmatrix}
+0 \\ 1 \\ 0 \\ \vdots \\ 0
+\end{pmatrix}, \mathbf{e}_3=\begin{pmatrix}
+0 \\ 0 \\ 1 \\ \vdots \\ 0
+\end{pmatrix},\ldots, \mathbf{e}_n=\begin{pmatrix}
+0 \\ 0 \\ 0 \\ \vdots \\ 1
+\end{pmatrix}\]
+donde \(\mathbf{e}_n\) es la enésima columna de la matriz identidad \(n \times n\), \(\bmat{I}_n\). A partir de eso, se define la base canónica como el conjunto ordenado de \(n\) vectores \(\mathcal{C}=\set{\mathbf{e}_1, \mathbf{e}_2, \ldots,\mathbf{e}_n}\). Nótese que estos vectores son los vectores \(\uvec{i}\) y \(\uvec{j}\) en \(\mathbb{R}^{2}\) y a los vectores \(\uvec{i}\), \(\uvec{j}\) y \(\uvec{k}\) en \(\mathbb{R}^{3}\). 
+
+\begin{tip}
+	 El producto de la multiplicación entre una matriz cuadrada \(\bmat{A}\) de tamaño \(n \times n\) por \(\mathbf{e}_n\) es la enésima columna de \(\bmat{A}\). Multiplicar una matriz por \(\mathbf{e}_1\), cuando el producto está definido, \say{extrae} la primera columna de la matriz.
+\end{tip}
+
+\item Para \(P_n\), la base canónica es el conjunto ordenado de \(n\) monomios de forma \(\set{1,x,x^2,\ldots,x^n}\).
+\item Para \(\bmat{M}_{mn}\) la base canónica es el siguiente conjunto ordenado de \(mn\) matrices de tamaño \(m \times n\):
+\begin{equation*}
+\label{eq:base_canonica_Mmn}
+\set{\begin{pmatrix}
+	1 & 0 & \cdots & 0 \\
+	0 & 0 & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	0 & 0 & \cdots & 0 \\
+\end{pmatrix}, \begin{pmatrix}
+	0 & 1 & \cdots & 0 \\
+	0 & 0 & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	0 & 0 & \cdots & 0 \\
+\end{pmatrix},\ldots,\begin{pmatrix}
+	0 & 0 & \cdots & 1 \\
+	0 & 0 & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	0 & 0 & \cdots & 0 \\
+\end{pmatrix},\begin{pmatrix}
+	0 & 0 & \cdots & 0 \\
+	1 & 0 & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	0 & 0 & \cdots & 0\\
+\end{pmatrix},\ldots,\begin{pmatrix}
+	0 & 0 & \cdots & 0 \\
+	0 & 0 & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots  \\
+	0 & 0 & \cdots & 1 \\
+\end{pmatrix}}.
+\end{equation*}
+\end{itemize}
+
+\subsection{Vector de coordenadas y cambio de base}
+
+\subsubsection{Vector de coordenadas}\label{sssec:vector_de_coordenadas}
+
+Se puede determinar un mismo elemento en un espacio vectorial haciendo uso de bases diferentes. Para expresar un elemento haciendo uso de una base \(\mathcal{B}_1\) se debe multiplicar los elementos de \(\mathcal{B}_1\) por escalares distintos a si se quiere expresar ese elemento usando una base \(\mathcal{B}_2\). Esos escalares constituyen el vector de coordenadas del elemento con respecto a la base.
+
+\begin{definicion}{Vector de coordenadas}{vector_de_coordenadas}
+Sea \(V\) un espacio vectorial, \(\mathcal{B}=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_n}\) una base de \(V\) y \(\bvec{v} \in V\). El \emph{vector de coordenadas} \([\bvec{v}]_\mathcal{B}\) del vector \(\bvec{v}\) con respecto a la base \(\mathcal{B}\) es
+\[[\bvec{v}]_\mathcal{B}=\begin{pmatrix}
+	a_1 \\ a_2\\ \vdots \\ a_n
+\end{pmatrix}\quad \text{donde} \quad a_i \in \mathbb{R}\]
+si y sólo si \(\bvec{v}\) se puede expresar como
+\[\bvec{v}=a_1\bvec{u}_1+a_2\bvec{u}_2+\cdots+a_n\bvec{u}_n=\sum_{i=1}^{n}a_i\bvec{u}_i.\] 
+\end{definicion}
+
+\begin{notacion}
+	La notación \( [\bvec{v}]_\mathcal{B} \) significa expresar el vector \(\bvec{v}\) con respecto a la base \(\mathcal{B}\).
+\end{notacion}
+
+Expresando la \autoref{def:vector_de_coordenadas} como ecuación matricial, se tiene
+\[\bvec{v}=\begin{pmatrix}
+\bvec{u}_1 & \bvec{u}_2 & \cdots & \bvec{u}_n
+\end{pmatrix}[\bvec{v}]_\mathcal{B}.\]
+Como los vectores \(\bvec{u}_i\) son elementos de una base, son linealmente independientes y cada uno tiene \(n\) componentes, por lo que son columnas de una matriz cuadrada \emph{invertible} (véase el \autoref{thm:teorema_de_resumen}). Debido a eso, el vector de coordenadas \([\bvec{v}]_\mathcal{B}\) se puede obtener como
+\begin{equation}
+[\bvec{v}]_\mathcal{B}=\inv{\begin{pmatrix}
+\bvec{u}_1 & \bvec{u}_2 & \cdots & \bvec{u}_n
+\end{pmatrix}}\bvec{v}.
+\label{eq:vector_de_coordenadas_como_ecuacion_matricial}
+\end{equation}
+
+También se puede obtener realizando reducción Gauss-Jordan con la matriz aumentada 
+\[\begin{apmatrix}{4}
+\bvec{u}_1 & \bvec{u}_2 & \cdots & \bvec{u}_n & \bvec{v}
+\end{apmatrix}\]
+
+\begin{advertencia}
+	Al determinar un vector de coordenadas \([\bvec{v}]_\mathcal{B}\) es crucial tener en cuenta el orden en el que se encuentran los elementos de la base \(\mathcal{B}\), pues eso determina el orden en el que deben estar los elementos del vector que son los escalares de la  \autoref{def:vector_de_coordenadas}.
+\end{advertencia}
+
+\subsubsection{Cambio de base}\label{sssec:cambio_de_base}
+
+Usualmente se expresan los vectores en un espacio vectorial a partir de la base canónica de dicho espacio, mas puede resultar conveniente expresarlos desde una base alterna. Se puede realizar el proceso de \emph{cambio de base} haciendo uso de una \emph{matriz de transición}.
+
+A partir de la \autoref{eq:vector_de_coordenadas_como_ecuacion_matricial}, se puede determinar que la matriz de transición de la base canónica \(\mathcal{C}\) a una base \(\mathcal{B}=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_n}\), denotada \(Q_{\mathcal{C}\to \mathcal{B}}\), está dada por la inversa de la matriz que tiene a los elementos de la base como columnas:
+\[Q_{\mathcal{C}\to \mathcal{B}}=\inv{\begin{pmatrix}
+\bvec{u}_1 & \bvec{u}_2 & \cdots & \bvec{u}_n
+\end{pmatrix}}\]
+Con eso se puede reescribir la \autoref{eq:vector_de_coordenadas_como_ecuacion_matricial}:
+\begin{equation}
+[\bvec{v}]_\mathcal{B}=Q_{\mathcal{C}\to \mathcal{B}}[\bvec{v}]_\mathcal{C}
+\label{eq:vector_de_coordenadas_con_matriz_cambio_de_base}
+\end{equation}
+
+\begin{tip}
+El vector \(\bvec{v} \in \mathbb{R}^{n}\) está expresado de forma convencional, es decir, desde la base canónica de \(\mathbb{R}^{n}\). Por eso se puede plantear \([\bvec{v}]_\mathcal{C}=\bvec{v}\) y se puede sustituir \( \bvec{v} \) por \( [\bvec{v}]_\mathcal{C} \) en la \autoref{eq:vector_de_coordenadas_con_matriz_cambio_de_base}
+\end{tip}
+
+Para determinar una matriz de transición desde una base \(\mathcal{B}\) a la base canónica \(\mathcal{C}\), se realiza el proceso inverso. Es decir:
+\[Q_{\mathcal{B}\to\mathcal{C}}=\inv{Q_{\mathcal{C}\to \mathcal{B}}}=\begin{pmatrix}
+\bvec{u}_1 & \bvec{u}_2 & \cdots & \bvec{u}_n
+\end{pmatrix}.\]
+Así, \( Q_{\mathcal{B}\to\mathcal{C}} \) es una matriz que tiene como columnas los elementos de la base \(\mathcal{B}\).
+
+Para realizar un cambio de base de \(\mathcal{B}_1\) a una base \(\mathcal{B}_2\), se pasa de \(\mathcal{B}_1\) a la canónica usando la matriz de transición \(  Q_{\mathcal{B}_1\to \mathcal{C}} \) y de la canónica a \(\mathcal{B}_2\) con la matriz de transición \( Q_{\mathcal{C}\to \mathcal{B}_2} \). Por ello, la matriz de transición de una base \(\mathcal{B}_1\) a otra base \(\mathcal{B}_2\) se denota \(Q_{\mathcal{B}_1\to \mathcal{B}_2}\) y se obtiene de forma
+\[Q_{\mathcal{B}_1\to \mathcal{B}_2}=Q_{\mathcal{C}\to \mathcal{B}_2}\cdot Q_{\mathcal{B}_1\to \mathcal{C}}.\]
+
+\begin{definicion}{Matriz de transición}{matriz_de_transicion}
+	La \emph{matriz de transición} para cambiar de la base \( \mathcal{B}_1=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_n}\) a la base \( \mathcal{B}_2=\set{\bvec{w}_1,\bvec{w}_2,\ldots,\bvec{w}_n} \), denotada como \(Q_{\mathcal{B}_1\to \mathcal{B}_2} \), está dada por:
+	\begin{equation*}
+		Q_{\mathcal{B}_1\to \mathcal{B}_2}= \begin{pmatrix}
+			[\bvec{u}_1]_{\mathcal{B}_2} & [\bvec{u}_2]_{\mathcal{B}_2} & \cdots & [\bvec{u}_n]_{\mathcal{B}_2}
+		\end{pmatrix}=\inv{\begin{pmatrix}
+			[\bvec{w}_1]_{\mathcal{B}_1} & [\bvec{w}_2]_{\mathcal{B}_1} & \cdots & [\bvec{w}_n]_{\mathcal{B}_1}
+		\end{pmatrix}}
+	\end{equation*}
+\end{definicion}
+
+De la \autoref{eq:vector_de_coordenadas_con_matriz_cambio_de_base}, se puede extrapolar que el vector de coordenadas de un vector \(\bvec{v} \in \mathbb{R}^{n}\) con respecto a una base \(\mathcal{B}_2\) se puede expresar en términos del vector de coordenadas con respecto a una base \(\mathcal{B}_1\) haciendo uso de una matriz de transición. Con eso se formaliza el proceso de cambio de base.
+
+\begin{teorema}{Cambio de base}{thm:cambio_de_base}
+	Sea \(V\) un espacio vectorial con bases \(\mathcal{B}_1\) y \(\mathcal{B}_2\), para todo \(\bvec{v} \in V\) se cumple que
+	\[[\bvec{v}]_{\mathcal{B}_2}=Q_{\mathcal{B}_1\to \mathcal{B}_2}[\bvec{v}]_{\mathcal{B}_1}\]
+\end{teorema}
+
+Para realizar el proceso inverso, se hace uso del hecho de que \(Q_{\mathcal{B}_2\to \mathcal{B}_1}=\inv{Q_{\mathcal{B}_1\to \mathcal{B}_2}}\).
+
+\subsection{Bases ortonormales}
+
+\begin{definicion}{Conjunto ortogonal}{conjunto_ortogonal}
+	Sea \(S=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_n}\subseteq\mathbb{R}^{n}\), \(S\) es un \emph{conjunto ortogonal} si
+	\[\bvec{u}_i \cdot \bvec{u}_j=0 \quad\text{si}\quad i \neq j\]
+\end{definicion}
+Si \(S\) es un conjunto ortogonal que no contiene al vector  \(\bvec{0}\), entonces \(S\) es linealmente independiente. El inverso lógico no necesariamente se cumple.
+
+\begin{definicion}{Conjunto ortonormal}{conjunto_ortonormal}
+	Sea \(S=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_n}\subseteq\mathbb{R}^{n}\), \(S\) es un \emph{conjunto ortonormal} si es un conjunto ortogonal y 
+	\[ \norm{\bvec{u}_i}=1\]
+\end{definicion}
+Un conjunto de vectores es ortonormal si cualquier par de vectores es ortogonal y tiene norma unitaria, por lo que satisface \( \bvec{u}_i \cdot \bvec{u}_i=1 \) y \( \bvec{u}_i \cdot \bvec{u}_j=0 \).
+
+Todo subespacio de \(\mathbb{R}^{n}\) tiene al menos una base ortonormal. A partir de cualquier base en \(\mathbb{R}^{n}\) se puede obtener una base ortonormal haciendo uso del algoritmo de Gram-Schmidt seguido de la normalización de los elementos.
+
+% Añadir ilustración algoritmo de Gram-Schmidt aplicado en \( \mathbb{R}^{2} \).
+
+\begin{teorema}{Algoritmo de Gram-Schmidt}{algoritmo_gram-schmidt}
+	Sea \(H\) un subespacio de \(\mathbb{R}^{n}\) con una base \(\mathcal{B}_1=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_m}\), el \emph{algoritmo de Gram-Schmidt} permite construir una base ortogonal \(\mathcal{B}_\text{ortogonal}=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_m}\) de \(H\).
+	\begin{enumerate}
+		\item \( \bvec{v}_1 =\bvec{u}_1 \)
+		\item \( \bvec{v}_2 =\bvec{u}_2-\proy_{\bvec{v}_1}\bvec{u}_2\)
+		\item \( \bvec{v}_3=\bvec{u}_3-(\proy_{\bvec{v}_1}\bvec{u}_3+\proy_{\bvec{v}_2}\bvec{u}_3)\)
+		\item \( \vdots \)
+		\item \( \bvec{v}_m=\bvec{u}_m-(\proy_{\bvec{v}_1}\bvec{u}_m+\proy_{\bvec{v}_2}\bvec{u}_m+\cdots+\proy_{\bvec{v}_{m-1}}\bvec{u}_m)\)
+	\end{enumerate}
+\end{teorema}
+
+% Arreglas formato de la definición. Números como ordinales (1° en lugar de 1) y \vdots en el cuarto lugar centrado.
+
+Una vez se tiene una base ortogonal, se puede normalizar cada vector en la base para obtener una base ortonormal. 
+Una forma alternativa de conseguir una base ortonormal de \(\mathbb{R}^{n}\) es tomar las columnas de una matriz ortogonal de tamaño \(n\times n\).
+
+\subsection{Proyección ortogonal y complemento ortogonal}
+
+Se puede proyectar un vector sobre un espacio vectorial. Eso se denomina proyección ortogonal.
+
+\begin{definicion}{Proyección ortogonal}{proyeccion_ortogonal}
+	Sea \(H\) un subespacio de \(\mathbb{R}^{n}\) con una base ortonormal \(\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_m}\). Dado \(\bvec{v}\in\mathbb{R}^{n}\), su \emph{proyección ortogonal} sobre \(H\) está dada por
+	\[\proy_H \bvec{v} = \proy_{\bvec{u}_1}\bvec{v}+\proy_{\bvec{u}_2}\bvec{v}+\cdots+\proy_{\bvec{u}_m}\bvec{v}\] 
+	que, como la base es ortonormal, es lo mismo que
+	\[\proy_H \bvec{v} = (\bvec{v}\cdot\bvec{u}_1)\bvec{u}_1+(\bvec{v}\cdot\bvec{u}_2)\bvec{u}_2+\cdots+(\bvec{v}\cdot\bvec{u}_m)\bvec{u}_m\]
+	donde \(\proy_H \bvec{v} \in H\) incluso si \(\bvec{v} \not\in H\).
+\end{definicion}
+
+% Gráfico. La proyección del vector grande es la proyección sobre cada vector de la base sumados. El gráfico sirve hacerlo en R3 con el plano z=0, las bases (1,0,0) y (0,1,0) y un vector (3,3,3) o (1,2,3).
+
+En la definición anterior se escribe el vector \(\proy_H \bvec{v}\) como la combinación lineal de los elementos de la base \(\mathcal{B}=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_m}\) de \(H\), por lo que se puede plantear el siguiente vector de coordenadas:
+\begin{equation*}
+	[\proy_H \bvec{v}]_{\mathcal{B}}=\begin{pmatrix}
+		\bvec{v}\cdot\bvec{u}_1 \\ \bvec{v}\cdot\bvec{u}_2 \\ \vdots\\ \bvec{v}\cdot\bvec{u}_m
+	\end{pmatrix}.
+\end{equation*}
+
+La proyección ortogonal de un vector sobre un espacio vectorial es la misma independientemente de la base ortonormal elegida: el vector proyección es único. Sumado a eso, cabe mencionar que para todo vector \(\bvec{v}\in H\) se cumple que \(\bvec{v}=\proy_{H}\bvec{v}\) y que \(\proy_{H^\perp}\bvec{v}=\bvec{0}\).
+
+\begin{definicion}{Complemento ortogonal}{complemento_ortogonal}
+	Sea \(H\) un subespacio de \(\mathbb{R}^{n}\), el \emph{complemento ortogonal} de \(H\), denotado \(H^{\perp}\), es un subespacio de \(\mathbb{R}^{n}\) dado por
+	\[H^{\perp}=\set{\bvec{u}\in\mathbb{R}^{n}|\text{ para todo } \bvec{v} \in H,\quad\bvec{u}\cdot \bvec{v}=\bvec{0}}\subseteq\mathbb{R}^{n}.\]
+\end{definicion}
+
+El complemento ortogonal del eje \(x\) es el eje \(y\). Sea \(\mathcal{B}\) una base ortogonal de \(H\subseteq\mathbb{R}^{n}\), si \(\bvec{u}\in\mathbb{R}^{n}\) es perpendicular a los elementos en \(\mathcal{B}\) entonces  es perpendicular a todos los elementos de \(H\).
+
+Sea \(H\) un subespacio de \(\mathbb{R}^{n}\):
+\begin{longtable}{ll}
+	\rule[1ex]{0pt}{2.5ex}i.&\( \dim(H)+\dim(H^\perp)=\dim(\mathbb{R}^{n}) \). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&\(H\cap H^\perp=\set{\bvec{0}}\) . \\
+	\rule[1ex]{0pt}{2.5ex}iii.&\((\mathbb{R}^{3})^\perp=\set{\bvec{0}}\)
+\end{longtable}
+
+Sea \(\mathcal{B}=\set{\bvec{u}_1,\bvec{u}_2,\ldots,\bvec{u}_n}\) una base de \(H\), \(H^\perp\) es el conjunto de soluciones de un sistema homogéneo \(\bmat{A}\bvec{x}=\bvec{0}\) donde \[\bmat{A}=\begin{pmatrix}
+\bvec{u}_1 \\ \bvec{u}_2 \\ \vdots \\ \bvec{u}_n
+\end{pmatrix}.\]
+
+Se puede escribir cualquier \(\bvec{v}\in\mathbb{R}^{n}\) usando los subespacios \(H\) y \(H^\perp\).
+\begin{teorema}{Descomposición ortogonal de un vector}{descomposición__ortogonal}
+	Dado un subespacio \(H\) de \(\mathbb{R}^{n}\), la \emph{descomposición ortogonal} de \(\bvec{v}\in\mathbb{R}^{n}\) está dada por la suma de dos vectores únicos:
+	\[\bvec{v}=\proy_H\bvec{v}+\proy_{H^\perp}\bvec{v}.\]
+\end{teorema}
+
+Similar a como se realiza la descomposición ortogonal, se puede obtener una base de \(\mathbb{R}^{n}\) juntando bases de \(H\subseteq\mathbb{R}^{n}\)
+ y \(H^\perp\). Más aún, si se tienen bases ortonormales de \(H\) y \(H^\perp\), se tiene una base ortonormal de \(\mathbb{R}^{n}\).
+ 
+La distancia de \( \bvec{v} \) a \( H^\perp \) es \( \norm{\bvec{v}-\proy_{H^\perp}\bvec{v}} \) y la distancia de \( \bvec{v} \) a H es \( \norm{\bvec{v}-\proy_{H}\bvec{v}} \). Esas son las distancias más cortas posibles de \(\bvec{v}\) a \(H\) y \(H^\perp\) respectivamente. Es decir, \( \norm{\bvec{v}-\proy_{H}\bvec{v}} \leq \norm{\bvec{v}-\bvec{u}} \text{ para todo } \bvec{u} \in H\) y \( \norm{\bvec{v}-\proy_{H^\perp}\bvec{v}}\leq \norm{\bvec{v}-\bvec{w}} \text{ para todo } \bvec{w} \in H^\perp \). Esta información es muy relevante para el método de mínimos cuadrados.
+
+\subsection{Método de mínimos cuadrados}
+
+El \emph{método de mínimos cuadrados} es uno de los métodos más comunes para realizar un ajuste a una serie de datos de dos variables, es decir datos de forma \((x,y)\). 
+
+\subsubsection{Regresión lineal}
+
+Una \emph{regresión lineal} o \emph{ajuste lineal} consiste en hallar la recta que mejor se ajusta a todos los datos que se tiene, tal que dicha recta tiene la distancia más corta posible a todos los puntos dados. La recta no necesariamente debe pasar por el origen, dado que esa condición limitaría el ajuste, por lo que generalmente la recta obtenida no es un subespacio vectorial de \(\mathbb{R}^{2}\).
+
+Se sabe que la ecuación de una recta en \(\mathbb{R}^{2}\) es de la forma \(y=mx+b\) y son dados \(n\) datos de forma \((x_1,y_1),(x_2,y_2),\ldots,(x_n,y_n)\) que son puntos en \(\mathbb{R}^{2}\). A cualquiera de esos puntos, \((x_i,y_i)\), le corresponderá un punto en la recta con coordenadas \((x_i, mx_i+b)\). La distancia entre cada dato y el punto en la recta que le corresponde es, aplicando la fórmula de distancia entre puntos:
+\begin{align*}
+	d &= \sqrt{(x_i-x_i)^2+(y_i-(mx_i+b))^2}\notag \\
+	d &= \sqrt{(y_i-mx_i-b)^2} \notag \\
+	d &= \left|y_i-mx_i-b\right|. \notag 
+\end{align*}
+
+Se quiere que esa distancia sea mínima para cada uno de los datos y su punto correspondiente. Por esa razón, es razonable querer que la suma de los cuadrados de dichas distancias sean mínimas (de ahí el nombre del método). Así, el problema consiste en hallar números \(m\) y \(b\) tal que la suma
+\[(y_1-mx_1-b)^2+(y_2-mx_2-b)^2+\cdots+(y_n-mx_n-b)^2\]
+sea mínima. Una vez resuelto, la recta \(y=mx+b\) será el ajuste lineal por el método de mínimos cuadrados.
+
+El problema anterior se aborda de forma matricial. Para armar la matriz, supóngase que los puntos son colineales, tal que todos satisfacen una ecuación de la recta:
+\begin{gather*}
+b+mx_1 =y_1  \\
+b+mx_2 =y_2  \\
+\, \vdots \quad \vdots \quad \vdots \\
+b+mx_n =y_n \\
+\end{gather*}
+
+Con eso se elabora la siguiente ecuación matricial:
+\begin{align*}
+\begin{pmatrix}
+	1 & x_1 \\ 1 & x_2\\ \vdots & \vdots \\1 & x_n
+\end{pmatrix}\begin{pmatrix}
+b\\m
+\end{pmatrix}&=\begin{pmatrix}
+y_1 \\y_2\\ \vdots \\y_n
+\end{pmatrix}\\
+\bmat{A}\bvec{x}&=\bvec{b}
+\end{align*}
+Si la ecuación anterior no se cumple, tal que \(b+x_im\neq y_i\), se quiere que \(\left|y_i-mx_i-b\right|\) sea mínimo, que es equivalente a buscar un \(\bvec{x}\) tal que \(\norm{\bmat{A}\bvec{x}-\bvec{b}}\) sea mínimo. Dicho vector está dado por
+\begin{equation*}
+ \bvec{x}=\inv{(\transpose{\bmat{A}}\bmat{A})}\transpose{\bmat{A}} \bvec{b},
+\end{equation*}
+
+Así, si \(\bvec{x}=(b,m)\) la regresión lineal por el método de mínimos cuadrados arroja la recta \(y=mx+b\), cuyo intercepto con el eje \(y\) es \(b\) y cuya pendiente es \(m\).
+
+\subsubsection{Regresión cuadrática}
+
+Una \emph{regresión cuadrática} consiste en encontrar la parábola que mejor se ajusta a todos los datos que se tiene, tal que tiene la distancia más corta posible a todos los puntos. Para hallar una expresión para la regresión cuadrática, se sigue un camino similar al de la regresión lineal. Conociendo que la ecuación de una parábola es de forma \(y=a+bx+cx^2\), si todos los puntos estuviesen en la parábola se tendría un sistema de forma
+
+\begin{gather*}
+a+bx_1+cx_1^2=y_1  \\
+a+bx_2+cx_2^2=y_2  \\
+\, \vdots \quad \vdots \quad \vdots \\
+a+bx_n+cx_n^2=y_n
+\end{gather*}
+
+Con eso se elabora la siguiente ecuación matricial:
+\begin{align*}
+\begin{pmatrix}
+	1 & x_1 & x_1^2\\ 1 & x_2&x_2^2\\ \vdots & \vdots&\vdots \\1 & x_n&x_n^2
+\end{pmatrix}\begin{pmatrix}
+a\\b\\c
+\end{pmatrix}&=\begin{pmatrix}
+y_1 \\y_2\\ \vdots \\y_n
+\end{pmatrix}\\
+\bmat{A}\bvec{x}&=\bvec{b}
+\end{align*}
+Como en la regresión lineal, se desea hallar un vector \(\bvec{x}\) tal que \(\norm{\bmat{A}\bvec{x}-\bvec{b}}\) sea mínimo. Dicho vector está dado por
+\begin{equation*}
+ \bvec{x}=\inv{(\transpose{\bmat{A}}\bmat{A})}\transpose{\bmat{A}} \bvec{b},
+\end{equation*}
+Donde el vector \(\bvec{x}\) permite establecer la ecuación de la parábola que más se adecua a los datos.
+
+\section{Transformaciones lineales}
+
+\subsection{Transformaciones lineales}
+
+Sea \(\bmat{A}\) una matriz de tamaño \(m \times n\), \(\bvec{x}\in\mathbb{R}^{n}\) y \(\bvec{b}\in\mathbb{R}^{m}\) se puede plantear 
+\[\bmat{A}\bvec{x}=\bvec{b}.\]
+La matriz \(\bmat{A}\) transforma al vector \(\bvec{x}\) en el vector \(\bvec{b}\). A partir de eso, la matriz \(\bmat{A}\) se puede entender como una función de forma \(f\colon\bvec{x}\mapsto\bvec{b}\), con dominio \(\mathbb{R}^{n}\) y rango \(\mathbb{R}^{m}\). Siguiendo esa línea, toda matriz se puede ver como una función entre espacios vectoriales. Se pueden establecer entonces funciones \(T\) para transformar de un espacio vectorial a otro, si se asocia una matriz a la transformación.
+
+\begin{ejemplo}{Matriz de rotación}{matriz_de_rotacion}
+La matriz \(\bmat{A}=\begin{pmatrix}
+0 & -1\\1 &0
+\end{pmatrix}\) multiplicada por un vector \(\bvec{v}\in\mathbb{R}^{2}\) rota el vector en un ángulo de \(\uppi/2\) en el sentido positivo (antihorario). 
+\end{ejemplo}
+
+\begin{definicion}{Transformación lineal}{transformacion_lineal}
+	Sean \(V\) y \(W\) espacios vectoriales. Una función \(T\) de forma \(T\colon V\to W\), que asigna a cada vector \(\bvec{v}\in V\) un único vector \(T(\bvec{v})\in W\),  es una \emph{transformación lineal} u \emph{operador lineal} si 
+	\begin{longtable}{llp{\textwidth/2+0.8cm}}
+		\rule[1ex]{0pt}{2.5ex}i.&\(T\) \say{respeta} la adición vectorial:&Para todo \(\bvec{u},\bvec{v} \in V\):
+		\begin{center}
+			\(T(\bvec{u}+\bvec{v})=T(\bvec{u})+T(\bvec{v})\)
+		\end{center}
+		donde la suma a la izquierda ocurre en \(V\), la suma a la derecha ocurre en \(W\) y \(T(\bvec{u}),T(\bvec{v}) \in W\). \\
+		\rule[1ex]{0pt}{2.5ex}ii.&\(T\) \say{respeta} al producto por escalar:&Para todo \(\bvec{v} \in V\) y \(a \in \mathbb{R}\):
+		\begin{center}
+			\(T(a\bvec{v})=aT(\bvec{v})\)
+		\end{center}	
+		donde el producto por escalar a la izquierda ocurre en  \(V\), el producto por escalar a la derecha ocurre en \(W\) y \(T(\bvec{v}) \in W\). \\
+	\end{longtable}
+\end{definicion}
+
+\begin{notacion}
+	 Sea \(T\) una función y \(V\) y \(W\) espacios vectoriales, la notación \(T\colon V \to W\) indica que \(\dom T=V\) y \(\ran T=W\), mientras que la notación \(T\colon x\mapsto y\) representa lo mismo que \(T(x)=y\). En ocasiones, \(T(\bvec{v})\) se escribe \(T\bvec{v}\). 
+\end{notacion}
+
+Sean \(\bvec{v}_n \in \mathbb{R}^{n}\) y \(\bvec{v}_m \in \mathbb{R}^{m}\), una función \(T\colon\mathbb{R}^{n}\to\mathbb{R}^{m}\) de forma \( T(\bvec{v}_n)=\bvec{v}_m \), será una transformación lineal si los elementos de \(\bvec{v}_m\) tienen la forma de ecuaciones lineales en donde no hay términos independientes que sean constantes no nulas. 
+
+\subsection{Propiedades de las transformaciones lineales}
+Sean \(V\) y \(W\) espacios vectoriales de dimensión finita con bases \(\mathcal{B}_V=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) y \(\mathcal{B}_W=\set{\bvec{w}_1,\bvec{w}_2,\ldots,\bvec{w}_n}\) y sea \(T:V\to W\) una transformación lineal, \(T\) satisface las siguientes propiedades:
+
+\begin{longtable}{lp{\textwidth-1.8cm}}
+	\rule[1ex]{0pt}{2.5ex}i.&\(T(\bvec{0}_V)=\bvec{0}_W\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&\(T(\bvec{v}_1\pm\bvec{v}_2)=T(\bvec{v}_1)\pm T(\bvec{v}_2)\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&\(T(a_1\bvec{v}_1+a_2\bvec{v}_2+\cdots+a_n\bvec{v}_n)=a_1T(\bvec{v}_1)+a_2T(\bvec{v}_2)+\cdots+a_nT(\bvec{v}_n)\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.& Si \(\bvec{v} \in V\), entonces \(T(\bvec{v})=\alpha_1T(\bvec{v}_1)+\alpha_2T(\bvec{v}_2)+\cdots+\alpha_nT(\bvec{v}_n)\) donde los escalares están dados por \([\bvec{v}]_{\mathcal{B}_V}=(\alpha_1,\alpha_2,\ldots,\alpha_n)\). \\
+	\rule[1ex]{0pt}{2.5ex}v.&Existe una única transformación lineal \(T\) tal que \(T(\bvec{v}_i)=\bvec{w}_i\). \\
+	\rule[1ex]{0pt}{2.5ex}vi.&Si se conoce el efecto de \(T\) sobre los vectores en \(\mathcal{B}_V\) entonces se puede determinar el efecto de \(T\) sobre cualquier \(\bvec{v}\in V\) expresando \( \bvec{v} \) en términos de \( \set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n} \) con la propiedad iv. \\
+\end{longtable}
+
+Si se toman los elementos del espacio vectorial de salida de una transformación lineal como información, entonces el núcleo de una transformación lineal se puede entender como el conjunto de la información que se pierde al realizar esa transformación.
+\begin{definicion}{Núcleo de una transformación lineal}{nucleo_de_una_transformacion_lineal}
+	Sean \(V\) y \(W\) espacios vectoriales y \(T:V\to W\) una transformación lineal, el \emph{núcleo} (en inglés \textit{kernel}) de \(T\), denotado \(\ker T\), es un conjunto de elementos de \(V\) dado por
+	\[\ker(T)=\set{\bvec{v}\in V | T(\bvec{v})=\bvec{0}_W} \subseteq V.\]
+\end{definicion}
+Por la propiedad i. el núcleo nunca es vacío: el núcleo más reducido posible es aquel que contiene sólo al origen, denominado \emph{núcleo trivial}. Si \(\ker(T)=\set{\bvec{0}_V}\) entonces no se está perdiendo información en absoluto. Opuesto a ello, el mayor núcleo posible es todo \(V\), caso en el cual se pierde la totalidad de la información.
+
+Si \(T(\bvec{v})=\bvec{w}\) entonces \( \bvec{w} \) es la \emph{imagen} de \(\bvec{v}\) bajo \(T\). 
+
+\begin{definicion}{Imagen de una transformación lineal}{imagen_de_una_transformacion_lineal}
+	Sean \(V\) y \(W\) espacios vectoriales y \(T:V\to W\) una transformación lineal, la \emph{imagen} de \(T\), denotada \(\im T\), es el conjunto de elementos en \(W\) que son imagen de algún elemento de \(V\) bajo la función \(T\). 
+	\[\im(T)=\set{\bvec{w} \in W | \text{ existe } \bvec{v} \in V \text{ para el que } T(\bvec{v})=\bvec{w}} \subseteq W.\]
+\end{definicion}
+La imagen de una transformación lineal es la información del espacio vectorial de salida que pasa al espacio vectorial de llegada. Se puede interpretar como el opuesto del núcleo, porque es la información que no se pierde.
+
+\begin{teorema}{}{ker_im_subespacios}
+	Sea \(T\colon V\to W\) una transformación lineal, entonces
+	\begin{itemize}
+		\item \(\ker(T)\) es subespacio de \(V\).
+		\item \(\im(T)\) es subespacio de \(W\).
+	\end{itemize}
+\end{teorema}
+
+Tiene sentido hablar de la dimensión del núcleo y de la imagen porque por el \hyperlink{thm:ker_im_subespacios}{teorema anterior} son espacios vectoriales. Dichas dimensiones reciben nombres particulares.
+
+\begin{definicion}{Nulidad de una transformación lineal}{nulidad_de_una_transformacion_lineal}
+	Sean \(V\) y \(W\) espacios vectoriales de dimensión finita y \(T\colon V\to W\) una transformación lineal, la \emph{nulidad} de \(T\), denotada \(\nu(T)\), es la dimensión de su núcleo: 
+	\(\nu(T)=\dim(\ker(T))\).
+\end{definicion}
+
+\begin{definicion}{Rango de una transformación lineal}{rango_de_una_transformacion_lineal}
+	Sean \(V\) y \(W\) espacios vectoriales de dimensión finita y \(T\colon V\to W\) una transformación lineal, el \emph{rango} de \(T\), denotado \(\rho(T)\), es la dimensión de su imagen:
+	\(\rho(T)=\dim(\im(T))\).
+\end{definicion}
+
+\begin{tip}
+	Nótese que los conceptos de núcleo, imagen, nulidad y rango de una transformación lineal son extrapolaciones de los conceptos de espacio nulo, imagen, nulidad y rango de una matriz.
+\end{tip}
+
+\begin{teorema}{Teorema de la dimensión}{teorema_de_la_dimension}
+	Sean \(V\) y \(W\) espacios vectoriales y sea \(T:V\to W\) una transformación lineal,
+	\[\nu (T) + \rho (T)= \dim V\]
+\end{teorema}
+Entendiendo el espacio vectorial de salida como la totalidad de la información, el núcleo es la información que se pierde y la imagen es la información que pasa (o sea, la que no se pierde). Es lógico que la información que se pierde más la que no se pierde equivalga a la totalidad de la información, por eso tiene sentido que la suma de las dimensiones del núcleo y la imagen sea igual a la dimensión del espacio vectorial de salida, es decir \(\nu T + \rho T = \dim V\). 
+
+\subsection{Algunas transformaciones lineales}
+Algunas transformaciones lineales reciben nombres propios. 
+
+\subsubsection{Transformación cero}
+La transformación lineal \(T\colon V\to W\) definida por \(T\colon\bvec{v}\mapsto\bvec{0}\) se denomina \emph{transformación cero}. Satisface las siguientes propiedades:
+\begin{longtable}{lp{\textwidth/2-1.8cm}p{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex}i.&Núcleo de la transformación cero: &\(\ker T = V\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Imagen de la transformación cero: &\(\im T = \set{\bvec{0}}\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Nulidad de la transformación identidad: &\(\nu T = \dim V\). \\
+		\rule[1ex]{0pt}{2.5ex}iv.&Rango de la transformación identidad: &\(\rho T = 0\). \\
+\end{longtable}
+
+\subsubsection{Transformación identidad}
+La transformación lineal \(T\colon V\to W\) definida por \(T\colon\bvec{v}\mapsto\bvec{v}\) se denomina \emph{transformación identidad}. Satisface las siguientes propiedades:
+\begin{longtable}{lp{\textwidth/2-1.8cm}p{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex}i.&Núcleo de la transformación identidad: &\(\ker T = \set{\bvec{0}}\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Imagen de la transformación identidad: &\(\im T = V\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Nulidad de la transformación identidad: &\(\nu T = 0\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Rango de la transformación identidad: &\(\rho T = \dim W\). \\
+\end{longtable}
+
+\subsubsection[Transformaciones de elongación y compresión en \(\mathbb{R}^{2}\)]{Transformaciones de elongación y compresión en \(\bm{\mathbb{R}^{2}}\)} 
+
+Las transformaciones de elongación y compresión en \(\mathbb{R}^{2}\) son dos transformaciones lineales de forma \(T\colon\mathbb{R}^{2}\to\mathbb{R}^{2}\) que elongan o contraen un vector en un factor \(\alpha\) a lo largo de un eje específico. Si \(\alpha>1\) la transformación es una expnasión; de lo contrario, si \(0<\alpha<1\) la transformación es una compresión. Si \(\alpha=1\), no hay transformación.
+
+La \emph{transformación de elongación o compresión a lo largo del eje \(x\)} está definida por 
+\[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+\alpha x \\ y
+\end{pmatrix} \quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+\alpha & 0 \\ 0 & 1
+\end{pmatrix}.\]
+Similarmente, la \emph{transformación de elongación o compresión a lo largo del eje \(y\)} está dada por  
+\[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+x \\  \alpha y
+\end{pmatrix} \quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+1 & 0 \\ 0 & \alpha
+\end{pmatrix}.\]
+
+\subsubsection[Transformaciones de reflexión en \(\mathbb{R}^{2}\)]{Transformaciones de reflexión en \(\bm{\mathbb{R}^{2}}\)} 
+
+Las transformaciones de reflexión en \(\mathbb{R}^{2}\) son cuatro transformaciones lineales de forma \(T\colon\mathbb{R}^{2}\to\mathbb{R}^{2}\) que reflejan un vector sobre un eje específico. La \emph{transformación de reflexión respecto al eje \(x\)} está definida por \[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+x \\ -y
+\end{pmatrix} \quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+1 & 0 \\ 0 & -1
+\end{pmatrix}\]
+Similarmente, la \emph{transformación de reflexión respecto al eje \(y\)} está dada por \[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+-x \\ y
+\end{pmatrix} \quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+-1 & 0 \\ 0 & 1
+\end{pmatrix}.\] 
+Una combinación de las dos transformaciones anteriores provee la \emph{transformación de reflexión respecto a la recta \(x=y\)}: 
+\[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+y \\ x
+\end{pmatrix} \quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+0 & 1 \\ 1 & 0
+\end{pmatrix}.\]
+Por último, se tiene la \emph{transformación de reflexión respecto al origen} (o respecto a la recta \(y=-x\)): 
+\[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+-x \\ -y
+\end{pmatrix}\quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+-1 & 0 \\ 0 & -1
+\end{pmatrix}.\]
+Todas las transformaciones de reflexión en \(\mathbb{R}^{2}\) satisfacen las siguientes propiedades:
+\begin{longtable}{lll}
+	\rule[1ex]{0pt}{2.5ex}i.&Núcleo de las transformaciones de reflexión en \(\mathbb{R}^{2}\): &\(\ker T = \set{\bvec{0}}\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Imagen de las transformaciones de reflexión en \(\mathbb{R}^{2}\): &\(\im T = \mathbb{R}^{2}\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Nulidad de las transformaciones de reflexión en \(\mathbb{R}^{2}\): &\(\nu T = 0\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Rango de las transformaciones de reflexión en \(\mathbb{R}^{2}\): &\(\rho T = 2\). \\
+\end{longtable}
+
+\subsubsection[Transformaciones de corte en \(\mathbb{R}^{2}\)]{Transformaciones de corte en \(\bm{\mathbb{R}^{2}}\)} 
+
+Las transformaciones de corte en \(\mathbb{R}^{2}\) son dos transformaciones lineales de forma \(T\colon\mathbb{R}^{2}\to\mathbb{R}^{2}\) que \textcolor{red!80!black}{describir adecuadamente qué hace esta transformación en términos geométricos} a lo largo de un eje específico.
+
+La \emph{transformación de corte a lo largo del eje \(x\)} está definida por 
+\[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+x+\alpha y \\ y
+\end{pmatrix} \quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+1 & \alpha \\ 0 & 1
+\end{pmatrix}.\]
+Similarmente, la \emph{transformación de corte a lo largo del eje \(y\)} está dada por  
+\[T\begin{pmatrix}
+x \\ y
+\end{pmatrix}=\begin{pmatrix}
+x \\ \alpha x + y
+\end{pmatrix} \quad \text{con representación matricial} \quad \bmat{A}_T=\begin{pmatrix}
+1 & 0 \\ \alpha & 1
+\end{pmatrix}.\]
+
+\subsubsection[Transformación de rotación en \(\mathbb{R}^{2}\)]{Transformación de rotación en \(\bm{\mathbb{R}^{2}}\)}
+Las \emph{transformación de rotación} en \(\mathbb{R}^{2}\) es una transformación lineal \(T\colon\mathbb{R}^{2}\to\mathbb{R}^{2}\) que rota un vector en un ángulo de \(\theta\) radianes en el sentido positivo. La transformación se define como
+\begin{equation*}
+	T\begin{pmatrix}
+	x \\ y
+	\end{pmatrix}=\begin{pmatrix}
+	x\cos(\theta)-y\sin(\theta) \\ x\sin(\theta)+y\cos(\theta)
+	\end{pmatrix}.
+	\label{eq:transformacion_rotacion_R2}
+\end{equation*}
+La representación matricial \(\bmat{A}_\theta\) de esa transformación, que satisface \(T(\bvec{v})=\bmat{A}_\theta\bvec{v}\), está dada por
+\[\bmat{A}_\theta=\begin{pmatrix}
+\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta
+\end{pmatrix}.\]
+
+La transformación de rotación satisface las siguientes propiedades:
+\begin{longtable}{lll}
+	\rule[1ex]{0pt}{2.5ex}i.&Núcleo de la transformación de rotación en \(\mathbb{R}^{2}\): &\(\ker T = \set{\bvec{0}}\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Imagen de la transformación de rotación en \(\mathbb{R}^{2}\): &\(\im T = \mathbb{R}^{2}\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Nulidad de la transformación de rotación en \(\mathbb{R}^{2}\): &\(\nu T = 0\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Rango de la transformación de rotación en \(\mathbb{R}^{2}\): &\(\rho T = 2\). \\
+\end{longtable}
+
+\begin{tip}
+	Para obtener una matriz que sea la representación de realizar varias transformaciones lineales \(T_1,T_2,\ldots,T_n\) de forma sucesiva, se multiplican entre sí las representaciones matriciales de cada una de dichas transformaciones: \[\bmat{A}_{T_n}\cdots\bmat{A}_{T_2}\bmat{A}_{T_1}.\] 
+	Nótese que la transformación que se realiza primero va a la derecha en la multiplicación matricial.
+\end{tip}
+
+\subsubsection[Transformaciones de rotación en \(\mathbb{R}^{3}\)]{Transformaciones de rotación en \(\bm{\mathbb{R}^{3}\)}}
+
+Se puede extrapolar la transformación de rotación en \(\mathbb{R}^{2}\) a tres \emph{transformaciones lineales de rotación en \(\mathbb{R}^{3}\)}. La transformación de rotación que rota un vector un ángulo de \(\theta\) radianes sobre el plano \(xy\) está dada por la matriz de transformación
+\[\bmat{A}_{\theta_{xy}}=\begin{pmatrix}
+\cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 
+\\ 0 & 0 & 1 \end{pmatrix}.\]
+Similarmente, la matriz de transformación rota un vector un ángulo \(\theta\) sobre el plano \(xz\) es
+\[\bmat{A}_{\theta_{xz}}=\begin{pmatrix}
+\cos\theta & 0 & -\sin\theta \\ 0 & 1 & 0 \\ \sin\theta & 0 & \cos\theta \end{pmatrix}\]
+y la que rota un vector un ángulo \(\theta\) sobre el plano \(yz\) es
+\[\bmat{A}_{\theta_{yz}}=\begin{pmatrix}
+1 & 0 & 0 \\ 0 & \cos\theta & -\sin\theta \\ 0 &\sin\theta & \cos\theta \end{pmatrix}.\]
+
+\subsubsection{Operadores de proyección}
+Existen transformaciones lineales que proyectan vectores sobre ejes (en \(\mathbb{R}^{2}\)) o planos (en \(\mathbb{R}^{3}\), denominados \emph{operadores de proyección}.
+
+La transformación lineal \(T\colon \mathbb{R}^{2}\to \mathbb{R}^{2}\) definida por \(T\colon(x,y)\mapsto(x,0)\) es la transformación de proyección sobre el eje \(x\) porque \(T(x,y)=\proy_{\mathbf{e}_1}(x,y)\). Análogamente, la transformación definida por \(T\colon(x,y)\mapsto(0,y)\) es la transformación de proyección sobre el eje \(y\), debido a que \(T(x,y)=\proy_{\mathbf{e}_2}(x,y)\).
+
+Los operadores de forma \(T\colon\mathbb{R}^{3}\to\mathbb{R}^{3}\) que proyectan vectores en \(\mathbb{R}^{3}\) sobre planos son tres:
+\begin{itemize}
+	\item La transformación definida como \(T\colon(x,y,z)\mapsto(x,y,0)\) proyecta cualquier vector en \(\mathbb{R}^{3}\) sobre el plano \(xy\).
+	\item La transformación definida como \(T\colon(x,y,z)\mapsto(x,0,y)\) proyecta cualquier vector en \(\mathbb{R}^{3}\) sobre el plano \(xz\).
+	\item La transformación definida como \(T\colon(x,y,z)\mapsto(0,y,z)\) proyecta cualquier vector en \(\mathbb{R}^{3}\) sobre el plano \(yz\).
+\end{itemize}
+
+\begin{tip}
+	Para aplicar una transformación lineal a una figura geométrica en \(\mathbb{R}^{n}\), se aplica la transformación a todos los vectores de posición correspondientes a cada vértice de la figura.
+\end{tip}
+
+\subsubsection{Otros operadores lineales}
+Algunas operaciones conocidas son transformaciones lineales y pueden ser descritas como tal. Entre ellas se encuentran:
+\begin{longtable}{lll}
+	\rule[1ex]{0pt}{2.5ex}i.&Operador de transposición: &Transformación \(T\colon M_{mn}\to M_{mn}\) definida por \(T(\bmat{A})=\transpose{\bmat{A}}\). \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Operador integral: &Transformación \(T\colon C[a,b]\to\mathbb{R}\) definida por \(\displaystyle T(f(x))=\defint{f(x)}[x]{a}{b}\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Operador diferencial: &Transformación \(T\colon C[a,b]\to C[a,b]\) definida por \(\displaystyle T(f(x))=\der[][x]f(x)\). \\
+\end{longtable}
+
+\subsection{Representación matricial}
+
+\begin{definicion}{Representación matricial}{representacion_matricial}
+	Sea \(T\colon\mathbb{R}^{n}\to\mathbb{R}^{m}\) una transformación lineal y \(\bvec{x}\in\mathbb{R}^{n}\) existe una única matriz \(\bmat{A}_T\) de tamaño \(m \times n\) denominada \emph{representación matricial} o \emph{matriz de transformación} tal que
+	\[T(\bvec{x})=\bmat{A}_T\bvec{x}.\]
+\end{definicion}
+
+Nótese que la ecuación en la definición se cumple con la suposición de que todos los vectores en \(\mathbb{R}^{n}\) y \(\mathbb{R}^{m}\) está expresados a partir de las respectivas bases canónicas. En ese caso, la matriz tiene como columnas la transformación aplicada a los vectores de base estándar, es decir:
+\[\bmat{A}_T=\begin{pmatrix}
+T(\mathbf{e}_1) & T(\mathbf{e}_2) & \cdots & T(\mathbf{e}_n)
+\end{pmatrix}\]
+
+Similar a lo enunciado por la definición, toda matriz de \(m\times n \) define una transformación lineal \(T\colon \mathbb{R}^{n}\to\mathbb{R}^{m}\) de forma \(T\colon \bvec{v}\to\bmat{A}\bvec{v}\).
+
+\begin{teorema}{Equivalencias entre la transformación y su representación matricial}{}
+	La representación matricial \(\bmat{A}_T\) de una transformación lineal \(T\) satisface:
+	\begin{longtable}{lp{\textwidth/2}}
+		\rule[1ex]{0pt}{2.5ex}i.&\(N_{\bmat{A}_T}=\ker T\). \\
+		\rule[1ex]{0pt}{2.5ex}ii.&\(\im \bmat{A}=C_{\bmat{A}_T}=\im T\).\\
+		\rule[1ex]{0pt}{2.5ex}iii.&\(\nu(\bmat{A})=\nu(T)\). \\
+		\rule[1ex]{0pt}{2.5ex}iv.&\(\rho(\bmat{A}_T)=\rho(T)\).
+	\end{longtable}
+\end{teorema}
+
+\begin{advertencia}
+	Si bien las imágenes de la transformación lineal y la de la matriz de transformación contienen la misma información, se debe ser cuidadoso porque podrían ser subespacios de espacios vectoriales distintos.
+\end{advertencia}
+
+Para determinar una representación matricial de una transformación lineal se usan vectores de coordenadas:
+\begin{teorema}{Obtención de la matriz de transformación}{obtencion_de_la_matriz_de_transformacion}
+	Sean \(V\) y \(W\) espacios vectoriales de dimensión \(\dim V=n\) y \(\dim W=m\) con bases \(\mathcal{B}_V=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) y \(\mathcal{B}_W=\set{\bvec{w}_1,\bvec{w}_2,\ldots,\bvec{w}_m}\) y sea \(T:V\to W\) una transformación lineal, la matriz de transformación \(\bmat{A}_T\) viene de la ecuación
+	\[[T(\bvec{v})]_{\mathcal{B}_W}=\bmat{A}_T[\bvec{v}]_{\mathcal{B}_V} \quad \text{para todo} \quad \bvec{v}\in V\]
+	y se encuentra dada por
+	\[\bmat{A}_T=\begin{pmatrix}
+			[T(\bvec{v}_1)]_{\mathcal{B}_W} & [T(\bvec{v}_2)]_{\mathcal{B}_W} & \cdots & [T(\bvec{v}_n)]_{\mathcal{B}_W}
+		\end{pmatrix}\]
+\end{teorema}
+
+La representación matricial de una transformación lineal depende de las bases elegidas para el espacio vectorial de salida y el espacio vectorial de llegada. La elección de diferentes bases originan representaciones matriciales disímiles. Las bases se pueden elegir de forma arbitraria y resulta conveniente usar las bases canónicas.
+
+\begin{tip}
+	Como las transformaciones lineales son funciones, el producto entre representaciones matriciales se entiende como composición de funciones. Así, la transformación lineal \(S\circ T\) tiene matriz de transformación \(\bmat{A}_S\cdot \bmat{A}_T\).
+\end{tip}
+% Corregir mk.
+
+Se pueden relacionar entre sí distintas representaciones matriciales de la misma trasformación lineal.
+
+\begin{teorema}{Relación entre representaciones matriciales}{}
+	Sea \(T\colon\mathbb{R}^{n}\to\mathbb{R}^{m}\) una transformación lineal y sea \(\bmat{A}_\mathcal{C}\) la representación matricial de \(T\) respecto a las bases \(\mathcal{C}_n\) y \(\mathcal{C}_m\) que son las canónicas de \(\mathbb{R}^{n}\) y \(\mathbb{R}^{m}\). Si \(\bmat{A}_T\) es la representación matricial de la transformación respecto a \(\mathcal{B}_1\) y \(\mathcal{B}_2\) entonces
+	\[\bmat{A}_T=Q_{\mathcal{C}_m\to\mathcal{B}_2}\bmat{A}_\mathcal{C}Q_{\mathcal{B}_1\to\mathcal{C}_n}.\]
+\end{teorema}
+
+La relación anterior se satisface para bases cualquiera (no necesariamente las canónicas) y para todo espacio vectorial.
+
+\textcolor{red!80!black}{Poner qué pasa y cómo con la canónica.}
+
+\section{Valores propios, vectores propios y diagonalización}
+
+\subsection{Valor y vector propio o característico}
+
+\begin{definicion}{Valor y vector propio}{valor_y_vector_propio}
+	Sea \(\bmat{A}\) una matriz cuadrada \(n\times n\). Un escalar \(\lambda\) es un \emph{valor propio}, valor característico, autovalor o eigenvalor de \(\bmat{A}\) si existe un \(\bvec{v} \in\mathbb{R}^{n}|\bvec{v}\neq\bvec{0} \) tal que
+	\[ \bmat{A} \bvec{v}=\lambda \bvec{v}.\]
+	Se dice entonces que \(\bvec{v}\) es un \emph{vector propio}, vector característico, autovector o eigenvector de \(\bmat{A}\) asociado a \(\lambda\).
+\end{definicion} 
+
+De una matriz \(\bmat{A}_{n \times n} \) se pueden hallar \( n \) valores propios. A cada valor propio corresponden infinitos vectores propios, dado que si \( \bvec{v} \) es vector propio todo múltiplo escalar \( a \bvec{v} \) también es vector propio, por lo que a cada valor propio se le asocia una familia de vectores. Si la matriz \( \bmat{A} \) es igual a su adjunta, sus valores propios pertenecen a los reales.
+
+% Mirar adjunta.
+
+Dada la ecuación \(\bmat{A}\bvec{x}=\bvec{b}\), donde \(\bmat{A}\) es de tamaño \(n \times n \) y \(\bvec{x},\bvec{b} \in \mathbb{R}^{n}\), \(\bvec{x}\) es un vector propio de \(\bmat{A}\) sí y sólo si \(\bvec{b}\) es un múltiplo escalar de \(\bvec{x}\), caso en el cual la multiplicidad es el valor propio.
+
+\subsection{Hallar valores propios: Polinomio característico}
+La ecuación de vector propio dada en la definición es equivalente a \( \bmat{A} \bvec{v}=\lambda \bmat{I}_n \bvec{v} \) donde \( \bmat{I}_n \) es la matriz identidad de \(n\times n\). A causa de eso, se puede realizar la siguiente transformación:
+\begin{gather*}
+\bmat{A} \bvec{v} =\lambda \bvec{v} \\
+\bmat{A} \bvec{v} - \lambda \bvec{v} =0 \\
+\bmat{A} \bvec{v} -\lambda \bmat{I}_n \bvec{v} = 0\\
+(\bmat{A}-\lambda \bmat{I}_n) \bvec{v}=0
+\end{gather*}
+donde la sustracción matricial \(\bmat{A}-\lambda \bmat{I}_n\) es una matriz del tamaño de \(\bmat{A}\). Como \(\bvec{v}\neq\bvec{0}\), entonces \(\bmat{A}-\lambda \bmat{I}_n\) no puede ser una matriz invertible. Ergo,
+\[\det(\bmat{A}-\lambda \bmat{I}_n)=0.\]
+A partir de lo anterior se obtiene el polinomio característico de \( \bmat{A} \):
+\begin{align*}
+	p_{\bmat{A}}(\lambda) & \coloneqq \left|\bmat{A}-\lambda \bmat{I}_n\right|=0 \\
+	p_{\bmat{A}}(\lambda) & = (\alpha_1-\lambda_1)^{m_1}(\alpha_2-\lambda_2)^{m_2}(\alpha_3-\lambda_3)^{m_3}\cdots=0
+\end{align*}
+que tiene variable \(\lambda\) y cuyas soluciones son los valores propios de \(\bmat{A}\), por eso se puede factorizar con tantos factores como valores propios \(\lambda_i\). Una definición alternativa de un valor propio de \(\bmat{A}\) es: cualquier número que es solución del polinomio característico de \(\bmat{A}\). 
+
+\subsubsection{Polinomio caractersítico para matrices \(2 \times 2\)}
+
+Sea \(\bmat{A}\) una matriz de tamaño \(2\times 2\), el cálculo de su polinomio característico se simplifica a lo siguiente:
+\begin{align*}
+	p_{\bmat{A}}(\lambda)\colon& \begin{vmatrix}
+	a_{11}-\lambda & a_{12} \\
+	a_{21} & a_{22}-\lambda
+	\end{vmatrix}=0 \\
+	p_{\bmat{A}}(\lambda)\colon&(a_{11}-\lambda)(a_{22}-\lambda)-a_{12} a_{21}=0. 
+\end{align*} 
+
+Más aún, el polinomio característico de una matriz \(\bmat{A}\) de tamaño \(2\times2\) también está dado por:
+\begin{align*}
+	p_{\bmat{A}}(\lambda) & = \lambda^2 - \tr(\bmat{A})\lambda +\det\bmat{A}=0 \\
+	p_{\bmat{A}}(\lambda) & = (\alpha_1-\lambda_1)^{m_1}(\alpha_2-\lambda_2)^{m_2}=0.
+\end{align*}
+Esta forma para obtener el polinomio característico tiene un análogo para matrices \(n\times n \) que se puede formular haciendo uso de las fórmulas de Vieta. 
+
+% Mirar qué son fórmulas de Vieta.
+
+\subsection{Hallar vectores propios: Espacio propio}
+
+Tras resolver el polinomio característico y hallar los valores propios \(\lambda_i\), se pueden hallar las familias de vectores propios que corresponden a cada valor propio a través de sistemas homogéneos, planteando matrices aumentadas de la forma
+\begin{equation}
+	\begin{apmatrix}{1}
+			\bmat{A}-\lambda_i \bmat{I}_n & 0
+			\label{eq:espacio_propio}
+	\end{apmatrix}
+\end{equation}
+y realizando reducción gaussiana o Gauss-Jordan.
+
+El conjunto de vectores propios asociados a un valor propio \(\lambda_i\), cuando se le añade el origen, genera un espacio vectorial denominado \emph{espacio propio} \(E_{\lambda_i}\). Cada espacio propio está asociado a un valor propio y contiene a una familia de vectores propios: todo vector no nulo en el espacio propio es un vector propio. El espacio propio es el conjunto de soluciones de la \autoref{eq:espacio_propio}.
+
+Sean \(\bvec{v}_1\) y \(\bvec{v}_2\) vectores propios de \(\bmat{A}\) asociados a valores propios \(\lambda_1\) y \(\lambda_2\) distintos, entonces son linealmente independientes.
+
+\begin{tip}
+	Si una matriz \(\bmat{A}\) de tamaño \(n\times n\) tiene valores propios distintos, el conjunto de los vectores propios correspondientes a dichos valores propios es una base de \(\mathbb{R}^{n}\).
+\end{tip}
+
+\subsection{Propiedades de los valores propios}
+
+\begin{definicion}{Multiplicidad algebraica de un valor propio}{multiplicidad_algebraica}
+	Dado el polinomio característico de la matriz \(\bmat{A}\) con \(n\) valores propios,
+	\[ p_{\bmat{A}}(\lambda) \coloneqq (\alpha_1-\lambda_1)^{m_1}(\alpha_2-\lambda_2)^{m_2}\cdots(\alpha_n-\lambda_n)^{m_n} =0 \]
+	la \emph{multiplicidad algebraica} del valor propio \(\lambda_i\), denotada \( \operatorname{ma}(\lambda_i) \), está dada por
+	\[\operatorname{ma}(\lambda_i)=m_i.\]
+	Es decir, al número de veces que aparece como raíz de \(p_{\bmat{A}}(\lambda)\).
+\end{definicion}
+
+La multiplicidad algebraica de un valor propio indica cuántas veces debe aparecer ese valor propio en la matriz diagonal \(\bmat{D}\). 
+
+\begin{definicion}{Multiplicidad geométrica de un valor propio}{multiplicidad_geometrica}
+	La \emph{multiplicidad geométrica} de un valor propio \(\lambda_i\), denotada \( \operatorname{mg}(\lambda_i) \), está dada por 
+	\[1\leq\operatorname{mg}(\lambda_i)=\dim(E_{\lambda_i})=\dim(\ker(\bmat{A}-\lambda_i\bmat{I}_n)).\]
+	Es decir, es la dimensión del espacio propio del valor propio dado.
+\end{definicion}
+
+La multiplicidad geométrica de un valor propio indica cuántos vectores propios linealmente independientes relacionados a él deben aparecer en la matriz invertible \(\bmat{C}\). Si no hay tantos vectores propios linealmente independientes relacionados a un valor propio como su multiplicidad geométrica, la matriz no es diagonalizable.
+
+Sea \(\bmat{A}\) una matriz \(n \times n\) con vectores propios \(\bvec{v}_i\) asociados a valores propios \(\lambda_i\) y sea \(a\) un escalar no nulo:
+\begin{longtable}{lp{\textwidth/2-1.8cm}p{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex}i.&Definición de valor propio: &\( \bmat{A} \bvec{v}_i=\lambda_i \bvec{v}_i \). \\
+	\rule[2ex]{0pt}{2.5ex}ii.&Valores propios de múltiplos escalares de una matriz: & Si \(\lambda\) es valor propio de \(\bmat{A}\), entonces \(a\lambda\) es valor propio de \(a\bmat{A}\). \\
+	\rule[1ex]{0pt}{2.5ex}iii.& Valores propios de potencias de una matriz: &Si \(\lambda\) es valor propio de \(\bmat{A}\), entonces \(\lambda^n\) es valor propio de \(\bmat{A}^n\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Determinante en términos de valores propios: & \(\lambda_1\lambda_2\cdots\lambda_n = \det\bmat{A}\). %\\
+%	\rule[1ex]{0pt}{2.5ex}v.&Nombre5: Propiedad5. \\
+%	\rule[1ex]{0pt}{2.5ex}vi.&Nombre6: &Propiedad6. \\
+%	\rule[1ex]{0pt}{2.5ex}vii.&Nombre7: &Propiedad7. \\
+%	\rule[1ex]{0pt}{2.5ex}viii.&Nombre8: &Propiedad8. \\
+%	\rule[1ex]{0pt}{2.5ex}ix.&Nombre9: &Propiedad9. \\
+%	\rule[1ex]{0pt}{2.5ex}x.&Nombre10: &Propiedad10. \\
+%	\rule[1ex]{0pt}{2.5ex}xi.&Nombre11: &Propiedad11. \\
+%	\rule[1ex]{0pt}{2.5ex}xii.&Nombre12: &Propiedad12. \\
+%	\rule[1ex]{0pt}{2.5ex}xiii.&Nombre13: &Propiedad13. \\
+%	\rule[1ex]{0pt}{2.5ex}xiv.&Nombre14: &Propiedad14. \\
+%	\rule[1ex]{0pt}{2.5ex}xv.&Nombre15: &Propiedad15. \\
+%	\rule[1ex]{0pt}{2.5ex}xvi.&Nombre16: &Propiedad16. \\
+%	\rule[1ex]{0pt}{2.5ex}xvii.&Nombre17: &Propiedad17. \\
+%	\rule[1ex]{0pt}{2.5ex}xviii.&Nombre18: &Propiedad18. \\
+%	\rule[1ex]{0pt}{2.5ex}xix.&Nombre19: &Propiedad19. \\
+%	\rule[1ex]{0pt}{2.5ex}xx.&Nombre20: &Propiedad20. \\
+\end{longtable}
+
+\subsection{Semejanza de matrices}
+
+\begin{definicion}{Matrices semejantes}{matrices_semejantes}
+	Sean \(\bmat{A}\) y \(\bmat{B}\) dos matrices \(n\times n\), son \emph{matrices semejantes} si existe una matriz invertible \(\bmat{C}\) tal que
+	\[\bmat{A}=\bmat{C}\bmat{B}\inv{\bmat{C}} \quad \text{o, equivalentemente,} \quad \bmat{B}=\inv{\bmat{C}}\bmat{A}\bmat{C}.\]
+\end{definicion}
+
+La relación de semejanza entre matrices se puede representar por una transformación lineal \(T\) denominada \emph{transformación de semejanza}, que al ser evaluada en una matriz \(\bmat{A}\) arroja una matriz semejante a ella. las transformación se define entonces por
+\[T(\bmat{A})=\inv{\bmat{C}}\bmat{A}\bmat{C}.\]
+
+Si dos matrices son semejantes, entonces tienen el mismo polinomio característico y por ende tienen los mismos valores propios. 
+
+\subsubsection{Propiedades de la semejanza de matrices}
+Sean \(\bmat{A}\) y \(\bmat{B}\) dos matrices \(n\times n\):
+\begin{longtable}{lp{\textwidth/2-1.8cm}p{\textwidth/2}}
+	\rule[1ex]{0pt}{2.5ex}i.&Definición de semejanza de matrices: &Si existe \(\bmat{C}\) invertible tal que \(\bmat{A}=\bmat{C}\bmat{B}\inv{\bmat{C}}\) o lo que es lo mismo \( \bmat{B}=\inv{\bmat{C}}\bmat{A}\bmat{C} \), \(\bmat{A}\) y \(\bmat{B}\) son semejantes. \\
+	\rule[1ex]{0pt}{2.5ex}ii.&Polinomios característicos de matrices semejantes: &Sean \(\bmat{A}\) y \(\bmat{B}\) matrices semejantes, \( p_{\bmat{A}}(\lambda) = p_{\bmat{B}}(\lambda)\).\newline Ergo, los valores propios de \(\bmat{A}\) y \(\bmat{B}\) son iguales. \\
+	\rule[1ex]{0pt}{2.5ex}iii.&Propiedad transitiva de la semejanza de matrices: &Si \(\bmat{A}\) es semejante a \(\bmat{B}\) y \(\bmat{B}\) es semejante a \(\bmat{C}\), entonces \(\bmat{A}\) es semejante a \(\bmat{C}\). \\
+	\rule[1ex]{0pt}{2.5ex}iv.&Semejanza entre potencias de matrices semejantes: &Si \(\bmat{A}\) es semejante a \(\bmat{B}\), \(\bmat{A}^n\) es semejante a \(\bmat{B}^n\).  \\
+	\rule[1ex]{0pt}{2.5ex}v.&Semejanza entre matrices diagonales: &Si dos matrices diagonales son semejantes, son iguales. \\
+%	\rule[1ex]{0pt}{2.5ex}vi.&Nombre6: &Propiedad6. \\
+%	\rule[1ex]{0pt}{2.5ex}vii.&Nombre7: &Propiedad7. \\
+%	\rule[1ex]{0pt}{2.5ex}viii.&Nombre8: &Propiedad8. \\
+%	\rule[1ex]{0pt}{2.5ex}ix.&Nombre9: &Propiedad9. \\
+%	\rule[1ex]{0pt}{2.5ex}x.&Nombre10: &Propiedad10. \\
+%	\rule[1ex]{0pt}{2.5ex}xi.&Nombre11: &Propiedad11. \\
+%	\rule[1ex]{0pt}{2.5ex}xii.&Nombre12: &Propiedad12. \\
+%	\rule[1ex]{0pt}{2.5ex}xiii.&Nombre13: &Propiedad13. \\
+%	\rule[1ex]{0pt}{2.5ex}xiv.&Nombre14: &Propiedad14. \\
+%	\rule[1ex]{0pt}{2.5ex}xv.&Nombre15: &Propiedad15. \\
+%	\rule[1ex]{0pt}{2.5ex}xvi.&Nombre16: &Propiedad16. \\
+%	\rule[1ex]{0pt}{2.5ex}xvii.&Nombre17: &Propiedad17. \\
+%	\rule[1ex]{0pt}{2.5ex}xviii.&Nombre18: &Propiedad18. \\
+%	\rule[1ex]{0pt}{2.5ex}xix.&Nombre19: &Propiedad19. \\
+%	\rule[1ex]{0pt}{2.5ex}xx.&Nombre20: &Propiedad20. \\
+\end{longtable}
+
+\subsection{Diagonalización}
+
+La \emph{diagonalización} es un proceso que consiste en, dada una matriz cuadrada, hallar una una matriz semejante a ella que sea diagonal. Una matriz es diagonalizable si es semejante a una matriz diagonal; la mayoría de matrices reales lo son, mas no todas. Para diagonalizar se hace uso de los valores y vectores propios de la matriz. Sea \(\bmat{A}\) una matriz de \(n\times n\) cuyos valores y vectores propios están dados en la expresión 
+\[\bmat{A}\bvec{v}_i=\lambda_i\bvec{v}_i,\]
+si \(A\) tiene \(n\) valores propios, no necesariamente distintos, se cumple la siguiente ecuación matricial:
+\begin{align*}
+	\bmat{A}\begin{pmatrix}
+	\bvec{v}_1&\bvec{v}_2&\cdots&\bvec{v}_n
+	\end{pmatrix} & =\begin{pmatrix}
+	\bvec{v}_1&\bvec{v}_2&\cdots&\bvec{v}_n
+	\end{pmatrix} \begin{pmatrix}
+	\lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n
+	\end{pmatrix} \\
+	\bmat{A}\bmat{C}&=\bmat{C}\bmat{D}.
+\end{align*}
+donde \(\bmat{D}\) es una matriz diagonal que tiene en su diagonal a los valores propios de \(\bmat{A}\) en un orden arbitrario y \(\bmat{C}\) es una \emph{matriz ortogonalizante} cuyas columnas son los vectores propios de \(\bmat{A}\) en el mismo orden en el que se encuentran sus respectivos valores propios en la diagonal de \(\bmat{D}\). 
+
+\begin{tip}
+	Las matrices \(\bmat{C}\) y \(\bmat{D}\) no son únicas, pues dependen del orden que se elija para los valores propios en \(\bmat{D}\), orden que se debe conservar al acomodar los correspondientes vectores propios en las columnas de \(\bmat{C}\). 
+\end{tip}
+
+Si la matriz de vectores propios \(\bmat{C}\) es invertible, entonces se puede multiplicar a ambos lados por \(\inv{\bmat{C}}\) en la ecuación matricial y se tendrá que \(\bmat{A}\) es semejante a la matriz diagonal \(\bmat{D}\): 
+\[\bmat{A}=\bmat{C}\bmat{D}\inv{\bmat{C}},\]
+caso en el que \(\bmat{A}\) es diagonalizable. 
+
+Por lo tanto, \(\bmat{A}\) es diagonalizable si y sólo si la matriz de vectores propios \(\bmat{C}\) es invertible. Eso es equivalente a que la matriz \(\bmat{A}\) tiene \(n\) vectores propios linealmente independientes, o sea que existe una base \(\mathcal{B}=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) de \(\mathbb{R}^{n}\) en donde todos los \(\bvec{v}_i\) son vectores propios de \(\bmat{A}\). Esto último se cumple si \(\bmat{A}\) es \(n\times n\) y tiene \(n\) valores propios distintos, pero no es necesario que así sea para que se cumpla.
+
+Los vectores propios que constituyen las columnas de la matriz  \(\bmat{C}\) corresponden a los valores propios en la matriz diagonal \(\bmat{D}\), por lo que dichos vectores son las bases de los espacios propios de \(\bmat{A}\). Si un valor propio tiene multiplicidad algebraica \(m\), la dimensión de su espacio propio debe ser también \(m\) y por ende deben incluirse \(m\) vectores relacionados a ese valor propio en la matriz \(\bmat{C}\).
+
+\begin{teorema}{Matriz diagonalizable}{matriz_diagonalizable}
+	Sea \(\bmat{A}\) una matriz de tamaño \(n\times n\) con valores propios \(\lambda_i\), satisface que:
+	\begin{longtable}{ll}
+		\rule[1ex]{0pt}{2.5ex}i.&\(1 \leq \operatorname{mg}(\lambda)\leq\operatorname{ma}(\lambda) \quad \text{para todo} \quad \lambda\) \\
+		\rule[1ex]{0pt}{2.5ex}ii.&\(\bmat{A}\) es diagonalizable si y sólo si \( \operatorname{mg}(\lambda)=\operatorname{ma}(\lambda) \quad \text{para todo} \quad \lambda \). \\
+	\end{longtable}
+\end{teorema}
+
+\subsubsection{Diagonalización ortogonal}
+
+La \emph{diagonalización ortogonal} consiste en diagonalizar una matriz cuadrada de forma tal que la matriz cuyas columnas están conformadas por vectores propios sea ortogonal. Recuérdese que una matriz es ortogonal si \(\inv{\bmat{Q}}=\transpose{\bmat{Q}}\), caso en el cual es invertible y el conjunto de los vectores que constituyen sus columnas es ortonormal.
+
+Una matriz es diagonalizable ortogonalmente si es simétrica. Recuérdese que una matriz \(\bmat{A}\) es simétrica si \(\bmat{A}=\transpose{\bmat{A}}\). Las matrices simétricas son diagonalizables ortogonalmente por las siguientes propiedades:
+\begin{itemize}
+	\item Sea \(\bmat{A}\) una matriz simétrica, \(\bmat{A}\) tiene valores propios reales.
+	\item Sea \(\bmat{A}\) una matriz simétrica \(n\times n\), \(\bmat{A}\) tiene \(n\) vectores propios reales que forman un conjunto ortonormal. Así pues, existe una base ortonormal \(\mathcal{B}=\set{\bvec{v}_1,\bvec{v}_2,\ldots,\bvec{v}_n}\) de \(\mathbb{R}^{n}\) en donde todos los \(\bvec{v}_i\) son vectores propios de \(\bmat{A}\). Esta propiedad la hace diagonalizable.
+	\item Los vectores propios que corresponden a valores propios distintos de una matriz simétrica real son ortogonales. Es decir, sean \(\bvec{v}_1\) y \(\bvec{v}_2\) vectores propios de una matriz simétrica \(\bmat{A}\) que corresponden a valores propios \(\lambda_1\) y \(\lambda_2\) tal que \(\lambda_1 \neq\lambda_2\), entonces \(\bvec{v}_1\cdots\bvec{v}_2=0\). Ergo, los espacios propios también son ortogonales. Esta propiedad hace que la matriz que tiene vectores propios como columnas sea ortogonal.	
+\end{itemize} 
+
+Las propiedades anteriores justifican que, con base en una matriz simétrica \(\bmat{A}\) de tamaño \(n\times n\), se establezca una matriz diagonal \(\bmat{D}\) que tiene en su diagonal a los valores propios de \(\bmat{A}\) en un orden arbitrario y una \emph{matriz diagonalizante ortogonal} \(\bmat{Q}\) cuyas columnas son vectores propios de \(\bmat{A}\) en el mismo orden en el que se encuentran sus respectivos valores propios en la diagonal de \(\bmat{D}\). Con eso, se puede plantear una diagonalización de \(\bmat{A}\)
+\[\bmat{A}=\bmat{Q}\bmat{D}\inv{\bmat{Q}},\]
+que puede simplificarse por la ortogonalidad de \(\bmat{Q}\):
+\[\bmat{A}=\bmat{Q}\bmat{D}\transpose{\bmat{Q}}.\]
+Esa ecuación concreta la diagonalización ortogonal de \(\bmat{A}\).
+
+Análogamente a como se construye la matriz diagonalizante \(\bmat{C}\), los vectores propios que constituyen las columnas de la matriz diagonalizante ortogonal \(\bmat{Q}\) tiene como columnas a los vectores propios que son bases de los espacios propios de \(\bmat{A}\), en un orden supeditado al orden de los valores propios en \(\bmat{D}\). Sin embargo, para construir  \(\bmat{Q}\) tal que sea ortogonal, el conjunto de los vectores debe se ortonormal. Para ello, se utiliza el algoritmo de ortogonalización de Gram-Schmidt para la base de cada espacio propio y luego se normalizan los vectores. Concretamente, para construir una matriz diagonalizante ortogonal \(\bmat{Q}\) se utiliza el siguiente procedimiento: 
+\begin{enumerate}
+	\item Se halla una base para cada uno de los espacios propios de \(\bmat{A}\). 
+	\item Se aplica Gram-Schmidt a cada base para ortogonalizarla y luego se normaliza, obteniendo bases ortonormales para los espacios propios de \(\bmat{A}\). 
+	\item Se forma \(\bmat{Q}\) con los vectores propios ortonormales como columnas, en el orden dado por la matriz diagonal \(\bmat{D}\).
+\end{enumerate}
+
+\subsection{Formas cuadráticas en dos variables}
+
+Las \emph{formas cuadráticas en dos variables} son ecuaciones cuadráticas de dos variables sin términos lineales de forma 
+\[F(x,y)=ax^2+2cxy+by^2=d\]
+donde al menos uno de los coeficientes es distinto de 0, \(\left|a\right|+\left|b\right|+\left|c\right|\neq0\). Las formas cuadráticas se pueden asociar a matrices simétricas \(2\times 2\).
+
+\begin{definicion}{Forma cuadrática asociada a matriz}{forma_cuadratica}
+	Sea \(\bmat{A}\) una matriz simétrica \(2\times 2\) y \(\bvec{x}\) un vector columna de variables, la \emph{forma cuadrática} en las variables \(x\) y \(y\) asociada a \(\bmat{A}=\begin{psmallmatrix}
+		a & c \\ c & b
+		\end{psmallmatrix}\) está dada por: 
+	\begin{align*}
+		F(x,y)&=\transpose{\bvec{x}}\bmat{A}\bvec{x} \\
+		F(x,y)&=\begin{pmatrix}
+				x & y
+			\end{pmatrix}\begin{pmatrix}
+			a & c \\ c & b 
+			\end{pmatrix}\begin{pmatrix}
+			x \\ y
+			\end{pmatrix}\\
+		F(x,y)&=ax^2+2cxy+by^2
+	\end{align*}
+\end{definicion}
+
+Si se iguala una forma cuadrática a un escalar \(d \in \mathbb{R}\), se obtiene una curva en \(\mathbb{R}^{2}\) que por lo general es una sección cónica. Si se iguala una forma cuadrática a la variable \(z\), se  obtiene una superficie cuadrática en \(\mathbb{R}^{3}\).
+
+\subsubsection{Secciones cónicas a partir de formas cuadráticas}
+
+Una forma cuadrática igualada a un escalar \(d \in \mathbb{R}\) constituye la ecuación de una sección cónica o, en casos particulares, de dos rectas paralelas o un punto. Es sencillo reconocer qué describe una forma cuadrática si esta no tiene término mixto, es decir, si es de forma 
+\[F(x,y)=ax^2+by^2=d\]
+puesto que en esa forma se asemeja a las ecuaciones canónicas de las secciones cónicas. Así pues, es ideal transformar una forma cuadrática con término mixto en una forma cuadrática sin él. Como las formas cuadráticas asociadas a matrices diagonales no tienen término mixto, es útil diagonalizar la matriz para removerlo. 
+
+En concreto, como la matriz \(\bmat{A}\) es simétrica, se puede diagonalizar ortogonalmente  y por tanto se sabe que 
+\[\bmat{A}=\bmat{Q}\bmat{D}\transpose{\bmat{Q}}.\]
+Con eso, se puede reescribir la forma cuadrática de \(\bmat{A}\):  
+\begin{align*}
+	F(x,y)&=\transpose{\bvec{x}}\bmat{A}\bvec{x} = d \\
+	F(x,y) &= \transpose{\bvec{x}}(\bmat{Q}\bmat{D}\transpose{\bmat{Q}})\bvec{x} = d \\
+	F(x,y) &= (\transpose{\bvec{x}}\bmat{Q})\bmat{D}(\transpose{\bmat{Q}}\bvec{x}) = d.
+\end{align*}
+Si se establece que \(\transpose{\bmat{Q}}\bvec{x}=\bvec{u}\) donde \(\bvec{u}\) es un nuevo vector de variables, \(\bvec{u}=\transpose{(u,v)}\), entonces se puede expresar la forma cuadrática de \(\bmat{A}\) en términos de la matriz diagonal \(\bmat{D}\). La forma cuadrática quedaría entonces sin término medio, pero expresada en las variables \(u\) y \(v\) en lugar de las variables convencionales \(x\) y \(y\):
+\begin{align}
+	G(u,v) &= \transpose{\bvec{u}}\bmat{D}\bvec{u} = d \notag\\
+	G(u,v) &=\begin{pmatrix}
+					u & v
+				\end{pmatrix}\begin{pmatrix}
+				\lambda_1 & 0 \\ 0 & \lambda_2 
+				\end{pmatrix}\begin{pmatrix}
+				u \\ v
+				\end{pmatrix} = d\notag\\
+	G(u,v) &= \lambda_1 u^2+ \lambda_2 v^2 = d. \label{eq:nueva_forma_cuadratica}
+\end{align}
+
+Se ha obtenido una relación que permite obtener la forma cuadrática sin término medio, lo que facilita su identificación como sección cónica. Las nuevas variables \(u\) y \(v\) constituyen un nuevo sistema coordenado, en donde el eje \(u\) hace el papel de eje \(x\), el eje \(v\) hace el papel de eje \(y\). Análogamente a como el eje \(x\) está dado por \(\operatorname{span}\bvec{e}_1\), el eje \(u\) es el generado de la primera columna de \(\bmat{Q}\), el primer vector propio. Similarmente, el eje \(v\) es el generado de la segunda columna de \(\bmat{Q}\), el segundo vector propio. Como \(\bmat{Q}\) es ortogonal, sus columnas son ortonormales y los nuevos ejes \(u\) y \(v\) son perpendiculares: el nuevo sistema coordenado es una rotación de los ejes cartesianos. 
+
+Para conocer el ángulo \(\theta\) que han sido rotados los ejes cartesianos, se necesita que los valores en la diagonal de la matriz diagonalizante ortogonal \(\bmat{Q}\) sean iguales. Esto usualmente se puede conseguir eligiendo inteligentemente las bases de los espacios propios que son usadas como columnas de \(\bmat{Q}\) y ordenándolas acertadamente. Eso es necesario porque se busca igualar a \(\bmat{Q}\) con la matriz de rotación
+\[\bmat{Q}=\begin{pmatrix}
+	\cos \theta & \sin\theta \\ -\sin\theta & \cos\theta
+\end{pmatrix},\]
+con lo que se puede igualar cualquier valor en la diagonal de \(\bmat{Q}\) con \(\cos \theta\) y despejar para hallar el ángulo de rotación \(\theta\).
+
+\begin{advertencia}
+	El ángulo de rotación \(\theta\) obtenido está definido de forma opuesta a la convencional: está medido desde el eje \(x\) en el sentido negativo (a favor de las manecillas del reloj) hasta el eje \(u\).
+\end{advertencia}
+
+Como la nueva forma cuadrática de la \autoref{eq:nueva_forma_cuadratica} tiene como coeficientes a los valores propios de \(\bmat{A}\), entonces se puede saber de antemano que sección cónica (o excepción) describe la forma cuadrática de una matriz examinando sus vectores propios \(\lambda_1\) y \(\lambda_2\) y el escalar \(d\in\mathbb{R}\) al que se iguala la forma cuadrática.
+\begin{itemize}
+	\item Si \(\lambda_1,\lambda_2,d \neq 0\) y \(\lambda_1\), \(\lambda_2\) y \(d\) tienen el mismo signo, la forma cuadrática describe una elipse.
+	\begin{itemize}
+		\item Si, sumado a lo anterior, \(\lambda_1=\lambda_2\), la forma cuadrática describe un círculo.
+	\end{itemize}
+	\item Si \(\lambda_1,\lambda_2,d \neq 0\) y \(\lambda_1\) y \(\lambda_2\) tienen signo distinto, la forma cuadrática describe una hipérbola.
+	\item Si \(\lambda_1 = 0\) y \(\lambda_2\neq0\) o viceversa, entonces necesariamente se cumple que \(d > 0\) y la forma cuadrática describe dos rectas paralelas.
+		\begin{itemize}
+			\item Si \(\lambda_1 = 0\) y \(\lambda_2\neq0\), las rectas paralelas tienen ecuación \(v = \pm \sqrt{\frac{d}{\lambda_2}}\).
+			\item Si \(\lambda_1 \neq 0\) y \(\lambda_2=0\), las rectas paralelas tienen ecuación \(u = \pm \sqrt{\frac{d}{\lambda_1}}\).
+		\end{itemize}
+	\item Si \(d=0\) la forma cuadrática describe un punto.
+\end{itemize}
+
+Con base en esos criterios y tomando en cuenta que el determinante de una matriz es igual a sus productos de valores propios, que para una matriz simétrica \(2 \times 2\) se reduce a \[\lambda_1\lambda_2=\det \bmat{A} = a_{11}a_{22}-a_{12}a_{21} = ab-c^2,\]
+se pueden simplificar esos criterios a evaluar el determinante con tal que el escalar al que se iguala la forma cuadrática sea positivo:
+\begin{itemize}
+	\item Si \(\det \bmat{A} > 0\) y \(d>0\), la forma cuadrática describe una elipse.
+	\item Si \(\det \bmat{A} = 0\) y \(d>0\), la forma cuadrática describe dos líneas paralelas.
+	\item Si \(\det \bmat{A} < 0\) y \(d>0\), la forma cuadrática describe una hipérbola.
+	\item Si \(d=0\) la forma cuadrática describe un punto.
+\end{itemize}
+
+\subsubsection{Superficies cuadráticas a partir de formas cuadráticas}
+
+\end{document}
