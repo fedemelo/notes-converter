@@ -1,17 +1,19 @@
 from fastapi import UploadFile
-import re
+
+from re import Match, compile, error, escape, DOTALL
+
 from src.exceptions import RegexProcessingError, conversion_error_handler
 from src.latex_tools.tex_reader import decode_file_to_string
 
 
 @conversion_error_handler
-async def convert_tex_to_react(file: UploadFile):
+async def convert_tex_to_react(file: UploadFile) -> str:
     tex_content = await decode_file_to_string(file)
     react_content = convert_latex_code_to_react(tex_content)
     return react_content
 
 
-def convert_latex_code_to_react(tex_content: str):
+def convert_latex_code_to_react(tex_content: str) -> str:
 
     stages = {
 
@@ -157,40 +159,40 @@ def convert_latex_code_to_react(tex_content: str):
     for stage, pattern in stages.items():
         regex, replacement = pattern
         try:
-            tex_content = re.compile(regex).sub(replacement, tex_content)
+            tex_content = compile(regex).sub(replacement, tex_content)
             print(stage[0].upper() + stage[1:])
-        except re.error as e:
+        except error as e:
             raise RegexProcessingError(stage, pattern, str(e))
     return tex_content
 
 
-def transform_block_math(match):
+def transform_block_math(match: Match) -> str:
     """Escape backslashes and enclose in my custom react LaTeX block component"""
     content = match.group(1).replace("\\", "\\\\")
     # TODO: Improve this function to recognize simple math and use <M block> component instead of <LaTeX block>
     return "<LaTeX block>{`"+content+"`}</LaTeX>"
 
 
-def transform_gather_block_math(match):
+def transform_gather_block_math(match: Match) -> str:
     content = match.group(1).replace("\\\\", "").replace("\\", "\\\\")
     re_add_gather = r"\\begin{gather*}"+content+r"\\end{gather*}"
     return "<LaTeX block>{`"+re_add_gather+"`}</LaTeX>"
 
 
-def transform_align_block_math(match):
+def transform_align_block_math(match: Match) -> str:
     content = match.group(1).replace("\\\\", "").replace("\\", "\\\\")
     re_add_align = r"\\begin{align*}"+content+r"\\end{align*}"
     return "<LaTeX block>{`"+re_add_align+"`}</LaTeX>"
 
 
-def transform_inline_math(match):
+def transform_inline_math(match: Match) -> str:
     """Escape backslashes and enclose in my custom react LaTeX inline component"""
     # TODO: Improve this function to recognize simple math and use <M> component instead of <LaTeX>
     content = match.group(1).replace("\\", "\\\\")
     return "<LaTeX>{`"+content+"`}</LaTeX>"
 
 
-def regex_to_match_between_delimiters(bgin_delimiter: str, end_delimiter: str):
+def regex_to_match_between_delimiters(bgin_delimiter: str, end_delimiter: str) -> str:
     """Recieves a delimiter and returns a regex to match content between two delimiters.
         If a delimiter is a special character in regex, it must be escaped. E.g: $ -> \$
     """
@@ -205,7 +207,7 @@ def regex_to_match_between_delimiters(bgin_delimiter: str, end_delimiter: str):
     return bgin_delimiter + r"(.+?)" + end_delimiter
 
 
-def regex_to_match_command_content(command: str):
+def regex_to_match_command_content(command: str) -> str:
     """Recieves a command and returns a regex to match content between curly braces after the
             command."""
     # Same caveat as the previous function: if the content contains the closing curly brace, the match will end
@@ -213,14 +215,14 @@ def regex_to_match_command_content(command: str):
     return r"\\" + command + r"\{(.+?)\}"
 
 
-def regex_to_match_environment_content(environment: str):
+def regex_to_match_environment_content(environment: str) -> str:
     """Receives an environment and returns a regex to match content between the begin and end of the
        environment, including content that spans multiple lines."""
-    pattern = r"\\begin\{" + re.escape(environment) + \
-        r"\}(.+?)\\end\{" + re.escape(environment) + r"\}"
-    return re.compile(pattern, re.DOTALL)
+    pattern = r"\\begin\{" + escape(environment) + \
+        r"\}(.+?)\\end\{" + escape(environment) + r"\}"
+    return compile(pattern, DOTALL)
 
 
-def regex_to_put_content_in_html_tag(tag: str):
+def regex_to_put_content_in_html_tag(tag: str) -> str:
     """Recieves an html tag and returns a regex to put the matched content inside the tag."""
     return "<" + tag + r">\1</" + tag + ">"
