@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Body, File, HTTPException, UploadFile, status
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import JSONResponse, PlainTextResponse, Response
 
 from src.routers.conversion import Conversion
 
@@ -11,7 +11,11 @@ def make_conversion_router(conversion: Conversion) -> APIRouter:
         responses={404: {"detail": "Not found"}},
     )
 
-    @router.post("/convert-file", status_code=status.HTTP_200_OK)
+    @router.post(
+        "/convert-file",
+        status_code=status.HTTP_200_OK,
+        response_class=Response,
+    )
     async def convert_file(file: UploadFile = File(...)):
         if not file.filename or not file.filename.endswith(
             f".{conversion.source_extension}"
@@ -44,7 +48,11 @@ def make_conversion_router(conversion: Conversion) -> APIRouter:
             },
         )
 
-    @router.post("/convert-text", status_code=status.HTTP_200_OK)
+    @router.post(
+        "/convert-text", 
+        status_code=status.HTTP_200_OK,
+        response_class=PlainTextResponse,
+    )
     async def convert_text(
         content: str = Body(
             ...,
@@ -53,9 +61,8 @@ def make_conversion_router(conversion: Conversion) -> APIRouter:
         ),
     ):
         try:
-            result = conversion.converter(content)
+            return conversion.converter(content)
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
-        return JSONResponse(content={"result": result})
 
     return router
