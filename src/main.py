@@ -2,12 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
-from src.routers import latex_to_react
+from src.routers import router
 
 app = FastAPI(title="NotesConverter")
 
-app.include_router(latex_to_react.router)
-
+app.include_router(router)
 
 app.add_middleware(
     CORSMiddleware,
