@@ -1,4 +1,4 @@
-from converters.md_to_latex import convert_md_to_latex
+from src.converters.md_to_latex import convert_md_to_latex
 from src.converters.latex_dollar_to_paren import convert_latex_dollar_to_paren
 from src.converters.latex_to_react.latex_to_react import convert_latex_code_to_react
 from src.routers.conversion import Conversion

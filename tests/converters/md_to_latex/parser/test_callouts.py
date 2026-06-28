@@ -1,4 +1,4 @@
-from src.converters.md_to_latex.ir.nodes import (
+from src.ir.nodes import (
     Definition,
     InlineMath,
     Note,
@@ -7,8 +7,8 @@ from src.converters.md_to_latex.ir.nodes import (
     Theorem,
 )
 
-
 # [!tip] -> Definition
+
 
 def test_tip_callout_produces_definition(parser):
     doc = parser.parse("> [!tip] Continuity\n> Body.")
@@ -34,7 +34,9 @@ def test_definition_body_no_blank_line(parser):
     doc = parser.parse("> [!tip] Continuity\n> A function $f$ is continuous.")
     node = doc.children[0]
     assert node.body == [
-        Paragraph(children=[Text("A function "), InlineMath("f"), Text(" is continuous.")])
+        Paragraph(
+            children=[Text("A function "), InlineMath("f"), Text(" is continuous.")]
+        )
     ]
 
 
@@ -42,6 +44,7 @@ def test_definition_body_with_blank_line(parser):
     doc = parser.parse("> [!tip] Continuity\n>\n> A function is continuous.")
     node = doc.children[0]
     assert node.body == [Paragraph(children=[Text("A function is continuous.")])]
+
 
 # [!info] -> Theorem
 

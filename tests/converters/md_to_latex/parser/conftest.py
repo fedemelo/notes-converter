@@ -1,6 +1,6 @@
 import pytest
 
-from src.converters.md_to_latex.parsers.obsidian import ObsidianMarkdownParser
+from src.parsers.markdown.obsidian import ObsidianMarkdownParser
 
 
 @pytest.fixture

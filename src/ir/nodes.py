@@ -14,6 +14,7 @@ class Text:
 @dataclass
 class InlineMath:
     content: str
+    display: bool = False  # True for $$...$$, renders as \[...\]
 
 
 @dataclass
@@ -35,7 +36,7 @@ class Image:
 @dataclass
 class Ref:
     label: str  # full LaTeX label, e.g. "sec:grafos_ponderados"
-    text: str   # display text shown in the document
+    text: str  # display text shown in the document
 
 
 InlineNode = Text | InlineMath | Emphasis | Strong | Image | Ref
