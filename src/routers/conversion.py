@@ -4,7 +4,8 @@ from typing import Callable
 
 @dataclass
 class Conversion:
-    name: str
+    tag_name: str
+    endpoint_name: str
     source_format: str
     target_format: str
     source_extension: str

@@ -6,8 +6,8 @@ from src.routers.conversion import Conversion
 
 def make_conversion_router(conversion: Conversion) -> APIRouter:
     router = APIRouter(
-        prefix=f"/{conversion.name}",
-        tags=[conversion.name],
+        prefix=f"/{conversion.endpoint_name}",
+        tags=[conversion.tag_name],
         responses={404: {"detail": "Not found"}},
     )
 
@@ -49,7 +49,7 @@ def make_conversion_router(conversion: Conversion) -> APIRouter:
         )
 
     @router.post(
-        "/convert-text", 
+        "/convert-text",
         status_code=status.HTTP_200_OK,
         response_class=PlainTextResponse,
     )
