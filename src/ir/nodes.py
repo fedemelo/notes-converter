@@ -82,8 +82,13 @@ class Note:
 
 
 @dataclass
+class Comment:
+    content: str  # text after the leading #, e.g. "TODO fix this"
+
+
+@dataclass
 class Document:
     children: list[BlockNode] = field(default_factory=list)
 
 
-BlockNode = Paragraph | Heading | DisplayMath | Definition | Theorem | Note
+BlockNode = Paragraph | Heading | DisplayMath | Definition | Theorem | Note | Comment
