@@ -9,6 +9,7 @@ from mdit_py_plugins.dollarmath import dollarmath_plugin
 
 from src.ir.nodes import (
     BlockNode,
+    Comment,
     Definition,
     DisplayMath,
     Document,
@@ -27,16 +28,38 @@ from src.ir.nodes import (
 
 _CALLOUT_RE = re.compile(r"^\[!(\w+)\]\s*(.*)", re.IGNORECASE)
 
+# Obsidian uses #TAG for tags, but we treat a standalone paragraph whose entire
+# content is "#WORD rest of line" as a comment/todo marker.  This is NOT standard
+# Obsidian syntax — it is a personal convention we chose to parse this way so that
+# lines like "#TODO fix this" survive into the output as format-specific comments
+# (e.g. %TODO fix this in LaTeX) rather than being silently dropped or mangled.
+_COMMENT_RE = re.compile(r"^#([A-Z][A-Za-z0-9]*)(?:\s+(.*))?$")
+
+# Matches ![[filename]] — Obsidian embedded image syntax.
+_EMBED_RE = re.compile(r"!\[\[([^\]]*)\]\]")
+
 # Matches [[File\#Section|display]] and [[File#Section|display]].
 # Both the file and section parts are optional; only display is required.
 _WIKILINK_RE = re.compile(
     r"\[\["
-    r"[^\]|#\\]*"       # optional file name
-    r"(?:\\?#"          # \# or #
-    r"([^\]|]+))?"      # section name (group 1)
+    r"[^\]|#\\]*"  # optional file name
+    r"(?:\\?#"  # \# or #
+    r"([^\]|]+))?"  # section name (group 1)
     r"\|"
-    r"([^\]]+)"         # display text (group 2)
+    r"([^\]]+)"  # display text (group 2)
     r"\]\]"
+)
+
+# Pre-processing: replace all wikilinks/embeds before markdown-it tokenizes, so
+# inline math inside a wikilink (e.g. $n$) doesn't split the token stream.
+_ANY_WIKILINK_RE = re.compile(r"!?\[\[[^\]]*\]\]")
+_PLACEHOLDER_RE = re.compile(r"WLTOKEN\d+")
+
+# In-text scanner for anything still raw (edge case) or a placeholder.
+_SPLIT_RE = re.compile(
+    r"(?P<placeholder>WLTOKEN\d+)"
+    r"|(?P<embed>!\[\[[^\]]*\]\])"
+    r"|(?P<wikilink>\[\[[^\]]*\|[^\]]*\]\])"
 )
 
 
@@ -61,10 +84,23 @@ def _inline_plain_text(nodes: list[InlineNode]) -> str:
 
 class ObsidianMarkdownParser:
     def __init__(self) -> None:
-        self._md = MarkdownIt().use(dollarmath_plugin)
+        self._md = MarkdownIt().use(dollarmath_plugin, double_inline=True)
 
     def parse(self, source: str) -> Document:
-        tokens = self._md.parse(source)
+        # Replace wikilinks/embeds with opaque placeholders before markdown-it
+        # tokenizes, so inline math inside a link (e.g. $n$) can't split them.
+        self._wl_map: dict[str, str] = {}
+        count = 0
+
+        def _protect(m: re.Match) -> str:
+            nonlocal count
+            key = f"WLTOKEN{count}"
+            self._wl_map[key] = m.group()
+            count += 1
+            return key
+
+        safe = _ANY_WIKILINK_RE.sub(_protect, source)
+        tokens = self._md.parse(safe)
         return Document(children=self._parse_blocks(tokens))
 
     # ── Block-level parsing ───────────────────────────────────────────────────
@@ -85,8 +121,14 @@ class ObsidianMarkdownParser:
 
             elif token.type == "paragraph_open":
                 inline = tokens[i + 1]
-                children = self._parse_inlines(inline.children or [])
-                nodes.append(Paragraph(children=children))
+                m = _COMMENT_RE.match(inline.content)
+                if m:
+                    tag = m.group(1)
+                    rest = (m.group(2) or "").strip()
+                    nodes.append(Comment(content=f"{tag} {rest}".strip()))
+                else:
+                    children = self._parse_inlines(inline.children or [])
+                    nodes.append(Paragraph(children=children))
                 i += 3  # paragraph_open, inline, paragraph_close
 
             elif token.type == "math_block":
@@ -189,6 +231,10 @@ class ObsidianMarkdownParser:
                 nodes.append(InlineMath(content=token.content))
                 i += 1
 
+            elif token.type == "math_inline_double":
+                nodes.append(InlineMath(content=token.content, display=True))
+                i += 1
+
             elif token.type == "em_open":
                 close = self._find_close(tokens, i + 1, "em_close")
                 children = self._parse_inlines(tokens[i + 1 : close])
@@ -217,20 +263,42 @@ class ObsidianMarkdownParser:
         return nodes
 
     def _split_wikilinks(self, content: str) -> list[InlineNode]:
-        """Split a text string into Text and Ref nodes on wiki-link boundaries."""
+        """Split a text string into Text, Image, and Ref nodes on special-syntax boundaries."""
         nodes: list[InlineNode] = []
         last = 0
-        for m in _WIKILINK_RE.finditer(content):
+        for m in _SPLIT_RE.finditer(content):
             if m.start() > last:
                 nodes.append(Text(content[last : m.start()]))
-            section = (m.group(1) or "").strip()
-            display = m.group(2).strip()
-            label = "sec:" + to_label(section) if section else ""
-            nodes.append(Ref(label=label, text=display))
+            if m.group("placeholder"):
+                nodes.extend(self._expand_placeholder(m.group()))
+            elif m.group("embed"):
+                src = _EMBED_RE.match(m.group("embed")).group(1).strip()
+                nodes.append(Image(src=src, alt=""))
+            else:
+                wm = _WIKILINK_RE.match(m.group("wikilink"))
+                section = (wm.group(1) or "").strip()
+                display = wm.group(2).strip()
+                label = "sec:" + to_label(section) if section else ""
+                nodes.append(Ref(label=label, text=display))
             last = m.end()
         if last < len(content):
             nodes.append(Text(content[last:]))
         return nodes or [Text(content)]
+
+    def _expand_placeholder(self, key: str) -> list[InlineNode]:
+        """Expand a WLTOKEN placeholder back into the original IR node(s)."""
+        raw = self._wl_map.get(key, key)
+        if raw.startswith("!"):
+            m = _EMBED_RE.match(raw)
+            if m:
+                return [Image(src=m.group(1).strip(), alt="")]
+        m = _WIKILINK_RE.match(raw)
+        if m:
+            section = (m.group(1) or "").strip()
+            display = m.group(2).strip()
+            label = "sec:" + to_label(section) if section else ""
+            return [Ref(label=label, text=display)]
+        return [Text(raw)]
 
     def _find_close(self, tokens: list[Token], start: int, close_type: str) -> int:
         for j in range(start, len(tokens)):
