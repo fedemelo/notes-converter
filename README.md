@@ -1,8 +1,10 @@
-# LaTeX to React
+# Notes Converter
 
-Repo featuring a simple API to convert my LaTeX undergraduate notes to React components, to by displayed in my [personal website](https://fedemelo.github.io/apuntes/).
+API to convert between note formats. Currently supports:
 
-It has many features of a generic LaTeX to HTML converter, but it is tailored to my notes' structure. Particularly, it is able to convert theorems, definitions, examples, and other custom LaTeX environments I designed at the time to equivalent React components.
+- **Obsidian Markdown → LaTeX**: Converts Obsidian Markdown files to LaTeX, tailored to my notes' structure.
+- **LaTeX → React JSX**: Converts LaTeX to React components for display on my [personal website](https://fedemelo.github.io/apuntes/). Handles custom LaTeX environments (theorems, definitions, examples, etc.) that I designed for my undergraduate notes.
+- **TeX `$`/`$$` delimiters → LaTeX `\(`/`\[` delimiters**: Normalizes math delimiters in LaTeX files.
 
 ## Setup Instructions
 
@@ -38,6 +40,12 @@ The project must be run using [Python 3.11.9](https://www.python.org/downloads/r
 
    ```shell
    uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+   ```
+
+   Or with `make`:
+
+   ```shell
+   make run
    ```
 
    The server will be running on `http://localhost:8000`.
