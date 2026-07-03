@@ -4,6 +4,7 @@ import re
 
 from src.ir.nodes import (
     BlockNode,
+    Comment,
     Definition,
     DisplayMath,
     Document,
@@ -30,6 +31,13 @@ _HEADING_COMMANDS = {
 }
 
 # Single-pass LaTeX escaping — backslash must be handled first.
+# Environments that are themselves display-math containers; no \[...\] wrapper needed.
+_STANDALONE_ENV_RE = re.compile(
+    r"^\\begin\{"
+    r"(equation\*?|gather\*?|align\*?|multline\*?|flalign\*?|eqnarray\*?|alignat\*?)"
+    r"\}"
+)
+
 _SPECIAL = re.compile(r"[\\&%$#_{}\^~]")
 _ESCAPE_MAP = {
     "\\": r"\textbackslash{}",
@@ -66,6 +74,8 @@ class LatexRenderer:
                 return self._render_inlines(node.children)
 
             case DisplayMath():
+                if _STANDALONE_ENV_RE.match(node.content.strip()):
+                    return node.content.strip()
                 return f"\\[\n{node.content}\n\\]"
 
             case Definition():
@@ -89,6 +99,9 @@ class LatexRenderer:
                     f"\\end{{tip}}"
                 )
 
+            case Comment():
+                return f"%{node.content}"
+
             case _:
                 return ""
 
@@ -109,24 +122,29 @@ class LatexRenderer:
                 return self._escape(node.content)
 
             case InlineMath():
-                return f"${node.content}$"
+                if node.display:
+                    stripped = node.content.strip()
+                    if _STANDALONE_ENV_RE.match(stripped):
+                        return stripped
+                    return f"\\[\n{node.content}\n\\]"
+                return f"\\({node.content}\\)"
 
             case Emphasis():
-                return f"\\emph{{{self._render_inlines(node.children)}}}"
+                return f"\\textit{{{self._render_inlines(node.children)}}}"
 
             case Strong():
                 return f"\\textbf{{{self._render_inlines(node.children)}}}"
 
             case Image():
-                return "\n".join(
-                    [
-                        "\\begin{figure}[h]",
-                        "  \\centering",
-                        f"  \\includegraphics{{{node.src}}}",
-                        f"  \\caption{{{self._escape(node.alt)}}}",
-                        "\\end{figure}",
-                    ]
-                )
+                lines = [
+                    "\\begin{figure}[h]",
+                    "  \\centering",
+                    f"  \\includegraphics{{{node.src}}}",
+                ]
+                if node.alt:
+                    lines.append(f"  \\caption{{{self._escape(node.alt)}}}")
+                lines.append("\\end{figure}")
+                return "\n".join(lines)
 
             case Ref():
                 return f"\\hyperref[{node.label}]{{{node.text}}}"
