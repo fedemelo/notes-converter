@@ -13,6 +13,7 @@ from src.ir.nodes import (
     Image,
     InlineMath,
     InlineNode,
+    Italic,
     Note,
     Paragraph,
     Ref,
@@ -103,7 +104,9 @@ class LatexRenderer:
                 return f"%{node.content}"
 
             case _:
-                return ""
+                raise NotImplementedError(
+                    f"LatexRenderer has no rendering for block node {type(node).__name__}"
+                )
 
     def _render_body(self, blocks: list[BlockNode]) -> str:
         joined = "\n\n".join(self._render_block(b) for b in blocks)
@@ -129,8 +132,11 @@ class LatexRenderer:
                     return f"\\[\n{node.content}\n\\]"
                 return f"\\({node.content}\\)"
 
-            case Emphasis():
+            case Italic():
                 return f"\\textit{{{self._render_inlines(node.children)}}}"
+
+            case Emphasis():
+                return f"\\emph{{{self._render_inlines(node.children)}}}"
 
             case Strong():
                 return f"\\textbf{{{self._render_inlines(node.children)}}}"
@@ -150,7 +156,9 @@ class LatexRenderer:
                 return f"\\hyperref[{node.label}]{{{node.text}}}"
 
             case _:
-                return ""
+                raise NotImplementedError(
+                    f"LatexRenderer has no rendering for inline node {type(node).__name__}"
+                )
 
     # ── Helpers ───────────────────────────────────────────────────────────────
 

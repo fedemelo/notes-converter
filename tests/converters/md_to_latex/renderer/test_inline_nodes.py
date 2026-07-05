@@ -27,7 +27,7 @@ def test_inline_math_preserves_content(renderer):
 
 def test_emphasis(renderer):
     assert (
-        renderer._render_inline(Emphasis(children=[Text("word")])) == r"\textit{word}"
+        renderer._render_inline(Emphasis(children=[Text("word")])) == r"\emph{word}"
     )
 
 
@@ -37,7 +37,7 @@ def test_strong(renderer):
 
 def test_nested_emphasis_in_strong(renderer):
     node = Strong(children=[Text("a "), Emphasis(children=[Text("b")])])
-    assert renderer._render_inline(node) == r"\textbf{a \textit{b}}"
+    assert renderer._render_inline(node) == r"\textbf{a \emph{b}}"
 
 
 def test_image_produces_figure(renderer):
