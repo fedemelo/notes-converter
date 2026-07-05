@@ -23,7 +23,23 @@ class Emphasis:
 
 
 @dataclass
+class Italic:
+    children: list[InlineNode] = field(default_factory=list)
+
+
+@dataclass
 class Strong:
+    children: list[InlineNode] = field(default_factory=list)
+
+
+@dataclass
+class Underline:
+    children: list[InlineNode] = field(default_factory=list)
+
+
+@dataclass
+class Quote:
+    """Quoted text (e.g. say command in LaTeX, double-quoted in plain text)."""
     children: list[InlineNode] = field(default_factory=list)
 
 
@@ -36,10 +52,17 @@ class Image:
 @dataclass
 class Ref:
     label: str  # full LaTeX label, e.g. "sec:grafos_ponderados"
-    text: str  # display text shown in the document
+    text: str   # display text shown in the document
 
 
-InlineNode = Text | InlineMath | Emphasis | Strong | Image | Ref
+@dataclass
+class Hyperlink:
+    """A clickable link with an explicit target and display text."""
+    target: str
+    text: str
+
+
+InlineNode = Text | InlineMath | Emphasis | Italic | Strong | Underline | Quote | Image | Ref | Hyperlink
 
 # ── Block nodes ───────────────────────────────────────────────────────────────
 # Nodes that occupy their own vertical space in a document.
@@ -63,6 +86,35 @@ class DisplayMath:
 
 
 @dataclass
+class ListItem:
+    children: list[InlineNode] = field(default_factory=list)
+
+
+@dataclass
+class UnorderedList:
+    items: list[ListItem] = field(default_factory=list)
+
+
+@dataclass
+class OrderedList:
+    items: list[ListItem] = field(default_factory=list)
+
+
+@dataclass
+class Figure:
+    """A standalone block-level image with an optional caption."""
+    src: str
+    alt: str = ""
+    caption: str = ""
+
+
+@dataclass
+class VerticalSpace:
+    """An explicit vertical gap (e.g. \\vspace{1cm} in LaTeX)."""
+    amount: str
+
+
+@dataclass
 class Definition:
     title: str
     label: str
@@ -77,13 +129,30 @@ class Theorem:
 
 
 @dataclass
+class Example:
+    title: str
+    label: str
+    body: list[BlockNode] = field(default_factory=list)
+
+
+@dataclass
 class Note:
     body: list[BlockNode] = field(default_factory=list)
 
 
 @dataclass
+class Warning:
+    body: list[BlockNode] = field(default_factory=list)
+
+
+@dataclass
+class Notation:
+    body: list[BlockNode] = field(default_factory=list)
+
+
+@dataclass
 class Comment:
-    content: str  # text after the leading #, e.g. "TODO fix this"
+    content: str
 
 
 @dataclass
@@ -91,4 +160,19 @@ class Document:
     children: list[BlockNode] = field(default_factory=list)
 
 
-BlockNode = Paragraph | Heading | DisplayMath | Definition | Theorem | Note | Comment
+BlockNode = (
+    Paragraph
+    | Heading
+    | DisplayMath
+    | UnorderedList
+    | OrderedList
+    | Figure
+    | VerticalSpace
+    | Definition
+    | Theorem
+    | Example
+    | Note
+    | Warning
+    | Notation
+    | Comment
+)
