@@ -39,8 +39,9 @@ def test_block_math_dollar_dollar():
 
 
 def test_block_math_dollar_dollar_preserves_surrounding_text():
+    # $$...$$ is block-level; surrounding text becomes separate paragraphs.
     src = "Sea $$E = mc^2$$ la ecuación."
-    assert convert_latex_code_to_react(src) == f"Sea {block('E = mc^2')} la ecuación."
+    assert convert_latex_code_to_react(src) == f"Sea\n{block('E = mc^2')}\nla ecuación."
 
 
 def test_block_math_dollar_dollar_not_split_into_two_inline():
@@ -72,11 +73,11 @@ def test_block_math_bracket():
 
 
 def test_block_math_bracket_preserves_surrounding_text():
+    # \[...\] is block-level; surrounding text becomes separate paragraphs.
     result = convert_latex_code_to_react(r"Formula: \[a = b\] fin.")
-    assert result == f"Formula: {block('a = b')} fin."
+    assert result == f"Formula:\n{block('a = b')}\nfin."
 
 
-@pytest.mark.xfail(reason=r"\[...\] spanning multiple lines is not converted to a block math component.")
 def test_block_math_bracket_multiline():
     src = "\\[\nE = mc^2\n\\]"
     assert convert_latex_code_to_react(src) == block("\nE = mc^2\n")

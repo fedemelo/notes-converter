@@ -1,5 +1,3 @@
-import pytest
-
 from src.converters.latex_to_react.latex_to_react import convert_latex_code_to_react
 
 
@@ -134,14 +132,12 @@ def test_teorema_inline_math_rendered_as_component():
 # ── case-insensitivity ────────────────────────────────────────────────────────
 
 
-@pytest.mark.xfail(reason="tip environment name is not matched case-insensitively, unlike definicion, ejemplo, and teorema.")
 def test_tip_environment_case_insensitive():
     src = "\\begin{Tip}\nUseful remark.\n\\end{Tip}"
     result = convert_latex_code_to_react(src)
     assert result == "<Tip>\nUseful remark.\n</Tip>"
 
 
-@pytest.mark.xfail(reason="advertencia environment name is not matched case-insensitively, unlike definicion, ejemplo, and teorema.")
 def test_advertencia_environment_case_insensitive():
     src = "\\begin{Advertencia}\nWatch out.\n\\end{Advertencia}"
     result = convert_latex_code_to_react(src)

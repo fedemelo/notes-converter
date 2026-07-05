@@ -36,8 +36,7 @@ def test_figure_environment_is_removed():
 def test_figure_in_text_is_removed():
     src = "Before.\n\\begin{figure}\n\\includegraphics{img.png}\n\\end{figure}\nAfter."
     result = convert_latex_code_to_react(src)
-    # Removing a figure between two paragraphs leaves a blank line.
-    assert result == "Before.\n\nAfter."
+    assert result == "Before.\nAfter."
 
 
 # ── \noindent ─────────────────────────────────────────────────────────────────
@@ -72,4 +71,4 @@ def test_vspace_is_removed():
 
 def test_vspace_in_text_is_removed():
     result = convert_latex_code_to_react(r"Text above.\vspace{2em}Text below.")
-    assert result == "Text above.Text below."
+    assert result == "Text above.\nText below."
