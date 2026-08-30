@@ -93,6 +93,11 @@ class DisplayMath:
 
 
 @dataclass
+class CodeBlock:
+    content: str
+
+
+@dataclass
 class ListItem:
     children: list[InlineNode] = field(default_factory=list)
 
@@ -171,6 +176,7 @@ BlockNode = (
     Paragraph
     | Heading
     | DisplayMath
+    | CodeBlock
     | UnorderedList
     | OrderedList
     | Figure

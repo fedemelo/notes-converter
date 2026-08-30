@@ -9,6 +9,7 @@ from mdit_py_plugins.dollarmath import dollarmath_plugin
 
 from src.ir.nodes import (
     BlockNode,
+    CodeBlock,
     Comment,
     Definition,
     DisplayMath,
@@ -134,6 +135,10 @@ class ObsidianMarkdownParser:
 
             elif token.type == "math_block":
                 nodes.append(DisplayMath(content=token.content.strip()))
+                i += 1
+
+            elif token.type == "fence":
+                nodes.append(CodeBlock(content=token.content.rstrip("\n")))
                 i += 1
 
             elif token.type == "blockquote_open":

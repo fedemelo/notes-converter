@@ -4,6 +4,7 @@ import re
 
 from src.ir.nodes import (
     BlockNode,
+    CodeBlock,
     Comment,
     Definition,
     DisplayMath,
@@ -23,7 +24,8 @@ from src.ir.nodes import (
     Theorem,
 )
 
-DEFAULT_CODE_COMMAND = "texttt"
+DEFAULT_INLINE_CODE_COMMAND = "texttt"
+DEFAULT_CODE_BLOCK_ENVIRONMENT = "verbatim"
 
 _HEADING_COMMANDS = {
     1: r"\part",
@@ -58,8 +60,13 @@ _ESCAPE_MAP = {
 
 
 class LatexRenderer:
-    def __init__(self, code_command: str = DEFAULT_CODE_COMMAND) -> None:
-        self._code_command = code_command
+    def __init__(
+        self,
+        inline_code_command: str = DEFAULT_INLINE_CODE_COMMAND,
+        code_block_environment: str = DEFAULT_CODE_BLOCK_ENVIRONMENT,
+    ) -> None:
+        self._inline_code_command = inline_code_command
+        self._code_block_environment = code_block_environment
 
     def render(self, doc: Document) -> str:
         return "\n\n".join(
@@ -84,6 +91,10 @@ class LatexRenderer:
                 if _STANDALONE_ENV_RE.match(node.content.strip()):
                     return node.content.strip()
                 return f"\\[\n{node.content}\n\\]"
+
+            case CodeBlock():
+                env = self._code_block_environment
+                return f"\\begin{{{env}}}\n{node.content}\n\\end{{{env}}}"
 
             case Definition():
                 return (
@@ -162,7 +173,7 @@ class LatexRenderer:
                 return f"\\hyperref[{node.label}]{{{node.text}}}"
 
             case InlineCode():
-                return f"\\{self._code_command}{{{self._escape(node.content)}}}"
+                return f"\\{self._inline_code_command}{{{self._escape(node.content)}}}"
 
             case _:
                 raise NotImplementedError(

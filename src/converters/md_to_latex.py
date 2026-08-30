@@ -1,18 +1,36 @@
 from enum import Enum
 
 from src.parsers.markdown.obsidian import ObsidianMarkdownParser
-from src.renderers.latex import DEFAULT_CODE_COMMAND, LatexRenderer
+from src.renderers.latex import (
+    DEFAULT_CODE_BLOCK_ENVIRONMENT,
+    DEFAULT_INLINE_CODE_COMMAND,
+    LatexRenderer,
+)
 
 _parser = ObsidianMarkdownParser()
 
 
-class CodeCommand(str, Enum):
+class InlineCodeCommand(str, Enum):
     """LaTeX commands available for typesetting inline code, each taking one {argument}."""
 
-    TEXTT = DEFAULT_CODE_COMMAND
+    TEXTT = DEFAULT_INLINE_CODE_COMMAND
     INLINE = "Inline"
 
 
-def convert_md_to_latex(text: str, code_command: str = DEFAULT_CODE_COMMAND) -> str:
-    renderer = LatexRenderer(code_command=code_command)
+class CodeBlockEnvironment(str, Enum):
+    """LaTeX environments available for typesetting fenced code blocks."""
+
+    VERBATIM = DEFAULT_CODE_BLOCK_ENVIRONMENT
+    PSEUDOCODE = "pseudocode"
+
+
+def convert_md_to_latex(
+    text: str,
+    inline_code_command: str = DEFAULT_INLINE_CODE_COMMAND,
+    code_block_environment: str = DEFAULT_CODE_BLOCK_ENVIRONMENT,
+) -> str:
+    renderer = LatexRenderer(
+        inline_code_command=inline_code_command,
+        code_block_environment=code_block_environment,
+    )
     return renderer.render(_parser.parse(text))

@@ -1,7 +1,11 @@
-from src.converters.md_to_latex import CodeCommand, convert_md_to_latex
+from src.converters.md_to_latex import (
+    CodeBlockEnvironment,
+    InlineCodeCommand,
+    convert_md_to_latex,
+)
 from src.converters.latex_dollar_to_paren import convert_latex_dollar_to_paren
 from src.converters.latex_to_react.latex_to_react import convert_latex_code_to_react
-from src.renderers.latex import DEFAULT_CODE_COMMAND
+from src.renderers.latex import DEFAULT_CODE_BLOCK_ENVIRONMENT, DEFAULT_INLINE_CODE_COMMAND
 from src.routers.conversion import Conversion, ConversionOption
 
 CONVERSIONS: list[Conversion] = [
@@ -24,10 +28,16 @@ CONVERSIONS: list[Conversion] = [
         converter=convert_md_to_latex,
         options=[
             ConversionOption(
-                name="code_command",
-                default=DEFAULT_CODE_COMMAND,
-                choices=CodeCommand,
+                name="inline_code_command",
+                default=DEFAULT_INLINE_CODE_COMMAND,
+                choices=InlineCodeCommand,
                 description="LaTeX command used to typeset inline code, as \\command{...}",
+            ),
+            ConversionOption(
+                name="code_block_environment",
+                default=DEFAULT_CODE_BLOCK_ENVIRONMENT,
+                choices=CodeBlockEnvironment,
+                description="LaTeX environment used to typeset fenced code blocks",
             ),
         ],
     ),
