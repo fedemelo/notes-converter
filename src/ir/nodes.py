@@ -62,7 +62,14 @@ class Hyperlink:
     text: str
 
 
-InlineNode = Text | InlineMath | Emphasis | Italic | Strong | Underline | Quote | Image | Ref | Hyperlink
+@dataclass
+class InlineCode:
+    content: str
+
+
+InlineNode = (
+    Text | InlineMath | Emphasis | Italic | Strong | Underline | Quote | Image | Ref | Hyperlink | InlineCode
+)
 
 # ── Block nodes ───────────────────────────────────────────────────────────────
 # Nodes that occupy their own vertical space in a document.

@@ -16,6 +16,7 @@ from src.ir.nodes import (
     Emphasis,
     Heading,
     Image,
+    InlineCode,
     InlineMath,
     InlineNode,
     Note,
@@ -233,6 +234,10 @@ class ObsidianMarkdownParser:
 
             elif token.type == "math_inline_double":
                 nodes.append(InlineMath(content=token.content, display=True))
+                i += 1
+
+            elif token.type == "code_inline":
+                nodes.append(InlineCode(content=token.content))
                 i += 1
 
             elif token.type == "em_open":

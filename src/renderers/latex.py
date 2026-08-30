@@ -11,6 +11,7 @@ from src.ir.nodes import (
     Emphasis,
     Heading,
     Image,
+    InlineCode,
     InlineMath,
     InlineNode,
     Italic,
@@ -21,6 +22,8 @@ from src.ir.nodes import (
     Text,
     Theorem,
 )
+
+DEFAULT_CODE_COMMAND = "texttt"
 
 _HEADING_COMMANDS = {
     1: r"\part",
@@ -55,6 +58,9 @@ _ESCAPE_MAP = {
 
 
 class LatexRenderer:
+    def __init__(self, code_command: str = DEFAULT_CODE_COMMAND) -> None:
+        self._code_command = code_command
+
     def render(self, doc: Document) -> str:
         return "\n\n".join(
             rendered for node in doc.children if (rendered := self._render_block(node))
@@ -154,6 +160,9 @@ class LatexRenderer:
 
             case Ref():
                 return f"\\hyperref[{node.label}]{{{node.text}}}"
+
+            case InlineCode():
+                return f"\\{self._code_command}{{{self._escape(node.content)}}}"
 
             case _:
                 raise NotImplementedError(
