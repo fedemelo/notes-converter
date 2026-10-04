@@ -5,6 +5,7 @@ from src.converters.md_to_latex import (
 )
 from src.converters.latex_dollar_to_paren import convert_latex_dollar_to_paren
 from src.converters.latex_to_react.latex_to_react import convert_latex_code_to_react
+from src.latex_tools.math_delimiters import DEFAULT_MATH_DELIMITER_STYLE, MathDelimiterStyle
 from src.renderers.latex import DEFAULT_CODE_BLOCK_ENVIRONMENT, DEFAULT_INLINE_CODE_COMMAND
 from src.routers.conversion import Conversion, ConversionOption
 
@@ -38,6 +39,12 @@ CONVERSIONS: list[Conversion] = [
                 default=DEFAULT_CODE_BLOCK_ENVIRONMENT,
                 choices=CodeBlockEnvironment,
                 description="LaTeX environment used to typeset fenced code blocks",
+            ),
+            ConversionOption(
+                name="math_delimiter_style",
+                default=DEFAULT_MATH_DELIMITER_STYLE.value,
+                choices=MathDelimiterStyle,
+                description="How to delimit math: $x$/$$x$$ or \\(x\\)/\\[x\\]",
             ),
         ],
     ),
