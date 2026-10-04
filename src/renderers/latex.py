@@ -23,6 +23,12 @@ from src.ir.nodes import (
     Text,
     Theorem,
 )
+from src.latex_tools.math_delimiters import (
+    DEFAULT_MATH_DELIMITER_STYLE,
+    MathDelimiterStyle,
+    display_math_delimiters,
+    inline_math_delimiters,
+)
 
 DEFAULT_INLINE_CODE_COMMAND = "texttt"
 DEFAULT_CODE_BLOCK_ENVIRONMENT = "verbatim"
@@ -64,9 +70,11 @@ class LatexRenderer:
         self,
         inline_code_command: str = DEFAULT_INLINE_CODE_COMMAND,
         code_block_environment: str = DEFAULT_CODE_BLOCK_ENVIRONMENT,
+        math_delimiter_style: MathDelimiterStyle = DEFAULT_MATH_DELIMITER_STYLE,
     ) -> None:
         self._inline_code_command = inline_code_command
         self._code_block_environment = code_block_environment
+        self._math_delimiter_style = MathDelimiterStyle(math_delimiter_style)
 
     def render(self, doc: Document) -> str:
         return "\n\n".join(
@@ -90,7 +98,8 @@ class LatexRenderer:
             case DisplayMath():
                 if _STANDALONE_ENV_RE.match(node.content.strip()):
                     return node.content.strip()
-                return f"\\[\n{node.content}\n\\]"
+                open_, close = display_math_delimiters(self._math_delimiter_style)
+                return f"{open_}\n{node.content}\n{close}"
 
             case CodeBlock():
                 env = self._code_block_environment
@@ -146,8 +155,10 @@ class LatexRenderer:
                     stripped = node.content.strip()
                     if _STANDALONE_ENV_RE.match(stripped):
                         return stripped
-                    return f"\\[\n{node.content}\n\\]"
-                return f"\\({node.content}\\)"
+                    open_, close = display_math_delimiters(self._math_delimiter_style)
+                    return f"{open_}\n{node.content}\n{close}"
+                open_, close = inline_math_delimiters(self._math_delimiter_style)
+                return f"{open_}{node.content}{close}"
 
             case Italic():
                 return f"\\textit{{{self._render_inlines(node.children)}}}"
